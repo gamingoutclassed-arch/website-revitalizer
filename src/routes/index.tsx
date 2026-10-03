@@ -116,7 +116,23 @@ function Index() {
   const [page, setPage] = useState(0);
   const mainRef = useRef<HTMLElement>(null);
 
-  const isDesktop = () =>,    typeof window !== "undefined" &&,    window.matchMedia(DESKTOP_QUERY).matches;,,  function openPage(index: number, targetId?: string) {,    if (typeof window === "undefined") return;,    setPage(index);,    requestAnimationFrame(() => {,      const main = mainRef.current;,      if (!main) return;,      const target = targetId ? document.getElementById(targetId) : null;,      const top = target,        ? target.getBoundingClientRect().top -,          main.getBoundingClientRect().top +,          main.scrollTop,        : 0;,      main.scrollTo({ top: Math.max(0, top), behavior: "auto" });,    });,  },,  function goHome() {,    if (typeof window === "undefined") return;,    if (isDesktop()) openPage(0);,    else window.scrollTo({ top: 0, behavior: "smooth" });,  }
+  const isDesktop = () => typeof window !== "undefined" && window.matchMedia(DESKTOP_QUERY).matches;
+
+  function openPage(index: number, targetId?: string) {
+    setPage(index);
+    requestAnimationFrame(() => {
+      const main = mainRef.current;
+      if (!main) return;
+      const target = targetId ? document.getElementById(targetId) : null;
+      const top = target
+        ? target.getBoundingClientRect().top -
+          main.getBoundingClientRect().top +
+          main.scrollTop
+        : 0;
+      main.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+    });
+  }
+
   function goHome() {
     if (isDesktop()) openPage(0);
     else window.scrollTo({ top: 0, behavior: "smooth" });
