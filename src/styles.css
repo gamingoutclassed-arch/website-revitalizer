@@ -47,7 +47,7 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 
   --background: oklch(0.17 0.035 250);
   --foreground: oklch(0.96 0.008 220);
@@ -117,9 +117,9 @@
 }
 
 @utility surface-panel {
-  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  background: color-mix(in oklab, var(--surface) 52%, transparent);
   border: 1px solid var(--color-border);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
   box-shadow: var(--shadow-card);
 }
 
@@ -248,5 +248,36 @@
 
   ::selection {
     background: oklch(0.74 0.115 195 / 0.3);
+  }
+}
+
+
+/* Phase 1 — architectural surfaces: less card-like, more system-like. */
+@utility architecture-line {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+@utility technical-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+@media (min-width: 1024px) {
+  .hero-stage {
+    min-height: calc(100vh - 82px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
