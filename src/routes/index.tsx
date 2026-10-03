@@ -40,6 +40,7 @@ import { HeroSystem } from "../components/hero-system";
 import {
   Capabilities,
   HumanLoop,
+  Insights,
   LeadJourney,
   Packages,
   Process,
@@ -232,6 +233,7 @@ function Index() {
         <Page index={2} active={page}>
           <Capabilities />
           <LeadJourney />
+          <Insights />
         </Page>
 
         {/* Page 4 — How it works */}
