@@ -59,16 +59,16 @@
   --popover-foreground: oklch(0.96 0.012 90);
 
   /* brand navy from the logo */
-  --brand: oklch(0.40 0.14 285);
+  --brand: oklch(0.40 0.12 245);
   --brand-foreground: oklch(0.97 0.008 220);
 
   /* electric blue — premium hero accent derived from the logo blue */
-  --electric: oklch(0.60 0.24 285);
+  --electric: oklch(0.62 0.20 245);
   --electric-foreground: oklch(0.99 0.005 250);
-  --shadow-electric: 0 14px 40px -16px oklch(0.66 0.17 255 / 0.7);
+  --shadow-electric: 0 14px 40px -16px oklch(0.66 0.16 245 / 0.65);
 
   /* secondary accents stay close to the electric-blue brand system */
-  --primary: oklch(0.64 0.23 285);
+  --primary: oklch(0.66 0.19 245);
   --primary-foreground: oklch(0.99 0.005 250);
   --accent: oklch(0.88 0.09 150);
   --accent-foreground: oklch(0.99 0.005 250);
@@ -82,7 +82,7 @@
   --destructive-foreground: oklch(0.97 0.012 90);
   --border: oklch(0.86 0.05 200 / 0.14);
   --input: oklch(0.86 0.05 200 / 0.2);
-  --ring: oklch(0.64 0.23 285);
+  --ring: oklch(0.66 0.19 245);
 
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
@@ -537,7 +537,7 @@ main[data-motion-ready] section.is-visible {
 .service-visual { min-height: 74px; }
 .voice-visual__label,.message-visual__label { font-family: var(--font-mono); font-size: 8px; letter-spacing: .16em; color: var(--muted-foreground); }
 .voice-bars { display: flex; align-items: center; justify-content: center; gap: 4px; height: 52px; margin-top: 8px; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.voice-bars i { display: block; width: 4px; height: var(--bar); background: var(--electric); opacity: .75; transform-origin: center; animation: voice-wave 1.15s ease-in-out infinite alternate; animation-delay: var(--bar-delay); }
+.voice-bars i { display: block; width: 4px; height: var(--bar); background: var(--electric); opacity: .75; transform-origin: center; animation: voice-wave 1.15s ease-in-out infinite alternate; animation-delay: var(--bar-delay); animation-play-state: running; will-change: transform, opacity; }
 .message-visual { position: relative; }
 .message-stream { position: relative; height: 52px; margin-top: 8px; overflow: hidden; border: 1px solid var(--border); background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--electric) 3%, transparent), transparent); }
 .message-stream::before,.message-stream::after { content:""; position:absolute; top:28%; height:2px; background:linear-gradient(90deg, transparent, var(--electric), transparent); animation: message-flight 1.6s linear infinite; }
@@ -559,7 +559,7 @@ main[data-motion-ready] section.is-visible {
 .network-visual span:nth-child(1){left:8%;top:48%}.network-visual span:nth-child(2){left:34%;top:28%;animation-delay:.3s}.network-visual span:nth-child(3){left:60%;top:65%;animation-delay:.6s}.network-visual span:nth-child(4){right:8%;top:42%;animation-delay:.9s}
 .network-visual span::after { content:""; position:absolute; inset:2px; background:var(--electric); opacity:.25; }
 .growth-visual { display:flex; align-items:flex-end; gap:5px; height:42px; border-bottom:1px solid var(--border); }
-.growth-visual span { width:22%; background:linear-gradient(to top,color-mix(in oklab,var(--electric) 20%,transparent),var(--electric)); transform-origin:bottom; animation:growth-rise 2.4s ease-in-out infinite alternate; }
+.growth-visual span { width:22%; background:linear-gradient(to top,color-mix(in oklab,var(--electric) 20%,transparent),var(--electric)); transform-origin:bottom; animation:growth-rise 2.4s ease-in-out infinite alternate; animation-play-state:running; will-change:transform,opacity; }
 .growth-visual span:nth-child(1){height:30%;animation-delay:0s}.growth-visual span:nth-child(2){height:55%;animation-delay:.25s}.growth-visual span:nth-child(3){height:82%;animation-delay:.5s}
 @keyframes growth-rise { from { transform:scaleY(.65);opacity:.4; } to { transform:scaleY(1);opacity:.9; } }
 @media (prefers-reduced-motion: reduce) {
