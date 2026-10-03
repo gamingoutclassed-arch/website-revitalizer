@@ -174,9 +174,6 @@ export function LeadJourney() {
                 </p>
               </div>
 
-              {index < JOURNEY.length - 1 ? (
-                
-              ) : null}
             </article>
           ))}
         </div>
