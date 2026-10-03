@@ -136,7 +136,7 @@ export function LeadJourney() {
         eyebrow="System pattern"
         title={
           <>
-            Signal <span className="text-muted-foreground">→</span> Understand <span className="text-muted-foreground">→</span> Decide <span className="text-muted-foreground">→</span> Act <span className="text-muted-foreground">→</span> Handoff
+            <span className="text-electric">01</span> Signal <span className="text-muted-foreground">/</span> <span className="text-electric">02</span> Understand <span className="text-muted-foreground">/</span> <span className="text-electric">03</span> Decide <span className="text-muted-foreground">/</span> <span className="text-electric">04</span> Act <span className="text-muted-foreground">/</span> <span className="text-electric">05</span> Handoff
           </>
         }
         intro="This is the operating pattern behind the systems we build. The tools can change; the architecture stays focused on moving useful information to the right action."
@@ -175,9 +175,7 @@ export function LeadJourney() {
               </div>
 
               {index < JOURNEY.length - 1 ? (
-                <span className="journey-step__arrow absolute bottom-6 right-6 hidden font-mono text-sm text-muted-foreground md:block" aria-hidden="true">
-                  →
-                </span>
+                
               ) : null}
             </article>
           ))}
@@ -287,6 +285,25 @@ const HUMAN = {
     "Approvals and exceptions",
   ],
 };
+
+export function Manifesto() {
+  return (
+    <section className="relative overflow-hidden border-y border-border bg-surface/10">
+      <div className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-6 md:py-28">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">
+          The principle
+        </p>
+        <p className="mt-6 font-display text-[clamp(1.7rem,3.6vw,3rem)] font-medium leading-[1.2] text-balance">
+          We find the work that no longer needs to be manual, then build a connected system that handles it{" "}
+          <span className="text-gradient">intelligently.</span>
+        </p>
+        <p className="mt-9 font-mono text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+          Alligentics
+        </p>
+      </div>
+    </section>
+  );
+}
 
 export function HumanLoop() {
   return (
