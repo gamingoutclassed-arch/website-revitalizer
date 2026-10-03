@@ -553,43 +553,32 @@ function Services() {
         className="glow-orb absolute -right-20 top-10 h-80 w-80"
         aria-hidden="true"
       />
-
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
         <SectionHeading
           eyebrow="What we build"
           title="Systems built around how your business works"
           intro="We combine intelligence, automation, software, and growth infrastructure into systems that fit the operation — not the other way around."
         />
-
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, index) => (
             <article
               key={service.number}
-              className={`group relative overflow-hidden border border-border bg-background/40 p-7 transition-colors duration-300 hover:border-primary/40 sm:p-8 ${
-                service.wide ? "lg:col-span-2" : ""
-              }`}
-              style={{ animationDelay: `${index * 0.06}s` }}
+              className={`service-node group relative overflow-hidden bg-background p-7 sm:p-8 ${service.wide ? "lg:col-span-2" : ""}`}
+              style={{ "--service-delay": `${index * 90}ms` } as React.CSSProperties}
             >
-              <div className="flex items-start justify-between gap-4">
-                <span
-                  className="inline-flex h-11 w-11 items-center justify-center border border-primary/30 text-primary-foreground"
-                  style={{ background: "var(--gradient-brand)" }}
-                >
+              <span className="service-node__signal" aria-hidden="true" />
+              <div className="relative z-10 flex items-start justify-between gap-4">
+                <span className="service-node__icon inline-flex h-11 w-11 items-center justify-center border border-primary/30 text-primary-foreground" style={{ background: "var(--gradient-brand)" }}>
                   <service.icon className="h-5 w-5" />
                 </span>
-
-                <span className="font-mono text-xs text-muted-foreground">
-                  {service.number}
-                </span>
+                <span className="font-mono text-xs text-muted-foreground">{service.number}</span>
               </div>
-
-              <h3 className="mt-6 font-display text-2xl font-semibold tracking-tight">
-                {service.title}
-              </h3>
-
-              <p className="mt-3 max-w-[52ch] text-sm leading-relaxed text-muted-foreground">
-                {service.body}
-              </p>
+              <h3 className="relative z-10 mt-6 font-display text-2xl font-semibold tracking-tight">{service.title}</h3>
+              <p className="relative z-10 mt-3 max-w-[52ch] text-sm leading-relaxed text-muted-foreground">{service.body}</p>
+              <div className="service-node__footer relative z-10 mt-8 flex items-center gap-3">
+                <span className="h-px w-8 bg-primary/60" />
+                <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Inspect system</span>
+              </div>
             </article>
           ))}
         </div>
@@ -597,6 +586,7 @@ function Services() {
     </section>
   );
 }
+
 
 const SELECTED_SYSTEMS = [
   {
@@ -626,13 +616,13 @@ function SelectedSystems() {
         />
         <div className="mt-12 space-y-5">
           {SELECTED_SYSTEMS.map((system) => (
-            <article key={system.number} className="group relative overflow-hidden border border-border bg-surface/20 p-6 transition-colors duration-300 hover:border-primary/40 sm:p-8 md:p-10">
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-primary/70 to-transparent opacity-70" />
+            <article key={system.number} className="system-panel group relative overflow-hidden border border-border bg-surface/20 p-6 sm:p-8 md:p-10">
+              <div className="system-panel__edge" aria-hidden="true" />
               <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
                 <div>
                   <div className="flex items-center justify-between border-b border-border pb-5">
                     <span className="font-mono text-[10px] tracking-[0.2em] text-primary">{system.number}</span>
-                    <Network className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-electric" />
+                    <Network className="h-4 w-4 text-muted-foreground transition-colors duration-300 group-hover:text-electric" />
                   </div>
                   <h3 className="mt-7 font-display text-2xl font-semibold tracking-tight sm:text-3xl">{system.title}</h3>
                   <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground">{system.description}</p>
@@ -640,11 +630,15 @@ function SelectedSystems() {
                 </div>
                 <div className="border-l border-border pl-6 sm:pl-8">
                   <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">System flow</p>
-                  <div className="mt-4 flex flex-wrap items-center gap-y-3">
+                  <div className="system-flow mt-5">
+                    <span className="system-flow__rail" aria-hidden="true" />
                     {system.architecture.map((item, index) => (
-                      <div key={item} className="flex items-center">
-                        <span className="border border-border bg-background px-3 py-2 font-mono text-[9px] uppercase tracking-[0.08em] text-foreground transition-colors group-hover:border-primary/30">{item}</span>
-                        {index < system.architecture.length - 1 && <span className="px-2 text-primary/70">→</span>}
+                      <div key={item} className="system-flow__item" style={{ "--flow-delay": `${index * 120}ms` } as React.CSSProperties}>
+                        <span className="system-flow__node">
+                          <span className="system-flow__node-dot" aria-hidden="true" />
+                          {item}
+                        </span>
+                        {index < system.architecture.length - 1 && <span className="system-flow__arrow" aria-hidden="true">→</span>}
                       </div>
                     ))}
                   </div>
@@ -661,6 +655,7 @@ function SelectedSystems() {
     </section>
   );
 }
+
 
 const REASONS = [
   {
@@ -889,7 +884,7 @@ function Contact() {
             <li>
               <a
                 href="https://alligentics.com/"
-                className="group grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-border bg-background/50 px-4 py-4 transition-colors hover:bg-surface sm:px-5"
+                className="group grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-y border-border px-2 py-4 transition-colors hover:border-electric/50 hover:bg-electric/5 sm:px-3"
               >
                 <span className="flex min-w-0 items-center gap-3 text-sm">
                   <Globe className="h-4.5 w-4.5 shrink-0 text-primary" />
@@ -1117,60 +1112,35 @@ function AlligenticsChat() {
 
 function Footer({ onHome }: { onHome: () => void }) {
   return (
-    <footer className="border-t border-border bg-surface/40">
-      <div className="mx-auto grid w-full max-w-[1600px] grid-cols-1 items-center gap-8 px-6 py-10 md:grid-cols-[auto_minmax(0,1fr)_auto] lg:px-10 xl:px-12">
+    <footer className="site-footer border-t border-border bg-surface/40">
+      <div className="mx-auto max-w-[1600px] px-6 py-14 lg:px-10 xl:px-12">
+        <div className="site-footer__statement">
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">Alligentics / 2026</span>
+          <h2 className="mt-5 max-w-4xl font-display text-3xl font-semibold tracking-tight sm:text-5xl">
+            THINK. BUILD. COMPOUND.
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
+            Intelligence engineered for the way your business actually works.
+          </p>
+        </div>
 
-        {/* Logo + Brand */}
-        <a
-          href="/"
-          onClick={(e) => {
-            e.preventDefault();
-            onHome();
-          }}
-          className="flex shrink-0 items-center gap-3 justify-self-start"
-          aria-label="Alligentics home"
-        >
-          <img
-            src="/alligentics-logo.png"
-            alt=""
-            loading="lazy"
-            className="h-11 w-11 shrink-0 object-contain"
-          />
-
-          <span className="font-display text-xl font-semibold tracking-tight text-foreground">
-            Alligentics
-          </span>
-        </a>
-
-        {/* Footer Navigation */}
-        <nav
-          className="flex w-full max-w-[760px] flex-wrap items-center justify-between gap-5 justify-self-center text-sm text-muted-foreground"
-          aria-label="Footer navigation"
-        >
-          {NAV.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              data-go-page={item.page}
-              className="whitespace-nowrap transition-colors hover:text-foreground"
-            >
-              {item.label}
-            </a>
-          ))}
-
-          <a
-            href="#contact"
-            className="whitespace-nowrap transition-colors hover:text-foreground"
-          >
-            Contact
+        <div className="mt-12 grid gap-8 border-t border-border pt-7 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-end">
+          <a href="/" onClick={(e) => { e.preventDefault(); onHome(); }} className="flex items-center gap-3" aria-label="Alligentics home">
+            <img src="/alligentics-logo.png" alt="" loading="lazy" className="h-10 w-10 object-contain" />
+            <span className="font-display text-lg font-semibold">Alligentics</span>
           </a>
-        </nav>
 
-        {/* Copyright */}
-        <p className="justify-self-start whitespace-nowrap font-mono text-xs text-muted-foreground md:justify-self-end">
-          © {new Date().getFullYear()} Alligentics
-        </p>
+          <nav className="flex flex-wrap gap-x-7 gap-y-3 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground" aria-label="Footer navigation">
+            {NAV.map((item) => (
+              <a key={item.href} href={item.href} data-go-page={item.page} className="transition-colors hover:text-foreground">{item.label}</a>
+            ))}
+            <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
+          </nav>
 
+          <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+            © {new Date().getFullYear()} Alligentics
+          </p>
+        </div>
       </div>
     </footer>
   );
