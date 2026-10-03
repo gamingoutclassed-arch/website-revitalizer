@@ -535,34 +535,27 @@ const PROBLEMS = [
 ];
 
 function Problem() {
+  const [connected, setConnected] = useState(false);
   return (
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
-      <SectionHeading
-        eyebrow="The bottleneck"
-        title="Software isn't the problem. Fragmentation is."
-        intro="Website, WhatsApp, email, phone, CRM, spreadsheets, calendars and internal tools all create signals. When those systems do not connect, every gap becomes work for someone."
-      />
-      <div className="problem-network mt-12">
+      <SectionHeading eyebrow="The bottleneck" title="Software isn’t the problem. Fragmentation is." intro="Website, messaging, email, phone, CRM, spreadsheets, calendars, and internal tools each hold part of the picture. When context stops at the boundary, people become the integration layer." />
+      <div className={"problem-network mt-12 " + (connected ? "is-connected" : "is-fragmented")}>
         <div className="problem-network__line" aria-hidden="true" />
         <div className="problem-network__nodes">
           {PROBLEMS.map((item, index) => (
-            <div
-              key={item.label}
-              className="problem-node group"
-              style={{ "--problem-delay": `${index * 90}ms` } as React.CSSProperties}
-            >
-              <span className="problem-node__icon">
-                <item.icon className="h-4 w-4" />
-              </span>
+            <div key={item.label} className="problem-node group" style={{ "--problem-delay": (index * 90) + "ms" } as React.CSSProperties}>
+              <span className="problem-node__icon"><item.icon className="h-4 w-4" /></span>
               <span className="problem-node__label">{item.label}</span>
             </div>
           ))}
         </div>
+        <div className="problem-network__status" aria-live="polite">{connected ? "CONNECTED OPERATING FLOW" : "FRAGMENTED SIGNALS"}</div>
       </div>
-      <div className="mt-10 flex items-center gap-4">
-        <span className="h-px w-12 bg-electric" />
-        <p className="font-display text-xl font-medium sm:text-2xl">We engineer the layer that connects them.</p>
+      <div className="mt-7 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <p className="max-w-2xl font-display text-xl font-medium sm:text-2xl">{connected ? "Context can move across the operation, with exceptions visible." : "Each disconnected handoff creates another place for context to get lost."}</p>
+        <button type="button" onClick={() => setConnected((value) => !value)} aria-pressed={connected} className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 border border-border px-4 py-3 text-sm font-medium transition-colors hover:border-primary">{connected ? "Show fragmented view" : "Connect the signals"} <ArrowUpRight className="h-4 w-4" /></button>
       </div>
+      <p className="mt-5 flex items-center gap-4 text-sm text-muted-foreground"><span className="h-px w-12 bg-electric" />We engineer the layer that connects them.</p>
     </section>
   );
 }
