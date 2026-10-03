@@ -91,6 +91,7 @@ const NAV = [
   { href: "#solutions", label: "Solutions", page: 1 },
   { href: "#systems", label: "Work", page: 1 },
   { href: "#insights", label: "Insights", page: 2 },
+  { href: "#packages", label: "Pricing", page: 4 },
   { href: "#team", label: "About", page: 5 },
 ];
 
@@ -371,7 +372,7 @@ function Hero() {
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
             <a
-              href="#services"
+              href="#solutions"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-electric/60 hover:bg-electric/5"
             >
               Explore our capabilities
