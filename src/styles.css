@@ -784,7 +784,6 @@ main[data-motion-ready] section.is-visible {
 .solution-transform--3 .solution-transform__after span:nth-child(2) { border-left-color: var(--electric); }
 .solution-transform--4 .solution-transform__before,
 .solution-transform--4 .solution-transform__after { grid-template-columns: 1fr; }
-.solution-transform--4 .solution-transform__before span { margin-left: calc(var(--unused, 0) * 1px); }
 .solution-transform--4 .solution-transform__after span { border-left-width: 3px; }
 @keyframes solution-signal { 0%,100% { transform: translateY(-4px); opacity: .35; } 50% { transform: translateY(4px); opacity: 1; } }
 .work-case--1 .work-signal-visual { border-top: 2px solid color-mix(in oklab, var(--electric) 45%, var(--border)); }
