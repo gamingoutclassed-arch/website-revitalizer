@@ -573,6 +573,25 @@ function Services() {
                 </span>
                 <span className="font-mono text-xs text-muted-foreground">{service.number}</span>
               </div>
+              <div className="service-visual relative z-10 mt-7" aria-hidden="true">
+                {service.title === "AI Agents" ? (
+                  <div className="voice-visual">
+                    <span className="voice-visual__label">VOICE AGENT</span>
+                    <div className="voice-bars">{[3,6,9,5,11,7,4,9,6,3,8,5].map((height, i) => <i key={i} style={{ "--bar": `${height * 2}px`, "--bar-delay": `${i * 90}ms` } as React.CSSProperties} />)}</div>
+                  </div>
+                ) : service.title === "Intelligent Automation" ? (
+                  <div className="message-visual">
+                    <span className="message-visual__label">FAST COMMUNICATION</span>
+                    <div className="message-stream"><b /><b /><b /></div>
+                  </div>
+                ) : service.title === "AI Applications" ? (
+                  <div className="app-visual"><span className="app-visual__screen" /><span className="app-visual__cursor" /></div>
+                ) : service.title === "Digital Systems" ? (
+                  <div className="network-visual"><span /><span /><span /><span /></div>
+                ) : (
+                  <div className="growth-visual"><span /><span /><span /></div>
+                )}
+              </div>
               <h3 className="relative z-10 mt-6 font-display text-2xl font-semibold tracking-tight">{service.title}</h3>
               <p className="relative z-10 mt-3 max-w-[52ch] text-sm leading-relaxed text-muted-foreground">{service.body}</p>
               <div className="service-node__footer relative z-10 mt-8 flex items-center gap-3">
