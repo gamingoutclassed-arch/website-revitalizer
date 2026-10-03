@@ -86,7 +86,7 @@ const CAPABILITIES = [
 
 export function Capabilities() {
   return (
-    <section id="automation" className="scroll-mt-20 border-y border-border bg-surface/30">
+    <section id="automation" className="scroll-mt-20 border-y border-border bg-surface/10 technical-grid">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
         <SectionHeading
           eyebrow="Engineering capabilities"
@@ -199,14 +199,14 @@ export function Insights() {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="surface-panel animate-rise rounded-2xl p-6 sm:p-8 md:p-10">
+            <div className="animate-rise border-y border-border bg-surface/10 p-6 sm:p-8 md:p-10">
               <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-3">
                 <Bell className="h-4 w-4 text-accent" />
                 <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                   Sample daily business brief
                 </p>
               </div>
-              <dl className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
+              <dl className="mt-8 grid gap-px border-y border-border bg-border sm:grid-cols-2">
                 {BRIEF.map((row) => (
                    <div key={row.label} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4 bg-background p-5 sm:p-6">
                     <dt className="text-sm text-muted-foreground">{row.label}</dt>
@@ -256,7 +256,7 @@ export function HumanLoop() {
         }
       />
       <div className="mt-14 grid gap-6 lg:grid-cols-2">
-        <article className="surface-panel animate-rise rounded-2xl p-8">
+        <article className="animate-rise border-y border-border bg-surface/10 p-8">
           <div className="flex items-center gap-3">
             <Bot className="h-5 w-5 text-primary" />
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
@@ -272,7 +272,7 @@ export function HumanLoop() {
             ))}
           </ul>
         </article>
-        <article className="animate-rise rounded-2xl border border-border p-8 [animation-delay:0.1s]">
+        <article className="animate-rise border-t border-border p-8 [animation-delay:0.1s]">
           <div className="flex items-center gap-3">
             <UserCheck className="h-5 w-5 text-muted-foreground" />
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -282,7 +282,7 @@ export function HumanLoop() {
           <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
             {HUMAN.people.map((item) => (
               <li key={item} className="flex items-baseline gap-3">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground" />
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-electric" />
                 {item}
               </li>
             ))}
@@ -382,7 +382,7 @@ export function Process() {
               We handle the technical implementation. You authorise the business resources the
               selected automation needs.
             </p>
-            <p className="mt-6 flex items-start gap-3 rounded-xl border border-border bg-background/50 p-5 text-sm">
+            <p className="mt-6 flex items-start gap-3 border-t border-border bg-background/40 p-5 text-sm">
               <BadgeCheck className="mt-0.5 h-4.5 w-4.5 shrink-0 text-accent" />
                You remain the owner of your accounts and data at all times.
             </p>
@@ -391,7 +391,7 @@ export function Process() {
             {CLIENT_INPUTS.map((item) => (
               <li
                 key={item}
-                className="flex items-baseline gap-3 rounded-xl border border-border bg-background/50 px-5 py-4 text-sm"
+                className="flex items-baseline gap-3 border-t border-border bg-background/40 px-5 py-4 text-sm"
               >
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 {item}
@@ -450,7 +450,7 @@ export function Packages() {
 
       <div className="mt-10 grid gap-4 md:hidden">
         {PACKAGE_DETAILS.map((detail, tierIndex) => (
-          <article key={detail.tier} className="rounded-2xl border border-border bg-surface/30 p-5">
+          <article key={detail.tier} className="border-y border-border bg-surface/10 p-5">
             <h3 className="font-display text-xl font-semibold">{detail.tier}</h3>
             <p className="mt-1 text-sm font-medium text-primary">{detail.strapline}</p>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{detail.audience}</p>
@@ -471,7 +471,7 @@ export function Packages() {
         ))}
       </div>
 
-      <div className="mt-14 hidden overflow-x-auto rounded-2xl border border-border md:block">
+      <div className="mt-14 hidden overflow-x-auto border-y border-border md:block">
         <table className="w-full min-w-[640px] border-collapse text-sm">
           <thead>
             <tr className="bg-surface/60">
@@ -530,7 +530,7 @@ export function Packages() {
           {PRICING_FACTORS.map((factor) => (
             <li
               key={factor}
-              className="flex items-baseline gap-3 rounded-xl border border-border bg-background/50 px-5 py-4 text-sm"
+              className="flex items-baseline gap-3 border-t border-border bg-background/40 px-5 py-4 text-sm"
             >
               <span
                 className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
