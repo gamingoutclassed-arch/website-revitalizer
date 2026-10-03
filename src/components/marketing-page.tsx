@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 
-export type MarketingPageKey = "solutions" | "work" | "insights" | "about" | "contact";
+export type MarketingPageKey = "capabilities" | "solutions" | "work" | "insights" | "about" | "contact";
 
 const DATA: Record<MarketingPageKey, {
   eyebrow: string;
@@ -8,6 +8,17 @@ const DATA: Record<MarketingPageKey, {
   intro: string;
   items: { title: string; body: string }[];
 }> = {
+  capabilities: {
+    eyebrow: "Capabilities",
+    title: "The intelligence underneath the system.",
+    intro: "We connect business strategy, AI agents, automation, applications, data, and existing tools into systems designed for real operations.",
+    items: [
+      { title: "AI strategy & opportunity mapping", body: "Identify the workflows where AI can create practical value, then define the use case, constraints, risks, and measures of success." },
+      { title: "Workflow automation & agents", body: "Coordinate repetitive tasks, customer conversations, classification, routing, and follow-ups with clear rules and human escalation." },
+      { title: "Custom AI products & copilots", body: "Build focused AI interfaces and applications around the knowledge and actions people need to do their work." },
+      { title: "Data, models & systems integration", body: "Connect APIs, business data, CRM, messaging, calendars, and internal tools into a dependable end-to-end workflow." },
+    ],
+  },
   solutions: {
     eyebrow: "Solutions",
     title: "AI systems organized around business outcomes.",
@@ -67,6 +78,7 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
   const data = DATA[page];
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-xl"><div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8"><a href="/" className="font-display text-lg font-semibold tracking-tight">Alligentics</a><nav className="hidden items-center gap-5 md:flex" aria-label="Primary navigation">{[["Capabilities","/capabilities"],["Solutions","/solutions"],["Work","/work"],["Insights","/insights"],["About","/about"]].map(([label,href]) => <a key={href} href={href} className="text-xs text-muted-foreground transition-colors hover:text-foreground">{label}</a>)}</nav><a href="/contact" className="border border-border px-4 py-2.5 text-xs font-semibold transition-colors hover:border-primary">Talk to an AI strategist <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" /></a></div></header>
       <section className="relative overflow-hidden border-b border-border px-5 pb-24 pt-28 sm:px-8 lg:pb-32 lg:pt-40">
         <div className="grid-veil absolute inset-0 opacity-30" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl">
@@ -89,6 +101,7 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
           ))}
         </div>
       </section>
+      <footer className="border-t border-border px-5 py-8 sm:px-8"><div className="mx-auto flex max-w-7xl flex-col gap-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between"><span>© {new Date().getFullYear()} Alligentics · Think. Build. Compound.</span><div className="flex flex-wrap gap-4"><a href="/capabilities">Capabilities</a><a href="/solutions">Solutions</a><a href="/work">Work</a><a href="/insights">Insights</a><a href="/about">About</a><a href="/contact">Contact</a></div></div></footer>
     </main>
   );
 }
