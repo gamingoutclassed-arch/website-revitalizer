@@ -268,7 +268,7 @@ function Header({
         </nav>
 
         <details className="relative ml-auto lg:hidden">
-          <summary className="flex h-10 cursor-pointer list-none items-center gap-2 rounded-md border border-border px-3 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground [&::-webkit-details-marker]:hidden">
+          <summary className="flex h-10 cursor-pointer list-none items-center gap-2 border border-border px-3 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground [&::-webkit-details-marker]:hidden">
             Menu <span aria-hidden="true">+</span>
           </summary>
           <div className="absolute right-0 top-12 z-50 w-56 border border-border bg-background p-2 shadow-2xl">
@@ -278,7 +278,7 @@ function Header({
           </div>
         </details>
         {/* CTA */}
-        <Button asChild className="group h-10 shrink-0 rounded-lg px-3 text-xs font-semibold shadow-lg sm:h-12 sm:rounded-xl sm:px-6 sm:text-sm">
+        <Button asChild className="group h-10 shrink-0 rounded-md px-3 text-xs font-semibold shadow-lg sm:h-12 sm:px-6 sm:text-sm">
           <a href="#contact" aria-label="Book a free call">
             <span className="sm:hidden">Book a call</span>
             <span className="hidden sm:inline">Book a free call</span>
@@ -322,14 +322,14 @@ function Hero() {
           <div className="animate-rise mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 [animation-delay:0.24s]">
             <a
               href="#contact"
-              className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-electric px-7 py-3.5 text-sm font-semibold text-electric-foreground shadow-[var(--shadow-electric)] transition-all duration-300 hover:brightness-110"
+              className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-electric px-7 py-3.5 text-sm font-semibold text-electric-foreground shadow-[var(--shadow-electric)] transition-all duration-300 hover:brightness-110"
             >
               Start a project
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
             <a
               href="#services"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-electric/60 hover:bg-electric/5"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-electric/60 hover:bg-electric/5"
             >
               See what we build
             </a>
@@ -749,11 +749,11 @@ function Team() {
           {TEAM.map((member, index) => (
             <article
               key={member.name}
-              className="surface-panel animate-rise rounded-2xl p-8 text-center"
+              className="animate-rise border-t border-border p-7 text-left transition-colors hover:border-electric/60 sm:p-8 md:border-r md:border-t-0 md:last:border-r-0"
               style={{ animationDelay: `${index * 0.08}s` }}
             >
               <span
-                className="mx-auto flex h-16 w-16 items-center justify-center rounded-full font-display text-lg font-semibold text-primary-foreground"
+                className="flex h-12 w-12 items-center justify-center border border-electric/40 font-display text-sm font-semibold text-electric"
                 style={{ background: "var(--gradient-brand)" }}
               >
                 {member.initials}
@@ -810,7 +810,7 @@ function Contact() {
       />
 
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
-        <div className="relative grid gap-10 border-y border-border bg-surface/10 p-6 sm:p-8 md:p-14 lg:grid-cols-12">
+        <div className="relative grid gap-10 border-y border-border bg-surface/10 p-6 sm:p-8 md:p-14 lg:grid-cols-12 technical-grid">
           <div className="lg:col-span-7">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">
               Start with the system
@@ -839,7 +839,7 @@ function Contact() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="group grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-border bg-background/50 px-4 py-4 transition-colors hover:bg-surface sm:px-5"
+                  className="group grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-y border-border px-2 py-4 transition-colors hover:border-electric/50 hover:bg-electric/5 sm:px-3"
                 >
                   <span className="flex min-w-0 items-center gap-3 text-sm">
                     <link.icon className="h-4.5 w-4.5 shrink-0 text-primary" />
