@@ -42,6 +42,7 @@ import {
   HumanLoop,
   Insights,
   LeadJourney,
+  Manifesto,
   Packages,
   Process,
 } from "../components/site-sections";
@@ -240,6 +241,7 @@ function Index() {
         <Page index={3} active={page}>
           <Process />
           <HumanLoop />
+          <Manifesto />
         </Page>
 
         {/* Page 5 — Value, pricing + trust */}
