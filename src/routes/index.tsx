@@ -45,6 +45,7 @@ import {
   Manifesto,
   Packages,
   Process,
+  WorkflowDemo,
 } from "../components/site-sections";
 
 const TITLE = "Alligentics | Intelligence Engineered for Business";
@@ -241,6 +242,7 @@ function Index() {
         <Page index={2} active={page}>
           <Capabilities />
           <LeadJourney />
+          <WorkflowDemo />
           <Insights />
         </Page>
 
@@ -1247,6 +1249,12 @@ function Footer({ onHome }: { onHome: () => void }) {
               <a key={item.href} href={item.href} data-go-page={item.page} className="transition-colors hover:text-foreground">{item.label}</a>
             ))}
             <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
+            <span className="hidden md:inline-block h-3 w-px bg-border" aria-hidden="true" />
+            <a href="/capabilities" className="transition-colors hover:text-foreground">Capabilities page</a>
+            <a href="/solutions" className="transition-colors hover:text-foreground">Solutions page</a>
+            <a href="/work" className="transition-colors hover:text-foreground">Work page</a>
+            <a href="/insights" className="transition-colors hover:text-foreground">Insights page</a>
+            <a href="/about" className="transition-colors hover:text-foreground">About page</a>
           </nav>
 
           <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
