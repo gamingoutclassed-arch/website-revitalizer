@@ -220,6 +220,7 @@ function Index() {
         {/* Page 1 — Introduction */}
         <Page index={0} active={page} className="lg:min-h-[calc(100vh-82px)]">
           <Hero />
+          <TrustStrip />
           <Positioning />
           <Marquee />
         </Page>
@@ -415,6 +416,35 @@ const CHANNELS = [
   "Invoicing",
   "Calendars",
 ];
+
+function TrustStrip() {
+  const areas = [
+    "Reduce manual operations",
+    "Connect fragmented workflows",
+    "Turn business knowledge into action",
+    "Build AI products around real use cases",
+  ];
+
+  return (
+    <section className="border-y border-border bg-surface/20">
+      <div className="mx-auto max-w-7xl px-5 py-7 sm:px-6 md:py-9">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <p className="shrink-0 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            Typical transformation areas
+          </p>
+          <div className="grid flex-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {areas.map((area, index) => (
+              <div key={area} className="bg-background px-4 py-4 text-sm leading-5 text-foreground">
+                <span className="mr-2 font-mono text-[9px] text-primary">0{index + 1}</span>
+                {area}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function Positioning() {
   const stages = [
