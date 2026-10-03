@@ -294,15 +294,36 @@ export function HumanLoop() {
 }
 
 const PROCESS = [
-  { phase: "THINK", title: "Understand", body: "Map the business, customer journey, constraints, tools, decisions, and the real bottleneck." },
-  { phase: "THINK", title: "Identify", body: "Choose where intelligence and automation can create leverage — and where a person should remain in control." },
-  { phase: "THINK", title: "Architect", body: "Define the signals, intelligence layer, systems, integrations, data, and handoffs before building." },
-  { phase: "BUILD", title: "Engineer", body: "Build the agents, applications, workflows, integrations, and interfaces the system requires." },
-  { phase: "BUILD", title: "Integrate", body: "Connect the system to the tools your team already uses and make the data move reliably between them." },
-  { phase: "BUILD", title: "Test & deploy", body: "Test normal paths, edge cases, permissions, handoffs, and failure modes before going live." },
-  { phase: "COMPOUND", title: "Monitor", body: "Watch the system in operation and surface where customers, data, or workflows are getting stuck." },
-  { phase: "COMPOUND", title: "Learn", body: "Use real interactions and outcomes to improve prompts, rules, workflows, and product decisions." },
-  { phase: "COMPOUND", title: "Improve & expand", body: "Strengthen what works, remove friction, and extend the system into the next valuable workflow." },
+  {
+    phase: "THINK",
+    title: "Understand",
+    body: "Map the business, customer journey, constraints, tools, decisions, and the real bottleneck.",
+  },
+  {
+    phase: "THINK",
+    title: "Architect",
+    body: "Define the signals, intelligence layer, systems, integrations, data, and human handoffs before building.",
+  },
+  {
+    phase: "BUILD",
+    title: "Engineer & integrate",
+    body: "Build the agents, applications, workflows, and integrations — then connect them to the tools the team already uses.",
+  },
+  {
+    phase: "BUILD",
+    title: "Test & deploy",
+    body: "Test normal paths, edge cases, permissions, handoffs, and failure modes before the system goes live.",
+  },
+  {
+    phase: "COMPOUND",
+    title: "Measure & learn",
+    body: "Watch the system in operation and use real interactions and outcomes to identify friction and improvement opportunities.",
+  },
+  {
+    phase: "COMPOUND",
+    title: "Improve & expand",
+    body: "Strengthen what works, remove friction, and extend the system into the next valuable workflow.",
+  },
 ];
 
 const CLIENT_INPUTS = [
@@ -324,7 +345,7 @@ export function Process() {
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
         <SectionHeading
           eyebrow="How we work"
-          title="A straightforward path from first conversation to launch"
+          title="Think. Build. Compound."
         />
         <div className="mt-12 grid gap-10 lg:grid-cols-3">
           {(["THINK", "BUILD", "COMPOUND"] as const).map((phase) => (
@@ -332,7 +353,7 @@ export function Process() {
               <div className="flex items-center justify-between py-5">
                 <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">{phase}</h3>
                 <span className="font-mono text-[10px] text-muted-foreground">
-                  {PROCESS.filter((step) => step.phase === phase).length.toString().padStart(2, "0")} stages
+                  {PROCESS.filter((step) => step.phase === phase).length.toString().padStart(2, "0")} moves
                 </span>
               </div>
               <div className="divide-y divide-border border-y border-border">
