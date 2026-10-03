@@ -576,69 +576,65 @@ const SERVICES = [
 ];
 
 function Services() {
+  const [selected, setSelected] = useState(0);
+  const service = SERVICES[selected];
+  const visuals = [
+    { label: "CONVERSATION → ACTION", nodes: ["Intent", "Tools", "Result", "Review"] },
+    { label: "EVENT → DECISION → ACTION", nodes: ["Trigger", "Conditions", "Action", "Exception"] },
+    { label: "KNOWLEDGE → WORKSPACE", nodes: ["Sources", "Context", "Workspace", "Approval"] },
+    { label: "FRONTEND → OPERATIONS", nodes: ["Visitor", "API layer", "Business data", "Fulfilment"] },
+    { label: "DEMAND → RELATIONSHIP", nodes: ["Signal", "Qualification", "Conversation", "Retention"] },
+  ];
+  const visual = visuals[selected];
+  const ctas = ["See an agent in action", "Explore an automation flow", "Open the product pattern", "See the connected experience", "Trace the growth loop"];
+
   return (
-    <section
-      id="solutions"
-      className="relative scroll-mt-20 overflow-hidden border-y border-border bg-surface/30"
-    >
-      <div
-        className="glow-orb absolute -right-20 top-10 h-80 w-80"
-        aria-hidden="true"
-      />
-      <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
-        <SectionHeading
-          eyebrow="What we build"
-          title="Systems built around how your business works"
-          intro="We combine intelligence, automation, software, and growth infrastructure into systems that fit the operation — not the other way around."
-        />
-        <div
-      className="services-grid mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((service, index) => (
-            <article
-              key={service.number}
-              className={`service-node group relative overflow-hidden bg-background p-7 sm:p-8 ${service.wide ? "lg:col-span-2" : ""}`}
-              style={{ "--service-delay": `${index * 90}ms` } as React.CSSProperties}
-            >
-              <span className="service-node__signal" aria-hidden="true" />
-              <div className="relative z-10 flex items-start justify-between gap-4">
-                <span className="service-node__icon inline-flex h-11 w-11 items-center justify-center border border-primary/30 text-primary-foreground" style={{ background: "var(--gradient-brand)" }}>
-                  <service.icon className="h-5 w-5" />
-                </span>
-                <span className="font-mono text-xs text-muted-foreground">{service.number}</span>
-              </div>
-              <div className="service-visual relative z-10 mt-7" aria-hidden="true">
-                {service.title === "AI Agents" ? (
-                  <div className="voice-visual">
-                    <span className="voice-visual__label">VOICE AGENT</span>
-                    <div className="voice-bars">{[3,6,9,5,11,7,4,9,6,3,8,5].map((height, i) => <i key={i} style={{ "--bar": `${height * 2}px`, "--bar-delay": `${i * 90}ms` } as React.CSSProperties} />)}</div>
+    <section id="solutions" className="relative scroll-mt-20 overflow-hidden border-y border-border bg-surface/30">
+      <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
+        <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+          <SectionHeading eyebrow="What we build" title="Choose the kind of product you need." intro="Five build archetypes. Each solves a different kind of engineering problem; select one to inspect its shape and components." />
+          <p className="max-w-xl text-sm leading-6 text-muted-foreground lg:justify-self-end">These are implementation categories, not a list of business outcomes. The right combination depends on the use case.</p>
+        </div>
+        <div className="mt-12 grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+          <div className="border-y border-border">
+            {SERVICES.map((item, index) => {
+              const active = selected === index;
+              return (
+                <button key={item.number} type="button" onClick={() => setSelected(index)} aria-pressed={active}
+                  className={"flex min-h-[76px] w-full items-center gap-4 border-b border-border px-4 py-4 text-left transition-colors last:border-b-0 " + (active ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:bg-surface/30 hover:text-foreground")}>
+                  <span className="font-mono text-[10px] text-primary">{item.number}</span>
+                  <span className="min-w-0 flex-1 font-display text-lg font-semibold">{item.title}</span>
+                  <ArrowUpRight className={"h-4 w-4 shrink-0 transition-transform " + (active ? "-translate-y-0.5 translate-x-0.5 text-primary" : "")} />
+                </button>
+              );
+            })}
+          </div>
+          <article className="relative min-w-0 overflow-hidden border border-border bg-background p-5 sm:p-8" aria-live="polite">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-5">
+              <div><p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">Build archetype / {service.number}</p><h3 className="mt-2 font-display text-2xl font-semibold">{service.title}</h3></div>
+              <service.icon className="h-6 w-6 text-primary" aria-hidden="true" />
+            </div>
+            <div className={"archetype-visual archetype-visual--" + (selected + 1) + " mt-6"}>
+              <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">{visual.label}</p>
+              <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                {visual.nodes.map((node, index) => (
+                  <div key={node} className="archetype-node relative flex min-h-[76px] items-center justify-center border border-border px-3 py-3 text-center text-xs font-medium" style={{ "--node-index": index } as React.CSSProperties}>
+                    <span className="archetype-node__index absolute left-2 top-2 font-mono text-[9px] text-primary">0{index + 1}</span>{node}
                   </div>
-                ) : service.title === "Intelligent Automation" ? (
-                  <div className="message-visual">
-                    <span className="message-visual__label">FAST COMMUNICATION</span>
-                    <div className="message-stream"><b /><b /><b /></div>
-                  </div>
-                ) : service.title === "AI Applications" ? (
-                  <div className="app-visual"><span className="app-visual__screen" /><span className="app-visual__cursor" /></div>
-                ) : service.title === "Digital Systems" ? (
-                  <div className="network-visual"><span /><span /><span /><span /></div>
-                ) : (
-                  <div className="growth-visual"><span /><span /><span /></div>
-                )}
+                ))}
               </div>
-              <h3 className="relative z-10 mt-6 font-display text-2xl font-semibold tracking-tight">{service.title}</h3>
-              <p className="relative z-10 mt-3 max-w-[52ch] text-sm leading-relaxed text-muted-foreground">{service.body}</p>
-              <div className="service-node__footer relative z-10 mt-8 flex items-center gap-3">
-                <span className="h-px w-8 bg-primary/60" />
-                <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Inspect system</span>
-              </div>
-            </article>
-          ))}
+            </div>
+            <p className="mt-6 max-w-2xl text-sm leading-6 text-muted-foreground">{service.body}</p>
+            <div className="mt-7 flex flex-col gap-4 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-xs leading-5 text-muted-foreground">Typical components: {visual.nodes.join(" · ")}</p>
+              <a href={selected === 0 ? "#walkthrough" : "#automation"} className="inline-flex min-h-10 shrink-0 items-center gap-2 text-sm font-semibold text-primary hover:text-accent">{ctas[selected]} <ArrowUpRight className="h-4 w-4" /></a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
   );
 }
-
 
 const SELECTED_SYSTEMS = [
   {
