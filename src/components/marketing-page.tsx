@@ -91,16 +91,86 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
         </div>
       </section>
       <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
-        <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
-          {data.items.map((item, index) => (
-            <article key={item.title} className="bg-background p-7 sm:p-10 lg:min-h-[260px]">
-              <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
-              <h2 className="mt-8 font-display text-2xl font-semibold">{item.title}</h2>
-              <p className="mt-4 max-w-lg text-sm leading-7 text-muted-foreground">{item.body}</p>
-            </article>
-          ))}
-        </div>
+        {page === "solutions" ? (
+          <div className="space-y-5">
+            {data.items.map((item, index) => (
+              <article key={item.title} className="grid overflow-hidden border border-border lg:grid-cols-[0.8fr_1.2fr]">
+                <div className="border-b border-border bg-surface/30 p-6 sm:p-8 lg:border-b-0 lg:border-r">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Before / {String(index + 1).padStart(2, "0")}</p>
+                  <h2 className="mt-5 font-display text-xl font-semibold">{item.title}</h2>
+                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{["Repeated coordination and slow handoffs obscure the next priority.", "Useful knowledge is spread across documents and disconnected interfaces.", "Decisions wait on manual sorting, inconsistent context, or unclear ownership.", "Promising product ideas lack a focused experience tied to a real use case."][index]}</p>
+                  <div className="mt-6 flex flex-wrap gap-2">{["Delay", "Context gaps", "Manual effort"].slice(0, index === 0 ? 3 : 2).map((tag) => <span key={tag} className="border border-border px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground">{tag}</span>)}</div>
+                </div>
+                <div className="p-6 sm:p-8">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">After / intended transformation</p>
+                  <p className="mt-5 max-w-2xl text-base leading-7">{item.body}</p>
+                  <div className="mt-7 border-t border-border pt-5">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Measure what changes</p>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{["Time from inquiry to next action; follow-up completion; work requiring manual coordination.", "Time to find a trusted answer; source coverage; successful task completion.", "Decision turnaround; routing accuracy; exception and approval rates.", "Task completion; adoption; quality and reliability in the target use case."][index]}</p>
+                  </div>
+                  <a href="/contact" className="mt-6 inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-primary hover:text-foreground">{["Map the bottleneck", "Make knowledge actionable", "Design the decision flow", "Shape the AI product"][index]} <ArrowUpRight className="h-4 w-4" /></a>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : page === "work" ? (
+          <div className="space-y-10">
+            {data.items.map((item, index) => {
+              const stages = [
+                ["Lead signal", "Enrichment", "Personalisation", "Reply triage", "Follow-up", "Calendar / human"],
+                ["Strategy input", "Content formats", "Asset creation", "Approval", "Schedule", "Publication"],
+                ["Customer signal", "Context capture", "Intent routing", "Task / response", "Owner handoff", "Resolution"],
+                ["Document intake", "Field extraction", "Validation", "Exception review", "Structured record", "Audit trail"],
+              ][index];
+              const details = [
+                { context: "Outbound prospecting across multiple tools.", constraint: "Lead context and reply status can become fragmented across steps.", oversight: "Low-confidence replies and scheduling exceptions are routed to a person.", outcome: "Lead-to-next-action continuity" },
+                { context: "A repeatable content publishing routine.", constraint: "Ideas, assets, approvals, and platform scheduling live in separate stages.", oversight: "A human reviews content and creative assets before publishing.", outcome: "Consistent publishing operations" },
+                { context: "Customer requests arriving through multiple channels.", constraint: "Teams can lose context when a request changes channel or owner.", oversight: "Sensitive or uncertain requests are escalated with the captured context.", outcome: "Context-rich customer handoff" },
+                { context: "Business documents that need structured handling.", constraint: "Manual extraction and inconsistent validation slow the next decision.", oversight: "Exceptions are reviewed before the record proceeds.", outcome: "Traceable information processing" },
+              ][index];
+              return (
+                <article key={item.title} className="overflow-hidden border border-border">
+                  <div className="grid lg:grid-cols-[0.72fr_1.28fr]">
+                    <div className="border-b border-border bg-surface/30 p-6 sm:p-8 lg:border-b-0 lg:border-r">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Implementation pattern / 0{index + 1}</p>
+                      <h2 className="mt-5 font-display text-2xl font-semibold sm:text-3xl">{item.title}</h2>
+                      <p className="mt-5 text-sm leading-6 text-muted-foreground"><strong className="text-foreground">Context:</strong> {details.context}</p>
+                      <p className="mt-4 text-sm leading-6 text-muted-foreground"><strong className="text-foreground">Constraint:</strong> {details.constraint}</p>
+                      <p className="mt-4 text-sm leading-6 text-muted-foreground"><strong className="text-foreground">Human oversight:</strong> {details.oversight}</p>
+                      <p className="mt-6 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Representative pattern · not a client case study</p>
+                    </div>
+                    <div className="p-6 sm:p-8">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Implementation path</p>
+                      <div className="mt-6 space-y-0">
+                        {stages.map((stage, stageIndex) => (
+                          <div key={stage} className="grid grid-cols-[2.5rem_1fr] gap-3">
+                            <div className="flex flex-col items-center"><span className="flex h-8 w-8 items-center justify-center border border-primary/40 font-mono text-[10px] text-primary">0{stageIndex + 1}</span>{stageIndex < stages.length - 1 ? <span className="my-1 min-h-5 w-px flex-1 bg-border" /> : null}</div>
+                            <div className={stageIndex === stages.length - 1 ? "pb-1" : "pb-5"}><p className="text-sm font-medium">{stage}</p>{stageIndex === stages.length - 1 ? <p className="mt-1 text-xs text-muted-foreground">Outcome category: {details.outcome}</p> : null}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="mt-6 border-t border-border pt-5 text-sm leading-6 text-muted-foreground"><strong className="text-foreground">System built:</strong> {item.body}</p>
+                      <p className="mt-3 text-xs leading-5 text-muted-foreground"><strong className="text-foreground">Integration surface:</strong> Selected APIs, business data, communication channels, and scheduling or publishing services as required by the implementation.</p>
+                      <a href="/contact" className="mt-6 inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-primary hover:text-foreground">View the implementation approach <ArrowUpRight className="h-4 w-4" /></a>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
+            {data.items.map((item, index) => (
+              <article key={item.title} className="bg-background p-7 sm:p-10 lg:min-h-[260px]">
+                <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
+                <h2 className="mt-8 font-display text-2xl font-semibold">{item.title}</h2>
+                <p className="mt-4 max-w-lg text-sm leading-7 text-muted-foreground">{item.body}</p>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
+
       <footer className="border-t border-border px-5 py-8 sm:px-8"><div className="mx-auto flex max-w-7xl flex-col gap-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between"><span>© {new Date().getFullYear()} Alligentics · Think. Build. Compound.</span><div className="flex flex-wrap gap-4"><a href="/capabilities">Capabilities</a><a href="/solutions">Solutions</a><a href="/work">Work</a><a href="/insights">Insights</a><a href="/about">About</a><a href="/contact">Contact</a></div></div></footer>
     </main>
   );
