@@ -119,6 +119,7 @@ function Page({
 
 function Index() {
   const [page, setPage] = useState(0);
+  const [activeNav, setActiveNav] = useState("#");
   const mainRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -159,6 +160,7 @@ function Index() {
 
   function openPage(index: number, targetId?: string) {
     setPage(index);
+    if (targetId) setActiveNav(`#${targetId}`);
     requestAnimationFrame(() => {
       const main = mainRef.current;
       if (!main) return;
@@ -191,7 +193,9 @@ function Index() {
     const goPage = anchor.getAttribute("data-go-page");
     if (goPage !== null) {
       e.preventDefault();
-      openPage(Number(goPage));
+      const href = anchor.getAttribute("href");
+      if (href) setActiveNav(href);
+      openPage(Number(goPage), href?.slice(1));
       return;
     }
 
@@ -211,7 +215,7 @@ function Index() {
       onClick={handleClick}
     >
       <div className="ambient-field" aria-hidden="true" />
-      <Header activePage={page} onHome={goHome} />
+      <Header activePage={page} activeNav={activeNav} onHome={goHome} />
 
       {/* Desktop: one page at a time. Mobile/tablet: normal continuous scroll. */}
       <main
@@ -270,9 +274,11 @@ function Index() {
 
 function Header({
   activePage,
+  activeNav,
   onHome,
 }: {
   activePage: number;
+  activeNav: string;
   onHome: () => void;
 }) {
   return (
@@ -304,8 +310,8 @@ function Header({
         <nav className="hidden w-full max-w-[680px] items-center justify-between justify-self-center lg:flex" aria-label="Primary navigation">
           {NAV.map((item) => (
             <a key={item.href} href={item.href} data-go-page={item.page}
-              aria-current={activePage === item.page ? "page" : undefined}
-              className={activePage === item.page ? "whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-foreground transition-colors duration-200" : "whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors duration-200 hover:text-foreground"}>
+              aria-current={activeNav === item.href ? "page" : undefined}
+              className={activeNav === item.href ? "whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-foreground transition-colors duration-200" : "whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors duration-200 hover:text-foreground"}>
               {item.label}
             </a>
           ))}
@@ -589,7 +595,6 @@ const SERVICES = [
 function Services() {
   return (
     <section
-      id="services"
       className="relative scroll-mt-20 overflow-hidden border-y border-border bg-surface/30"
     >
       <div
@@ -602,7 +607,8 @@ function Services() {
           title="Systems built around how your business works"
           intro="We combine intelligence, automation, software, and growth infrastructure into systems that fit the operation — not the other way around."
         />
-        <div className="services-grid mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+        <div id="solutions"
+      className="services-grid mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, index) => (
             <article
               key={service.number}
