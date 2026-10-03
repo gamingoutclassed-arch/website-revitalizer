@@ -363,38 +363,33 @@ main[data-motion-ready] section.is-visible {
 }
 
 /* Selected systems: the architecture itself carries the motion. */
-.system-panel { isolation: isolate; transition: border-color 300ms ease, background-color 300ms ease; }
+.system-panel { isolation: isolate; transition: border-color 300ms ease, background-color 300ms ease, transform 300ms var(--ease-smooth); }
 .system-panel::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 18rem;
-  height: 1px;
+  content: ""; position: absolute; left: 0; top: 0; width: 18rem; height: 1px;
   background: linear-gradient(90deg, transparent, var(--electric), transparent);
-  opacity: 0.35;
-  animation: signal-travel 6s linear infinite;
+  opacity: .35; animation: signal-travel 6s linear infinite;
 }
-.system-panel:hover { border-color: color-mix(in oklab, var(--electric) 42%, var(--border)); background: color-mix(in oklab, var(--surface) 80%, var(--electric) 5%); }
-.system-panel__edge {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 2px;
-  background: linear-gradient(180deg, transparent, var(--electric), transparent);
-  opacity: 0.7;
-}
-.system-flow { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 0; }
-.system-flow__rail { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--border); }
-.system-flow__item { position: relative; z-index: 1; display: flex; align-items: center; animation: phase-enter 650ms var(--ease-smooth) both; animation-delay: var(--flow-delay); }
+.system-panel:hover { border-color: color-mix(in oklab, var(--electric) 42%, var(--border)); background: color-mix(in oklab, var(--surface) 80%, var(--electric) 5%); transform: translateY(-2px); }
+.system-panel__edge { position: absolute; inset: 0 auto 0 0; width: 2px; background: linear-gradient(180deg, transparent, var(--electric), transparent); opacity: .7; }
+.system-flow { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: center; gap: 0; min-height: 76px; }
+.system-flow__rail { position: absolute; left: 4%; right: 4%; top: 50%; height: 1px; background: color-mix(in oklab, var(--electric) 22%, var(--border)); }
+.system-flow__signal { position: absolute; left: 4%; top: calc(50% - 2px); width: 28px; height: 4px; border-radius: 999px; background: var(--electric); box-shadow: 0 0 18px color-mix(in oklab, var(--electric) 70%, transparent); animation: system-signal 3.8s linear infinite; z-index: 3; }
+.system-flow__item { position: relative; z-index: 2; display: flex; justify-content: center; animation: phase-enter 650ms var(--ease-smooth) both; animation-delay: var(--flow-delay); }
 .system-flow__node {
-  position: relative; display: inline-flex; align-items: center; gap: 8px;
-  border: 1px solid var(--border); background: var(--background); padding: 8px 10px;
-  font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: .08em;
+  position: relative; display: inline-flex; min-height: 42px; align-items: center; justify-content: center; gap: 7px;
+  border: 1px solid var(--border); background: var(--background); padding: 8px 9px;
+  font-family: var(--font-mono); font-size: 8px; text-align: center; text-transform: uppercase; letter-spacing: .06em;
   transition: border-color 250ms ease, transform 250ms ease, background-color 250ms ease;
 }
 .system-flow__node-dot { width: 5px; height: 5px; flex: 0 0 auto; background: var(--electric); animation: node-pulse 2.2s ease-in-out infinite; }
-.system-flow__item:hover .system-flow__node { border-color: var(--electric); transform: translateY(-2px); }
-.system-flow__arrow { padding: 0 8px; color: color-mix(in oklab, var(--electric) 70%, transparent); }
+.system-flow__item:hover .system-flow__node { border-color: var(--electric); transform: translateY(-3px); background: color-mix(in oklab, var(--electric) 5%, var(--background)); }
+
+@keyframes system-signal {
+  0% { transform: translateX(0); opacity: 0; }
+  8% { opacity: 1; }
+  88% { opacity: .85; }
+  100% { transform: translateX(3300%); opacity: 0; }
+}
 
 /* Services: hover feels like inspecting a live subsystem. */
 .service-node { isolation: isolate; transition: background-color 300ms ease, box-shadow 300ms ease; }
@@ -411,31 +406,42 @@ main[data-motion-ready] section.is-visible {
 .service-node__footer { transition: transform 300ms var(--ease-smooth); }
 .service-node:hover .service-node__footer { transform: translateX(5px); }
 
-/* Capabilities: each cell activates in sequence when its section becomes visible. */
-.capability-node { position: relative; isolation: isolate; }
+/* Capabilities: a technical matrix with active subsystem behavior. */
+.capability-matrix { position: relative; }
+.capability-node { position: relative; isolation: isolate; overflow: hidden; min-height: 300px; transition: background-color 350ms ease, transform 350ms var(--ease-smooth); }
+.capability-node::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(120deg, transparent 20%, color-mix(in oklab, var(--electric) 7%, transparent) 50%, transparent 80%);
+  transform: translateX(-110%); transition: transform 800ms var(--ease-smooth);
+}
+.capability-node:hover::before { transform: translateX(110%); }
 .capability-node::after {
-  content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--electric);
-  transition: width 650ms var(--ease-smooth);
+  content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 2px; background: var(--electric);
+  transition: right 650ms var(--ease-smooth);
 }
-.capability-node:hover::after { width: 100%; }
-.capability-node:hover { background: color-mix(in oklab, var(--background) 92%, var(--electric) 8%); }
+.capability-node:hover::after { right: 0; }
+.capability-node:hover { background: color-mix(in oklab, var(--background) 91%, var(--electric) 9%); transform: translateY(-2px); }
 .capability-node:hover .text-primary { color: var(--electric); }
+.capability-node ul li { transition: transform 250ms var(--ease-smooth), color 250ms ease; }
+.capability-node:hover ul li { transform: translateX(3px); }
+.capability-node:hover ul li:nth-child(2) { transition-delay: 40ms; }
+.capability-node:hover ul li:nth-child(3) { transition-delay: 80ms; }
+.capability-node:hover ul li:nth-child(4) { transition-delay: 120ms; }
 
-/* Lead journey: a visible signal travels through the operating pattern. */
+/* System pattern: no arrows — the sequence is carried by the signal rail and node activation. */
 .journey-map { position: relative; }
-.journey-map::before {
-  content: ""; position: absolute; left: 5%; right: 5%; top: 42px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--electric), transparent);
-  transform: scaleX(0); transform-origin: left; animation: flow-pulse 2.2s 300ms var(--ease-smooth) forwards;
+.journey-map::before { display: none; }
+.journey-step { position: relative; min-height: 300px; transition: background-color 300ms ease; }
+.journey-step::after {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(180deg, transparent, var(--electric), transparent); opacity: .16;
 }
-.journey-step { position: relative; min-height: 220px; }
+.journey-step:hover { background: color-mix(in oklab, var(--electric) 4%, transparent); }
 .journey-step__dot {
-  display: block; width: 7px; height: 7px; margin-top: 13px; background: var(--electric);
-  box-shadow: 0 0 0 0 oklch(0.68 0.17 255 / 0.18);
-  animation: node-pulse 2.2s ease-in-out infinite;
+  display: block; width: 8px; height: 8px; margin-top: 13px; background: var(--electric);
+  box-shadow: 0 0 0 0 oklch(0.68 0.17 255 / 0.18); animation: node-pulse 2.2s ease-in-out infinite;
 }
-.journey-step__arrow { transition: transform 250ms ease, color 250ms ease; }
-.journey-step:hover .journey-step__arrow { transform: translateX(4px); color: var(--electric); }
+.journey-step__arrow { display: none; }
 
 /* Process: THINK → BUILD → COMPOUND reads as a progression. */
 .process-track { position: relative; }
@@ -527,31 +533,69 @@ main[data-motion-ready] section.is-visible {
 }
 
 /* Service visuals: communicate the idea, not just the label. */
-.service-visual { min-height: 42px; }
+.service-visual { min-height: 74px; }
 .voice-visual__label,.message-visual__label { font-family: var(--font-mono); font-size: 8px; letter-spacing: .16em; color: var(--muted-foreground); }
-.voice-bars { display: flex; align-items: center; gap: 4px; height: 28px; margin-top: 7px; overflow: hidden; }
-.voice-bars i { display: block; width: 3px; height: var(--bar); background: var(--electric); opacity: .75; transform-origin: center; animation: voice-wave 1.15s ease-in-out infinite alternate; animation-delay: var(--bar-delay); }
-@keyframes voice-wave { from { transform: scaleY(.35); opacity: .3; } to { transform: scaleY(1); opacity: 1; } }
-.message-stream { position: relative; height: 28px; margin-top: 7px; overflow: hidden; border-left: 1px solid var(--border); }
-.message-stream::before,.message-stream::after { content:""; position:absolute; top:50%; height:1px; background:linear-gradient(90deg, transparent, var(--electric), transparent); animation: message-flight 2.2s linear infinite; }
-.message-stream::before { width:65%; }
-.message-stream::after { width:40%; top:72%; animation-delay:.7s; }
-@keyframes message-flight { from { transform:translateX(-110%); opacity:0; } 15% { opacity:.9; } 85% { opacity:.5; } to { transform:translateX(170%); opacity:0; } }
-.app-visual { position:relative; height:42px; border:1px solid var(--border); overflow:hidden; }
-.app-visual__screen { position:absolute; inset:8px 12px; border:1px solid color-mix(in oklab,var(--electric) 35%,var(--border)); background:linear-gradient(90deg, transparent 35%, color-mix(in oklab,var(--electric) 10%,transparent) 50%, transparent 65%); animation: app-scan 2.8s ease-in-out infinite; }
-.app-visual__cursor { position:absolute; width:5px; height:5px; background:var(--electric); left:18%; top:50%; animation: cursor-run 3.5s ease-in-out infinite; }
+.voice-bars { display: flex; align-items: center; justify-content: center; gap: 4px; height: 52px; margin-top: 8px; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.voice-bars i { display: block; width: 4px; height: var(--bar); background: var(--electric); opacity: .75; transform-origin: center; animation: voice-wave 1.15s ease-in-out infinite alternate; animation-delay: var(--bar-delay); }
+.message-visual { position: relative; }
+.message-stream { position: relative; height: 52px; margin-top: 8px; overflow: hidden; border: 1px solid var(--border); background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--electric) 3%, transparent), transparent); }
+.message-stream::before,.message-stream::after { content:""; position:absolute; top:28%; height:2px; background:linear-gradient(90deg, transparent, var(--electric), transparent); animation: message-flight 1.6s linear infinite; }
+.message-stream::before { width:46%; }
+.message-stream::after { width:30%; top:68%; animation-delay:.5s; }
+.message-stream b { position:absolute; width:5px; height:5px; border-radius:50%; background:var(--electric); top:50%; animation: message-dot 1.9s linear infinite; }
+.message-stream b:nth-child(1){left:8%}.message-stream b:nth-child(2){left:42%;animation-delay:.35s}.message-stream b:nth-child(3){left:70%;animation-delay:.7s}
+@keyframes message-dot { from { transform:translateX(0); opacity:0; } 15% { opacity:1; } to { transform:translateX(80px); opacity:0; } }
+.app-visual { position:relative; height:74px; border:1px solid var(--border); overflow:hidden; background: linear-gradient(135deg, color-mix(in oklab, var(--electric) 3%, transparent), transparent); }
+.app-visual::before { content:""; position:absolute; left:10px; right:10px; top:10px; height:1px; background:var(--border); box-shadow: 0 9px 0 var(--border); }
+.app-visual__screen { position:absolute; left:12px; right:12px; top:31px; bottom:10px; border:1px solid color-mix(in oklab,var(--electric) 35%,var(--border)); background:linear-gradient(90deg, transparent 35%, color-mix(in oklab,var(--electric) 10%,transparent) 50%, transparent 65%); animation: app-scan 2.8s ease-in-out infinite; }
+.app-visual__cursor { position:absolute; width:7px; height:7px; background:var(--electric); left:18%; top:48px; animation: cursor-run 3.5s ease-in-out infinite; box-shadow:0 0 12px color-mix(in oklab,var(--electric) 55%,transparent); }
 @keyframes app-scan { 0%,100% { transform:translateX(-8%); opacity:.4; } 50% { transform:translateX(8%); opacity:1; } }
-@keyframes cursor-run { 0%,100% { left:18%; top:55%; } 35% { left:72%; top:30%; } 68% { left:48%; top:70%; } }
-.network-visual { position:relative; height:42px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.network-visual::before { content:""; position:absolute; left:8%; right:8%; top:50%; height:1px; background:linear-gradient(90deg,transparent,var(--electric),transparent); }
-.network-visual span { position:absolute; top:calc(50% - 4px); width:8px; height:8px; border:1px solid var(--electric); background:var(--background); animation: node-pulse 1.8s ease-in-out infinite; }
-.network-visual span:nth-child(1){left:8%}.network-visual span:nth-child(2){left:35%;animation-delay:.3s}.network-visual span:nth-child(3){left:62%;animation-delay:.6s}.network-visual span:nth-child(4){right:8%;animation-delay:.9s}
+@keyframes cursor-run { 0%,100% { left:18%; top:48px; } 35% { left:72%; top:38px; } 68% { left:48%; top:60px; } }
+.network-visual { position:relative; height:74px; border:1px solid var(--border); }
+.network-visual::before,.network-visual::after { content:""; position:absolute; left:10%; right:10%; height:1px; background:linear-gradient(90deg,transparent,var(--electric),transparent); }
+.network-visual::before { top:50%; transform:rotate(0deg); }.network-visual::after { top:50%; transform:rotate(16deg); transform-origin:center; opacity:.45; }
+.network-visual span { position:absolute; width:10px; height:10px; border:1px solid var(--electric); background:var(--background); animation: node-pulse 1.8s ease-in-out infinite; }
+.network-visual span:nth-child(1){left:8%;top:48%}.network-visual span:nth-child(2){left:34%;top:28%;animation-delay:.3s}.network-visual span:nth-child(3){left:60%;top:65%;animation-delay:.6s}.network-visual span:nth-child(4){right:8%;top:42%;animation-delay:.9s}
+.network-visual span::after { content:""; position:absolute; inset:2px; background:var(--electric); opacity:.25; }
 .growth-visual { display:flex; align-items:flex-end; gap:5px; height:42px; border-bottom:1px solid var(--border); }
 .growth-visual span { width:22%; background:linear-gradient(to top,color-mix(in oklab,var(--electric) 20%,transparent),var(--electric)); transform-origin:bottom; animation:growth-rise 2.4s ease-in-out infinite alternate; }
 .growth-visual span:nth-child(1){height:30%;animation-delay:0s}.growth-visual span:nth-child(2){height:55%;animation-delay:.25s}.growth-visual span:nth-child(3){height:82%;animation-delay:.5s}
 @keyframes growth-rise { from { transform:scaleY(.65);opacity:.4; } to { transform:scaleY(1);opacity:.9; } }
 @media (prefers-reduced-motion: reduce) {
- .voice-bars i,.message-stream::before,.message-stream::after,.app-visual__screen,.app-visual__cursor,.network-visual span,.growth-visual span { animation:none; }
+ .voice-bars i,.message-stream::before,.message-stream::after,.message-stream b,.app-visual__screen,.app-visual__cursor,.network-visual span,.growth-visual span { animation:none; }
+}
+
+/* Problem signal field */
+.problem-network { position: relative; padding: 34px 12px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.problem-network__line { position:absolute; left:5%; right:5%; top:50%; height:1px; background:linear-gradient(90deg, transparent, color-mix(in oklab,var(--electric) 35%,var(--border)), transparent); }
+.problem-network__nodes { position:relative; display:grid; grid-template-columns:repeat(9,minmax(0,1fr)); align-items:center; gap:8px; }
+.problem-node { position:relative; z-index:1; display:flex; min-height:92px; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:12px 8px; text-align:center; background:var(--background); animation: phase-enter 600ms var(--ease-smooth) both; animation-delay:var(--problem-delay); transition:transform 250ms var(--ease-smooth), border-color 250ms ease, background-color 250ms ease; border:1px solid transparent; }
+.problem-node:hover { transform:translateY(-4px); border-color:color-mix(in oklab,var(--electric) 45%,var(--border)); background:color-mix(in oklab,var(--electric) 5%,var(--background)); }
+.problem-node__icon { display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border:1px solid color-mix(in oklab,var(--electric) 30%,var(--border)); color:var(--electric); background:color-mix(in oklab,var(--electric) 4%,var(--background)); }
+.problem-node__label { font-family:var(--font-mono); font-size:9px; line-height:1.2; letter-spacing:.1em; text-transform:uppercase; color:var(--muted-foreground); }
+.problem-node:hover .problem-node__label { color:var(--foreground); }
+
+/* Mobile system flow / problem field */
+@media (max-width: 900px) {
+ .system-flow { grid-template-columns:1fr 1fr; gap:8px; padding-top:8px; }
+ .system-flow__rail,.system-flow__signal { display:none; }
+ .system-flow__item { justify-content:stretch; }
+ .system-flow__node { width:100%; }
+ .problem-network__nodes { grid-template-columns:repeat(3,minmax(0,1fr)); }
+ .problem-network__line { display:none; }
+}
+@media (max-width: 640px) {
+ .problem-network__nodes { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .services-grid { grid-template-columns:1fr; }
+ .service-node { min-height:unset; }
+}
+
+/* Floating controls stay clear of the final footer content. */
+.site-footer { padding-bottom: 6rem; }
+@media (min-width: 640px) { .site-footer { padding-bottom: 5rem; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .system-flow__signal,.problem-node,.service-node::before,.capability-node::before { animation:none; }
 }
 
 /* Hero: the intelligence layer visibly receives, processes, and emits signals. */
