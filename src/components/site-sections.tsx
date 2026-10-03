@@ -216,7 +216,7 @@ const RECOVERY = [
 
 export function Insights() {
   return (
-    <section className="border-y border-border bg-surface/30">
+    <section id="insights" className="border-y border-border bg-surface/30">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
