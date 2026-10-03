@@ -627,6 +627,51 @@ function SelectedSystems() {
   );
 }
 
+const REASONS = [
+  {
+    icon: Building2,
+    title: "Business",
+    body: "We start with the operation, constraints, customer journey, and decisions that matter.",
+  },
+  {
+    icon: Cpu,
+    title: "Engineering",
+    body: "We turn that understanding into connected software, automation, AI, integrations, and data flows.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Growth",
+    body: "We monitor what the system changes, improve what works, and expand the parts that create leverage.",
+  },
+];
+
+function WhyUs() {
+  return (
+    <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
+      <SectionHeading
+        eyebrow="Why Alligentics"
+        title={
+          <>
+            Business understanding.{" "}
+            <span className="text-gradient">Engineering depth. Growth focus.</span>
+          </>
+        }
+        intro="The value is not an isolated chatbot or workflow. It is a system that fits the way the business runs and gets better as it operates."
+      />
+      <div className="mt-12 grid border-y border-border md:grid-cols-3">
+        {REASONS.map((reason, index) => (
+          <article key={reason.title} className="border-b border-border py-7 md:border-b-0 md:border-r md:px-8 md:last:border-r-0 sm:py-9">
+            <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
+            <reason.icon className="mt-8 h-5 w-5 text-accent" />
+            <h3 className="mt-5 font-display text-xl font-semibold">{reason.title}</h3>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">{reason.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Engagement() {
   const items = [
     "Business problem and workflow mapping",
