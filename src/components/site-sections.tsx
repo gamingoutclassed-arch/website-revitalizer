@@ -131,7 +131,7 @@ const JOURNEY = [
 
 export function LeadJourney() {
   return (
-    <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
+    <section className="mx-auto max-w-7xl px-5 py-14 sm:px-6 md:py-20">
       <SectionHeading
         eyebrow="System pattern"
         title={
@@ -142,7 +142,7 @@ export function LeadJourney() {
         intro="This is the operating pattern behind the systems we build. The tools can change; the architecture stays focused on moving useful information to the right action."
       />
 
-      <div className="journey-map relative mt-12 overflow-hidden border-y border-border bg-background">
+      <div className="journey-map relative mt-8 overflow-hidden border-y border-border bg-background">
         <div className="pointer-events-none absolute left-0 right-0 top-[72px] hidden h-px bg-border md:block" aria-hidden="true">
           <span className="journey-signal" />
         </div>
@@ -151,7 +151,7 @@ export function LeadJourney() {
           {JOURNEY.map((step, index) => (
             <article
               key={step.stage}
-              className="journey-step group relative border-b border-border p-6 last:border-b-0 sm:p-7 md:min-h-[300px] md:border-b-0 md:border-r md:last:border-r-0"
+              className="journey-step group relative border-b border-border p-5 last:border-b-0 sm:p-6 md:min-h-[220px] md:border-b-0 md:border-r md:last:border-r-0"
               style={{ "--journey-delay": `${index * 120}ms` } as React.CSSProperties}
             >
               <div className="flex items-center justify-between">
@@ -165,7 +165,7 @@ export function LeadJourney() {
 
               <span className="journey-step__dot" aria-hidden="true" />
 
-              <div className="mt-12">
+              <div className="mt-8">
                 <h3 className="font-display text-xl font-semibold tracking-[0.04em] transition-transform duration-300 group-hover:translate-x-1">
                   {step.stage}
                 </h3>
