@@ -79,10 +79,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "author", content: "Alligentics" },
+      { name: "theme-color", content: "#0B0D12" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Alligentics" },
+      { property: "og:image", content: "https://alligentics.com/alligentics-logo.png" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@alligentics" },
+      { name: "twitter:image", content: "https://alligentics.com/alligentics-logo.png" },
     ],
     links: [
       {
