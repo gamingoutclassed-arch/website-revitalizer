@@ -714,3 +714,47 @@ main[data-motion-ready] section.is-visible {
 @media (prefers-reduced-motion: reduce) {
   .work-signal-visual__nodes::after { animation: none !important; }
 }
+
+
+/* Business view reads as a compact sequence; architecture view exposes system topology. */
+.system-snapshot-flow { transition: background-color 240ms ease, border-color 240ms ease; }
+.system-snapshot-flow--architecture {
+  position: relative;
+  padding: 14px;
+  border: 1px solid var(--border);
+  background-color: color-mix(in oklab, var(--surface) 55%, transparent);
+  background-image: linear-gradient(color-mix(in oklab, var(--border) 42%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--border) 42%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.system-snapshot-flow--architecture .system-snapshot-node { min-height: 88px; background: color-mix(in oklab, var(--background) 94%, transparent); }
+.system-snapshot-flow--architecture .system-snapshot-node:nth-child(odd) { transform: translateY(8px); }
+.system-snapshot-flow--architecture .system-snapshot-node:nth-child(even) { border-left: 2px solid color-mix(in oklab, var(--electric) 55%, var(--border)); }
+.system-snapshot-flow--architecture .system-snapshot-node.is-signal-active { background: color-mix(in oklab, var(--electric) 8%, var(--background)); }
+.archetype-visual--1 > div { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.archetype-visual--1 .archetype-node:nth-child(2) { border-radius: 999px; }
+.archetype-visual--2 > div { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.archetype-visual--2 .archetype-node:nth-child(4) { border-style: dashed; border-color: color-mix(in oklab, var(--accent) 65%, var(--border)); }
+.archetype-visual--3 > div { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.archetype-visual--3 .archetype-node:nth-child(2) { transform: translateY(9px); }
+.archetype-visual--4 > div { grid-template-columns: 1fr 1.2fr 1fr 1fr; }
+.archetype-visual--4 .archetype-node:nth-child(2) { min-height: 92px; border-left: 3px solid var(--electric); }
+.archetype-visual--5 > div { align-items: end; }
+.archetype-visual--5 .archetype-node:nth-child(1) { min-height: 54px; }
+.archetype-visual--5 .archetype-node:nth-child(2) { min-height: 68px; }
+.archetype-visual--5 .archetype-node:nth-child(3) { min-height: 82px; }
+.archetype-visual--5 .archetype-node:nth-child(4) { min-height: 96px; }
+@media (max-width: 640px) {
+  .system-snapshot-flow--architecture { padding: 8px; }
+  .system-snapshot-flow--architecture .system-snapshot-node { min-height: 76px; }
+  .archetype-visual--1 > div,
+  .archetype-visual--2 > div,
+  .archetype-visual--4 > div { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .archetype-visual--3 .archetype-node:nth-child(2) { transform: none; }
+  .archetype-visual--5 > div { align-items: stretch; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .system-snapshot-flow,
+  .system-snapshot-flow--architecture .system-snapshot-node { transition: none; }
+  .system-snapshot-flow--architecture .system-snapshot-node:nth-child(n),
+  .archetype-visual--3 .archetype-node:nth-child(2) { transform: none; }
+}
