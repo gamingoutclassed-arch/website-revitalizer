@@ -46,9 +46,9 @@ import {
   Process,
 } from "../components/site-sections";
 
-const TITLE = "Alligentics | AI Automation for Modern Businesses";
+const TITLE = "Alligentics | Intelligence Engineered for Business";
 const DESCRIPTION =
-  "Alligentics builds custom AI automation: assistants, workflow orchestration, lead and document automation, and business integrations that connect your entire tech stack.";
+  "Alligentics engineers intelligent systems around how businesses actually operate — connecting AI, workflows, applications, data, and growth infrastructure.";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -86,10 +86,9 @@ const DESKTOP_QUERY = "(min-width: 1024px)";
 
 // `page` = which desktop page the link opens
 const NAV = [
-  { href: "#services", label: "Services", page: 1 },
-  { href: "#automation", label: "Solutions", page: 2 },
+  { href: "#services", label: "Systems", page: 1 },
+  { href: "#automation", label: "Capabilities", page: 2 },
   { href: "#process", label: "Process", page: 3 },
-  { href: "#packages", label: "Pricing", page: 4 },
   { href: "#team", label: "About", page: 5 },
 ];
 
@@ -184,6 +183,7 @@ function Index() {
         {/* Page 1 — Introduction */}
         <Page index={0} active={page} className="lg:min-h-[calc(100vh-82px)]">
           <Hero />
+          <Positioning />
           <Marquee />
         </Page>
 
@@ -264,27 +264,26 @@ function Header({
         </a>
 
         {/* Navigation */}
-        <nav
-          className="hidden w-full max-w-[760px] items-center justify-between justify-self-center lg:flex"
-          aria-label="Primary navigation"
-        >
+        <nav className="hidden w-full max-w-[680px] items-center justify-between justify-self-center lg:flex" aria-label="Primary navigation">
           {NAV.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              data-go-page={item.page}
+            <a key={item.href} href={item.href} data-go-page={item.page}
               aria-current={activePage === item.page ? "page" : undefined}
-              className={`whitespace-nowrap text-[15px] font-medium transition-colors duration-200 hover:text-foreground ${
-                activePage === item.page
-                  ? "text-foreground"
-                  : "text-muted-foreground"
-              }`}
-            >
+              className={activePage === item.page ? "whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-foreground transition-colors duration-200" : "whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors duration-200 hover:text-foreground"}>
               {item.label}
             </a>
           ))}
         </nav>
 
+        <details className="relative ml-auto lg:hidden">
+          <summary className="flex h-10 cursor-pointer list-none items-center gap-2 rounded-md border border-border px-3 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground [&::-webkit-details-marker]:hidden">
+            Menu <span aria-hidden="true">+</span>
+          </summary>
+          <div className="absolute right-0 top-12 z-50 w-56 border border-border bg-background p-2 shadow-2xl">
+            {NAV.map((item) => (
+              <a key={item.href} href={item.href} className="block border-b border-border px-3 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground last:border-0 hover:text-foreground">{item.label}</a>
+            ))}
+          </div>
+        </details>
         {/* CTA */}
         <Button asChild className="group h-10 shrink-0 rounded-lg px-3 text-xs font-semibold shadow-lg sm:h-12 sm:rounded-xl sm:px-6 sm:text-sm">
           <a href="#contact" aria-label="Book a free call">
@@ -313,7 +312,7 @@ function Hero() {
         <div>
           <span className="animate-rise inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-electric sm:text-[11px]">
             <span className="h-px w-8 bg-electric" />
-            AI systems, engineered for real business
+            THINK · BUILD · COMPOUND
           </span>
 
           <h1 className="animate-rise mt-7 font-display text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-balance sm:text-[clamp(3rem,6vw,5.25rem)] [animation-delay:0.08s]">
@@ -322,9 +321,9 @@ function Hero() {
           </h1>
 
           <p className="animate-rise mt-7 max-w-[50ch] text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 [animation-delay:0.16s]">
-            Alligentics designs and deploys AI systems, automation and digital
-            products around how your business actually operates, from the first
-            customer message to the systems your team relies on.
+            We design and engineer intelligent systems around how your business
+            actually operates — connecting customer signals, AI, workflows,
+            applications, data, and the people who run the business.
           </p>
 
           <div className="animate-rise mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 [animation-delay:0.24s]">
@@ -339,7 +338,7 @@ function Hero() {
               href="#services"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-electric/60 hover:bg-electric/5"
             >
-              Explore our work
+              See what we build
             </a>
           </div>
 
@@ -382,6 +381,39 @@ const CHANNELS = [
   "Calendars",
 ];
 
+function Positioning() {
+  const stages = [
+    { number: "01", title: "THINK", body: "Understand the business, find the real constraint, and map the system around it.", label: "Business" },
+    { number: "02", title: "BUILD", body: "Engineer the intelligence, connect the tools, and deploy it into the workflow.", label: "Engineering" },
+    { number: "03", title: "COMPOUND", body: "Measure what happens, learn from the system, improve it, and expand what works.", label: "Growth" },
+  ];
+
+  return (
+    <section id="philosophy" className="border-y border-border bg-background">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-6 md:py-20">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">How we think</p>
+            <h2 className="mt-4 max-w-xl font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">Intelligence is not a feature. It is an operating layer.</h2>
+          </div>
+          <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">We start with the business, not the tool. Then we engineer the systems that make the operation faster, clearer, and easier to improve.</p>
+        </div>
+        <div className="mt-10 grid border-y border-border md:grid-cols-3">
+          {stages.map((stage) => (
+            <article key={stage.title} className="group border-b border-border py-7 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] tracking-[0.18em] text-primary">{stage.number}</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">{stage.label}</span>
+              </div>
+              <h3 className="mt-8 font-display text-2xl font-semibold tracking-[0.04em] transition-colors group-hover:text-electric">{stage.title}</h3>
+              <p className="mt-3 max-w-sm text-sm leading-6 text-muted-foreground">{stage.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 function Marquee() {
   return (
     <section
@@ -436,36 +468,15 @@ function SectionHeading({
 }
 
 const PROBLEMS = [
-  {
-    icon: Database,
-    title: "Manual data entry & CRM updates",
-    body: "Customer details copied by hand between messages, spreadsheets, and your CRM.",
-  },
-  {
-    icon: Network,
-    title: "Cross-platform integration",
-    body: "Your business apps hold useful information, but they do not pass it along.",
-  },
-  {
-    icon: MessageSquare,
-    title: "Customer communication",
-    body: "Customers wait while staff answer the same questions across different apps.",
-  },
-  {
-    icon: UserCheck,
-    title: "Lead management",
-    body: "Slow replies and forgotten follow-ups let interested customers go cold.",
-  },
-  {
-    icon: BarChart3,
-    title: "Reporting",
-    body: "Weekly summaries are rebuilt by hand instead of appearing automatically.",
-  },
-  {
-    icon: Eye,
-    title: "System monitoring",
-    body: "Teams check several systems before they can see what needs attention.",
-  },
+  { icon: Globe, label: "Website" },
+  { icon: MessageSquare, label: "WhatsApp" },
+  { icon: Mail, label: "Email" },
+  { icon: Phone, label: "Phone" },
+  { icon: Instagram, label: "Social" },
+  { icon: Users, label: "CRM" },
+  { icon: Database, label: "Spreadsheets" },
+  { icon: Gauge, label: "Calendars" },
+  { icon: Settings2, label: "Internal tools" },
 ];
 
 function Problem() {
@@ -473,74 +484,35 @@ function Problem() {
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
       <SectionHeading
         eyebrow="The bottleneck"
-        title="The problem isn't a lack of software."
-        intro="Your tools do not work together. Every gap between two apps becomes extra work for someone on your team."
+        title="Software isn't the problem. Fragmentation is."
+        intro="Website, WhatsApp, email, phone, CRM, spreadsheets, calendars and internal tools all create signals. When those systems do not connect, every gap becomes work for someone."
       />
-
-      <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {PROBLEMS.map((item, index) => (
-          <article
-            key={item.title}
-            className="surface-panel animate-rise group rounded-2xl p-7 transition-transform duration-300 hover:-translate-y-1"
-            style={{ animationDelay: `${index * 0.06}s` }}
-          >
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-background/60 text-primary transition-colors group-hover:text-accent">
-              <item.icon className="h-5 w-5" />
-            </span>
-
-            <h3 className="mt-5 font-display text-lg font-semibold">
-              {item.title}
-            </h3>
-
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              {item.body}
-            </p>
-          </article>
-        ))}
+      <div className="relative mt-12 overflow-hidden border-y border-border py-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9">
+          {PROBLEMS.map((item) => (
+            <div key={item.label} className="group border-b border-r border-border px-4 py-6 lg:border-b-0">
+              <div className="flex items-center gap-3 lg:block">
+                <item.icon className="h-4 w-4 text-primary transition-colors group-hover:text-electric" />
+                <span className="mt-0 lg:mt-4 block font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{item.label}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="mt-10 flex items-center gap-4">
+        <span className="h-px w-12 bg-electric" />
+        <p className="font-display text-xl font-medium sm:text-2xl">We engineer the layer that connects them.</p>
       </div>
     </section>
   );
 }
 
 const SERVICES = [
-  {
-    number: "01",
-    icon: Bot,
-    title: "AI assistants",
-    body: "Support and reception agents for WhatsApp, websites, email, and phone, with reliable handover to your team when needed.",
-    wide: true,
-  },
-  {
-    number: "02",
-    icon: Workflow,
-    title: "Workflow automation",
-    body: "Multistep orchestration across departments, so one trigger moves an entire process forward.",
-  },
-  {
-    number: "03",
-    icon: TrendingUp,
-    title: "Sales & lead automation",
-    body: "Capture and qualify new leads, update your CRM, and schedule the next follow-up automatically.",
-  },
-  {
-    number: "04",
-    icon: FileStack,
-    title: "Data & document automation",
-    body: "Read invoices, forms, and CVs automatically instead of typing their details by hand.",
-  },
-  {
-    number: "05",
-    icon: Boxes,
-    title: "Business integrations",
-    body: "Connect your CRM, communications, storage, finance, and internal tools.",
-  },
-  {
-    number: "06",
-    icon: Cpu,
-    title: "Custom AI systems",
-    body: "Bespoke builds when your operation doesn't fit anything off the shelf.",
-    wide: true,
-  },
+  { number: "01", icon: Bot, title: "AI Agents", body: "Systems that understand context, communicate naturally, and take action across real business workflows.", wide: true },
+  { number: "02", icon: Workflow, title: "Intelligent Automation", body: "Multi-step workflows connecting tools, data, and people without unnecessary manual handoffs." },
+  { number: "03", icon: Cpu, title: "AI Applications", body: "Purpose-built software around the processes, decisions, and information unique to your business." },
+  { number: "04", icon: Globe, title: "Digital Systems", body: "High-performance customer-facing experiences connected to the operation behind them." },
+  { number: "05", icon: TrendingUp, title: "Growth Systems", body: "Infrastructure for capturing, qualifying, following up with, and converting demand.", wide: true },
 ];
 
 function Services() {
@@ -557,8 +529,8 @@ function Services() {
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
         <SectionHeading
           eyebrow="What we build"
-          title="From manual processes to automated systems"
-          intro="Six capabilities that combine into one operating layer for your business."
+          title="Systems built around how your business works"
+          intro="We combine intelligence, automation, software, and growth infrastructure into systems that fit the operation — not the other way around."
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
