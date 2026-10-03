@@ -595,6 +595,7 @@ const SERVICES = [
 function Services() {
   return (
     <section
+      id="solutions"
       className="relative scroll-mt-20 overflow-hidden border-y border-border bg-surface/30"
     >
       <div
