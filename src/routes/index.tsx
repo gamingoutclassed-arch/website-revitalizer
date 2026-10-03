@@ -846,61 +846,41 @@ function ValueMap() {
 const REASONS = [
   {
     icon: Building2,
-    title: "Business-first",
-    body: "We prioritise your operational process over the technology stack.",
+    title: "Business",
+    body: "We start with the operation, constraints, customer journey, and decisions that matter.",
   },
   {
-    icon: Settings2,
-    title: "Customised",
-    body: "Every solution is tailored to how your business actually works.",
+    icon: Cpu,
+    title: "Engineering",
+    body: "We turn that understanding into connected software, automation, AI, integrations, and data flows.",
   },
   {
-    icon: Network,
-    title: "End-to-end",
-    body: "We connect your whole ecosystem, not one isolated step.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Human + AI",
-    body: "Systems empower your team and keep you firmly in control.",
-  },
-  {
-    icon: Layers,
-    title: "Scalable",
-    body: "Architecture built to grow alongside your business.",
+    icon: TrendingUp,
+    title: "Growth",
+    body: "We monitor what the system changes, improve what works, and expand the parts that create leverage.",
   },
 ];
 
 function WhyUs() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+    <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
       <SectionHeading
         eyebrow="Why Alligentics"
         title={
           <>
-            Practical automation that creates{" "}
-            <span className="text-gradient">measurable improvements.</span>
+            Business understanding.{" "}
+            <span className="text-gradient">Engineering depth. Growth focus.</span>
           </>
         }
-        intro="Reply faster, miss fewer leads, reduce repetitive work, and keep customer information organised."
+        intro="The value is not an isolated chatbot or workflow. It is a system that fits the way the business runs and gets better as it operates."
       />
-
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3">
         {REASONS.map((reason, index) => (
-          <article
-            key={reason.title}
-            className="surface-panel animate-rise rounded-2xl p-7"
-            style={{ animationDelay: `${index * 0.06}s` }}
-          >
-            <reason.icon className="h-5 w-5 text-accent" />
-
-            <h3 className="mt-5 font-display text-lg font-semibold">
-              {reason.title}
-            </h3>
-
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              {reason.body}
-            </p>
+          <article key={reason.title} className="bg-background p-7 sm:p-9">
+            <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
+            <reason.icon className="mt-8 h-5 w-5 text-accent" />
+            <h3 className="mt-5 font-display text-xl font-semibold">{reason.title}</h3>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">{reason.body}</p>
           </article>
         ))}
       </div>
@@ -990,8 +970,8 @@ function Manifesto() {
 
 const TEAM = [
   {
-    name: "Omer Bin Aziz",
-    role: "Founder & CEO",
+    name: "Omar Bin Aziz",
+    role: "Co-founder & CEO",
     initials: "OA",
     body: "Leads overall business strategy, operations, and business development.",
   },
@@ -1018,7 +998,7 @@ function Team() {
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
         <SectionHeading
           eyebrow="Founding team"
-          title="The people behind the systems"
+          title="Business. Engineering. Growth."
         />
 
         <div className="mt-14 grid gap-5 sm:grid-cols-3">
@@ -1089,16 +1069,15 @@ function Contact() {
         <div className="surface-panel grid gap-10 rounded-2xl p-6 sm:p-8 md:p-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">
-              Connect with us
+              Start with the system
             </p>
 
             <h2 className="mt-4 font-display text-[2rem] font-bold leading-[1.12] tracking-normal text-balance sm:text-[clamp(2rem,4vw,3.25rem)] sm:leading-[1.08] sm:tracking-tight">
-              Book a discovery session
+              Tell us how your business works today.
             </h2>
 
             <p className="mt-4 max-w-[52ch] text-base leading-7 text-muted-foreground sm:mt-5 sm:text-lg sm:leading-relaxed">
-              We will identify practical automation opportunities and give you a
-              clear plan for improving your operation.
+              Tell us where the operation is fragmented, where work gets stuck, or where growth is being limited by manual processes. We will map the system around the problem.
             </p>
 
             <a
