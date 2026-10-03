@@ -22,3 +22,5 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+<!-- Vercel preview trigger for the Alligentics Phase 1 branch. -->
