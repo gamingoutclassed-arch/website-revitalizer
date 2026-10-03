@@ -63,8 +63,10 @@ export function Capabilities() {
               const active = selectedLayer === index;
               const Icon = item.icon;
               return (
-                <button key={item.title} type="button" onClick={() => setSelectedLayer(index)} aria-pressed={active}
-                  className={"flex min-h-[72px] w-full items-center gap-4 border-b border-border px-4 py-4 text-left last:border-b-0 " + (active ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:text-foreground")}>
+                <button key={item.title} type="button" onClick={() => setSelectedLayer(index)} role="tab"
+                  aria-selected={active}
+                  tabIndex={active ? 0 : -1}
+                  className={"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary flex min-h-[72px] w-full items-center gap-4 border-b border-border px-4 py-4 text-left last:border-b-0 " + (active ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:text-foreground")}>
                   <span className="font-mono text-[10px] text-primary">0{index + 1}</span>
                   <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                   <span className="flex-1 text-sm font-medium">{item.title}</span>
@@ -112,8 +114,10 @@ export function LeadJourney() {
           {JOURNEY.map((item, index) => {
             const active = activeStep === index;
             return (
-              <button key={item.stage} type="button" onClick={() => setActiveStep(index)} aria-pressed={active}
-                className={"relative flex min-h-14 w-full items-center gap-4 border-b border-border px-3 py-3 text-left last:border-b-0 " + (active ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:text-foreground")}>
+              <button key={item.stage} type="button" onClick={() => setActiveStep(index)} role="tab"
+                aria-selected={active}
+                tabIndex={active ? 0 : -1}
+                className={"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary relative flex min-h-14 w-full items-center gap-4 border-b border-border px-3 py-3 text-left last:border-b-0 " + (active ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:text-foreground")}>
                 <span className="font-mono text-[10px] text-primary">0{index + 1}</span>
                 <span className="flex-1 font-display text-base font-semibold tracking-wide">{item.stage}</span>
                 {active ? <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" /> : null}
@@ -436,18 +440,20 @@ export function Packages() {
       <SectionHeading
         eyebrow="Pricing"
         title="Clear starting points. Scope built around the work."
-        intro="These are starting ranges, not fixed promises. Final pricing depends on the use case, integrations, delivery effort, and ongoing support required."
+        intro="Starting points are shown in PKR. International projects can be quoted in an applicable currency. Final scope is confirmed from the use case, integrations, delivery effort, and support required."
       />
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
-        <div className="border-y border-border" role="group" aria-label="Choose a pricing starting point">
+        <div className="border-y border-border" role="tablist" aria-label="Choose a pricing starting point">
           {PACKAGE_DETAILS.map((item, index) => (
             <button
               key={item.tier}
               type="button"
+              role="tab"
+              aria-selected={selectedTier === index}
+              tabIndex={selectedTier === index ? 0 : -1}
               onClick={() => setSelectedTier(index)}
-              aria-pressed={selectedTier === index}
-              className={"flex min-h-[88px] w-full items-center gap-4 border-b border-border px-4 py-4 text-left last:border-b-0 " + (selectedTier === index ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:bg-surface/30 hover:text-foreground")}
+              className={"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary flex min-h-[88px] w-full items-center gap-4 border-b border-border px-4 py-4 text-left last:border-b-0 " + (selectedTier === index ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:bg-surface/30 hover:text-foreground")}
             >
               <span className="font-mono text-[10px] text-primary">0{index + 1}</span>
               <span className="min-w-0 flex-1">
@@ -486,17 +492,17 @@ export function Packages() {
         </article>
       </div>
 
-      <div className="mt-14 grid gap-6 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <h3 className="font-display text-2xl font-semibold tracking-tight">Pricing philosophy</h3>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            We do not force a complex business into an arbitrary tier. Scope follows the workflow, integrations, intelligence requirements, and level of support.
-          </p>
-          <a href="#contact" className="mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-primary hover:text-accent">
+      <div className="mt-14">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">What shapes scope</p>
+            <h3 className="mt-2 font-display text-2xl font-semibold tracking-tight">The work determines the final build.</h3>
+          </div>
+          <a href="#contact" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-primary hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
             Request a quote <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
-        <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-7">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {PRICING_FACTORS.map((factor) => (
             <li key={factor} className="flex items-baseline gap-3 border-t border-border bg-background/40 px-5 py-4 text-sm">
               <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "var(--gradient-brand)" }} />
