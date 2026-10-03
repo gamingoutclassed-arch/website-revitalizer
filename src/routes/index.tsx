@@ -17,6 +17,7 @@ import {
   Settings2,
   Sparkles,
   TrendingUp,
+  UserCheck,
   Workflow,
   X,
   Zap,
@@ -506,11 +507,11 @@ function Services() {
   const [selected, setSelected] = useState(0);
   const service = SERVICES[selected];
   const visuals = [
-    { label: "CONVERSATION → ACTION", nodes: ["Intent", "Tools", "Result", "Review"] },
-    { label: "EVENT → DECISION → ACTION", nodes: ["Trigger", "Conditions", "Action", "Exception"] },
-    { label: "KNOWLEDGE → WORKSPACE", nodes: ["Sources", "Context", "Workspace", "Approval"] },
-    { label: "FRONTEND → OPERATIONS", nodes: ["Visitor", "API layer", "Business data", "Fulfilment"] },
-    { label: "DEMAND → RELATIONSHIP", nodes: ["Signal", "Qualification", "Conversation", "Retention"] },
+    { label: "INTERFACE → EXPERIENCE", nodes: ["Website", "Workspace", "Chat", "Action"] },
+    { label: "SIGNAL → REASONING", nodes: ["Context", "Model", "Decision", "Confidence"] },
+    { label: "EVENT → STATE → ACTION", nodes: ["Trigger", "Rules", "Route", "Exception"] },
+    { label: "RECORD → CONTEXT → OUTPUT", nodes: ["Data", "Context", "State", "Audit"] },
+    { label: "AUTOMATION → JUDGMENT", nodes: ["Detect", "Explain", "Review", "Resume"] },
   ];
   const visual = visuals[selected];
   const ctas = ["Inspect the experience", "Inspect the intelligence", "Inspect the orchestration", "Inspect the data flow", "Inspect the human handoff"];
