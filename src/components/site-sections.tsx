@@ -534,9 +534,9 @@ export function Packages() {
   return (
     <section id="packages" className="mx-auto max-w-7xl scroll-mt-20 px-5 py-20 sm:px-6 md:py-32">
       <SectionHeading
-        eyebrow="Engagement"
-        title="Start with the system. Expand what works."
-        intro="We scope each build around the business problem, workflow complexity, integrations, and ongoing support required. Pricing is discussed after the system is understood."
+        eyebrow="Pricing"
+        title="Clear starting points. Scope built around the work."
+        intro="These are starting ranges, not fixed promises. Final pricing depends on the use case, integrations, delivery effort, and ongoing support required."
       />
 
       <div className="mt-12 grid gap-px border border-border bg-border md:grid-cols-3">
