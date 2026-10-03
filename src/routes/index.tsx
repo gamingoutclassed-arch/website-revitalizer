@@ -608,7 +608,7 @@ function Services() {
           title="Systems built around how your business works"
           intro="We combine intelligence, automation, software, and growth infrastructure into systems that fit the operation — not the other way around."
         />
-        <div id="solutions"
+        <div
       className="services-grid mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, index) => (
             <article
