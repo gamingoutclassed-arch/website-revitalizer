@@ -638,75 +638,82 @@ function Services() {
 
 const SELECTED_SYSTEMS = [
   {
-    number: "01",
-    title: "AI Outreach Infrastructure",
-    description: "A connected outreach system that moves from lead data to personalised outreach, inbox handling, AI classification, follow-up, and calendar handoff.",
-    architecture: ["Lead data", "Enrichment", "Outreach", "Inbox", "AI classification", "Calendar / human handoff"],
+    number: "01", title: "Outbound lead handling",
+    description: "A short preview of how a new prospect can move from first signal to a clear next action.",
+    outcome: "From new lead to next action without losing context.",
+    architecture: ["Lead signal", "Enrichment", "Personalisation", "Reply triage", "Follow-up", "Scheduling"],
+    details: ["Capture the prospect and source.", "Add useful business context.", "Prepare relevant, individual outreach.", "Classify replies and confidence.", "Route the next message or task.", "Offer a meeting or alert a person."],
     tools: ["Python", "LLM", "Mailgun", "Make", "Calendly"],
   },
   {
-    number: "02",
-    title: "Social Content Engine",
-    description: "A content operation that turns strategy into publishable social media — combining content planning, AI generation, image creation, and platform publishing.",
-    architecture: ["Content strategy", "Generation", "Image creation", "Content calendar", "Publishing"],
+    number: "02", title: "Social publishing pipeline",
+    description: "A short preview of how one content idea can become reviewed assets and a scheduled post.",
+    outcome: "From strategy to a repeatable publishing operation.",
+    architecture: ["Content seed", "Format variants", "Asset creation", "Review", "Schedule", "Publish"],
+    details: ["Start from a content theme.", "Adapt the idea for each format.", "Generate copy and visual assets.", "Pause for human approval.", "Queue approved content.", "Publish through the connected platform."],
     tools: ["Python / n8n", "Gemini", "Zernio", "Instagram"],
   },
-];
+] as const;
+
+function SystemSnapshot({ system }: { system: (typeof SELECTED_SYSTEMS)[number] }) {
+  const [view, setView] = useState<"business" | "architecture">("business");
+  const [activeNode, setActiveNode] = useState(0);
+  const [running, setRunning] = useState(false);
+  return (
+    <article className="system-panel group relative overflow-hidden border border-border bg-surface/20 p-6 sm:p-8 md:p-10">
+      <div className="system-panel__edge" aria-hidden="true" />
+      <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
+        <div>
+          <div className="flex items-center justify-between border-b border-border pb-5"><span className="font-mono text-[10px] tracking-[0.2em] text-primary">{system.number} / SYSTEM SNAPSHOT</span><Network className="h-4 w-4 text-primary" /></div>
+          <h3 className="mt-7 font-display text-2xl font-semibold tracking-tight sm:text-3xl">{system.title}</h3>
+          <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground">{system.description}</p>
+          <p className="mt-6 border-l-2 border-accent pl-4 text-sm font-medium leading-6">{system.outcome}</p>
+          <p className="mt-7 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">Illustrative architecture · {system.tools.join(" · ")}</p>
+        </div>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
+            <div className="inline-flex border border-border p-1" role="group" aria-label={"View mode for " + system.title}>
+              <button type="button" onClick={() => setView("business")} aria-pressed={view === "business"} className={"px-3 py-2 text-xs transition-colors " + (view === "business" ? "bg-primary/10 text-foreground" : "text-muted-foreground hover:text-foreground")}>Business view</button>
+              <button type="button" onClick={() => setView("architecture")} aria-pressed={view === "architecture"} className={"px-3 py-2 text-xs transition-colors " + (view === "architecture" ? "bg-primary/10 text-foreground" : "text-muted-foreground hover:text-foreground")}>Architecture view</button>
+            </div>
+            <button type="button" onClick={() => { setRunning((value) => !value); setActiveNode(0); }} aria-pressed={running} className="inline-flex min-h-9 items-center gap-2 border border-border px-3 text-xs font-medium hover:border-primary/50">{running ? "Reset signal" : "Run signal"} <ArrowUpRight className="h-3.5 w-3.5" /></button>
+          </div>
+          <div className="mt-5 grid gap-2 sm:grid-cols-3">
+            {system.architecture.map((node, index) => {
+              const active = activeNode === index;
+              return (
+                <button key={node} type="button" onClick={() => setActiveNode(index)} aria-pressed={active}
+                  className={"system-snapshot-node relative min-h-[74px] border p-3 text-left transition-colors " + (active ? "border-primary/60 bg-primary/5" : "border-border hover:border-primary/30") + (running && index === activeNode ? " is-signal-active" : "")}>
+                  <span className="block font-mono text-[9px] text-primary">0{index + 1}</span>
+                  <span className="mt-2 block text-xs font-medium">{view === "business" ? ["Capture", "Enrich", "Personalise", "Classify", "Follow up", "Schedule"][index] : node}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="mt-4 border-t border-border pt-4" aria-live="polite">
+            <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-primary">{view === "business" ? "Business purpose" : "Architecture detail"}</p>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{system.details[activeNode]}</p>
+          </div>
+          <div className="mt-4 flex items-center gap-2 text-[10px] text-muted-foreground"><span className={"h-1.5 w-1.5 rounded-full " + (running ? "bg-accent" : "bg-border")} />{running ? "Signal active — select a stage to inspect it" : "Select a stage to inspect it; activate Run signal to highlight the path."}</div>
+        </div>
+      </div>
+    </article>
+  );
+}
 
 function SelectedSystems() {
   return (
     <section id="systems" className="border-y border-border bg-background">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
-        <SectionHeading
-          eyebrow="Selected systems"
-          title="We build the machine behind the workflow."
-          intro="These are examples of the kinds of connected systems we engineer. The architecture matters more than any single tool inside it."
-        />
+        <SectionHeading eyebrow="Selected systems" title="A glimpse of engineered outcomes." intro="Two short snapshots from the kinds of operational patterns we work on. Explore the business view or open the architecture details." />
         <div className="mt-12 space-y-5">
-          {SELECTED_SYSTEMS.map((system) => (
-            <article key={system.number} className="system-panel group relative overflow-hidden border border-border bg-surface/20 p-6 sm:p-8 md:p-10">
-              <div className="system-panel__edge" aria-hidden="true" />
-              <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
-                <div>
-                  <div className="flex items-center justify-between border-b border-border pb-5">
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-primary">{system.number}</span>
-                    <Network className="h-4 w-4 text-muted-foreground transition-colors duration-300 group-hover:text-electric" />
-                  </div>
-                  <h3 className="mt-7 font-display text-2xl font-semibold tracking-tight sm:text-3xl">{system.title}</h3>
-                  <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground">{system.description}</p>
-                  <p className="mt-7 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">Built with · {system.tools.join(" · ")}</p>
-                </div>
-                <div className="border-l border-border pl-6 sm:pl-8">
-                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">System flow</p>
-                  <div
-                    className="system-flow mt-5"
-                    style={{ "--flow-count": system.architecture.length } as React.CSSProperties}
-                  >
-                    <span className="system-flow__rail" aria-hidden="true" />
-                    <span className="system-flow__signal" aria-hidden="true" />
-                    {system.architecture.map((item, index) => (
-                      <div key={item} className="system-flow__item" style={{ "--flow-delay": `${index * 120}ms` } as React.CSSProperties}>
-                        <span className="system-flow__node">
-                          <span className="system-flow__node-dot" aria-hidden="true" />
-                          <span>{item}</span>
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-7 flex items-center gap-3">
-                    <span className="h-px flex-1 bg-border" />
-                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">architecture over tools</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-          ))}
+          {SELECTED_SYSTEMS.map((system) => <SystemSnapshot key={system.number} system={system} />)}
         </div>
+        <div className="mt-7"><a href="/work" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-foreground">Explore implementation patterns <ArrowUpRight className="h-4 w-4" /></a></div>
       </div>
     </section>
   );
 }
-
 
 const REASONS = [
   {
