@@ -95,7 +95,7 @@ export function HeroSystem() {
 
         {/* Tier labels */}
         <text x="0" y="14" className="fill-muted-foreground font-mono" fontSize="9" letterSpacing="2">
-          01 / INPUTS
+          01 / SIGNALS
         </text>
         <text x="0" y={H - 4} className="fill-muted-foreground font-mono" fontSize="9" letterSpacing="2">
           03 / BUSINESS SYSTEMS
