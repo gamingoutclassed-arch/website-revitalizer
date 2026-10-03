@@ -285,7 +285,7 @@ function Header({
         >
           <img
             src="/alligentics-logo.png"
-            alt=""
+            alt="Alligentics"
             className="h-9 w-9 shrink-0 object-contain sm:h-11 sm:w-11"
           />
 
@@ -713,7 +713,7 @@ function Engagement() {
           <SectionHeading
             eyebrow="Engagement"
             title="Clear scope. Shared ownership."
-            intro="A productive engagement starts with agreed expectations on both sides—not a preset package or an open-ended build."
+            intro="Before work begins, we align on the priority, responsibilities, access, milestones, and commercial terms."
           />
           <div className="border-t border-border">
             {items.map((item, index) => (
@@ -1151,13 +1151,6 @@ function Footer({ onHome }: { onHome: () => void }) {
   return (
     <footer className="site-footer border-t border-border bg-surface/40">
       <div className="mx-auto max-w-[1600px] px-6 py-14 lg:px-10 xl:px-12">
-        <div className="site-footer__statement">
-          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">Alligentics / 2026</span>
-          <h2 className="mt-5 max-w-4xl font-display text-3xl font-semibold tracking-tight sm:text-5xl">
-            Intelligence, engineered for business.
-          </h2>
-        </div>
-
         <div className="mt-12 grid gap-8 border-t border-border pt-7 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-end">
           <a href="/" onClick={(e) => { e.preventDefault(); onHome(); }} className="flex items-center gap-3" aria-label="Alligentics home">
             <img src="/alligentics-logo.png" alt="" loading="lazy" className="h-10 w-10 object-contain" />
