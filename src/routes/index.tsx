@@ -90,6 +90,7 @@ const NAV = [
   { href: "#services", label: "Systems", page: 1 },
   { href: "#automation", label: "Capabilities", page: 2 },
   { href: "#process", label: "Process", page: 3 },
+  { href: "#packages", label: "Pricing", page: 4 },
   { href: "#team", label: "About", page: 5 },
 ];
 
@@ -660,7 +661,10 @@ function SelectedSystems() {
                 </div>
                 <div className="border-l border-border pl-6 sm:pl-8">
                   <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">System flow</p>
-                  <div className="system-flow mt-5">
+                  <div
+                    className="system-flow mt-5"
+                    style={{ "--flow-count": system.architecture.length } as React.CSSProperties}
+                  >
                     <span className="system-flow__rail" aria-hidden="true" />
                     <span className="system-flow__signal" aria-hidden="true" />
                     {system.architecture.map((item, index) => (
