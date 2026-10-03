@@ -553,3 +553,19 @@ main[data-motion-ready] section.is-visible {
 @media (prefers-reduced-motion: reduce) {
  .voice-bars i,.message-stream::before,.message-stream::after,.app-visual__screen,.app-visual__cursor,.network-visual span,.growth-visual span { animation:none; }
 }
+
+/* Hero: the intelligence layer visibly receives, processes, and emits signals. */
+.hs-orbit { transform-origin: 260px 270px; animation: hero-orbit 18s linear infinite; }
+.hs-orbit--inner { animation-duration: 11s; animation-direction: reverse; }
+.hs-dot { filter: drop-shadow(0 0 5px color-mix(in oklab, var(--electric) 70%, transparent)); }
+.hs-dot--in { animation: hero-signal-in 2.4s ease-in-out infinite; }
+.hs-dot--out { animation: hero-signal-out 2.2s ease-in-out infinite; }
+.hs-step { animation: hero-step 2.4s ease-in-out infinite; }
+.hs-dash { animation: hero-dash 2s linear infinite; }
+.hs-core-glow { animation: hero-core 3.6s ease-in-out infinite; }
+@keyframes hero-orbit { to { transform: rotate(360deg); } }
+@keyframes hero-signal-in { 0%,100% { opacity:.25; r:2px; } 50% { opacity:1; r:3.8px; } }
+@keyframes hero-signal-out { 0%,100% { opacity:.25; r:2px; } 50% { opacity:1; r:4px; } }
+@keyframes hero-step { 0%,100% { opacity:.3; transform:scale(1); } 45% { opacity:1; transform:scale(1.45); } }
+@keyframes hero-dash { to { stroke-dashoffset:-24; } }
+@keyframes hero-core { 0%,100% { opacity:.35; } 50% { opacity:.85; } }
