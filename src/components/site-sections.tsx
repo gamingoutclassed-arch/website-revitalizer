@@ -121,40 +121,38 @@ export function Capabilities() {
 }
 
 const JOURNEY = [
-  "Customer gets in touch",
-  "AI understands the request",
-  "Instant reply, any hour",
-  "Lead is qualified",
-  "Details stored in your CRM",
-  "Salesperson notified",
-  "Quotation generated or sent",
-  "Follow-up scheduled automatically",
-  "Appointment booked if needed",
-  "Customer receives confirmation",
+  { stage: "SIGNAL", body: "A customer, lead, document, message, or event enters the system." },
+  { stage: "UNDERSTAND", body: "AI reads the context, extracts the useful information, and identifies intent." },
+  { stage: "DECIDE", body: "Rules, models, business logic, and confidence checks determine the next action." },
+  { stage: "ACT", body: "The system updates records, sends messages, creates tasks, calls APIs, or schedules work." },
+  { stage: "HANDOFF", body: "When judgment matters, the right person receives the context and takes over." },
 ];
 
 export function LeadJourney() {
   return (
-    <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
+    <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
       <SectionHeading
-        eyebrow="Example workflow"
-        title="From first message to booked appointment"
-        intro="One trigger, one connected chain of actions. Less manual work, faster responses, fewer missed opportunities."
+        eyebrow="System pattern"
+        title="Signal → Understand → Decide → Act → Handoff"
+        intro="This is the operating pattern behind the systems we build. The tools can change; the architecture stays focused on moving useful information to the right action."
       />
-      <ol className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-4 lg:grid-cols-5">
+      <div className="mt-12 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-5">
         {JOURNEY.map((step, index) => (
-          <li
-            key={step}
-            className="animate-rise min-w-0 rounded-xl border border-border bg-background/50 p-4 sm:p-5"
-            style={{ animationDelay: `${index * 0.05}s` }}
-          >
-            <span className="font-mono text-[11px] text-primary">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <p className="mt-3 text-sm leading-relaxed">{step}</p>
-          </li>
+          <article key={step.stage} className="bg-background p-6 sm:p-7">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
+              {index < JOURNEY.length - 1 && <span className="hidden font-mono text-xs text-muted-foreground md:block">→</span>}
+            </div>
+            <h3 className="mt-8 font-display text-xl font-semibold tracking-[0.04em]">{step.stage}</h3>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">{step.body}</p>
+          </article>
         ))}
-      </ol>
+      </div>
+      <div className="mt-8 flex flex-wrap gap-2 border-t border-border pt-6">
+        {["LLMs", "APIs", "CRM", "Database", "Calendar", "Email", "Messaging", "Human"].map((item) => (
+          <span key={item} className="border border-border px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground">{item}</span>
+        ))}
+      </div>
     </section>
   );
 }
@@ -251,8 +249,8 @@ export function HumanLoop() {
         eyebrow="Human in the loop"
         title={
           <>
-            AI handles the repetitive work.{" "}
-            <span className="text-gradient">Your team stays in control.</span>
+            AI acts on the workflow.{" "}
+            <span className="text-gradient">Humans stay responsible for judgment.</span>
           </>
         }
       />
@@ -295,11 +293,15 @@ export function HumanLoop() {
 }
 
 const PROCESS = [
-  { title: "Understand", body: "We learn how customers reach you, which tools you use, and where time is being lost." },
-  { title: "Identify", body: "We decide what is worth automating and what should stay with a person." },
-  { title: "Design & build", body: "We map the workflow, connect the right tools, and build it piece by piece." },
-  { title: "Test", body: "We test normal requests, unusual questions, handovers, and data transfers before launch." },
-  { title: "Launch & improve", body: "We put the system live, monitor real use, and improve it over time." },
+  { phase: "THINK", title: "Understand", body: "Map the business, customer journey, constraints, tools, decisions, and the real bottleneck." },
+  { phase: "THINK", title: "Identify", body: "Choose where intelligence and automation can create leverage — and where a person should remain in control." },
+  { phase: "THINK", title: "Architect", body: "Define the signals, intelligence layer, systems, integrations, data, and handoffs before building." },
+  { phase: "BUILD", title: "Engineer", body: "Build the agents, applications, workflows, integrations, and interfaces the system requires." },
+  { phase: "BUILD", title: "Integrate", body: "Connect the system to the tools your team already uses and make the data move reliably between them." },
+  { phase: "BUILD", title: "Test & deploy", body: "Test normal paths, edge cases, permissions, handoffs, and failure modes before going live." },
+  { phase: "COMPOUND", title: "Monitor", body: "Watch the system in operation and surface where customers, data, or workflows are getting stuck." },
+  { phase: "COMPOUND", title: "Learn", body: "Use real interactions and outcomes to improve prompts, rules, workflows, and product decisions." },
+  { phase: "COMPOUND", title: "Improve & expand", body: "Strengthen what works, remove friction, and extend the system into the next valuable workflow." },
 ];
 
 const CLIENT_INPUTS = [
@@ -323,18 +325,28 @@ export function Process() {
           eyebrow="How we work"
           title="A straightforward path from first conversation to launch"
         />
-        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-5">
-          {PROCESS.map((step, index) => (
-            <div
-              key={step.title}
-              className="animate-rise bg-background p-7 transition-colors hover:bg-surface/60"
-              style={{ animationDelay: `${index * 0.05}s` }}
-            >
-              <span className="font-mono text-[11px] text-primary">
-                Step {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-4 font-display text-lg font-semibold">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+        <div className="mt-12 grid gap-10 lg:grid-cols-3">
+          {(["THINK", "BUILD", "COMPOUND"] as const).map((phase) => (
+            <div key={phase} className="border-t border-border">
+              <div className="flex items-center justify-between py-5">
+                <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">{phase}</h3>
+                <span className="font-mono text-[10px] text-muted-foreground">
+                  {PROCESS.filter((step) => step.phase === phase).length.toString().padStart(2, "0")} stages
+                </span>
+              </div>
+              <div className="divide-y divide-border border-y border-border">
+                {PROCESS.filter((step) => step.phase === phase).map((step, index) => (
+                  <article key={step.title} className="py-6">
+                    <div className="flex items-start gap-4">
+                      <span className="font-mono text-[10px] text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
+                      <div>
+                        <h4 className="font-display text-lg font-semibold">{step.title}</h4>
+                        <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.body}</p>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           ))}
         </div>
