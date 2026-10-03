@@ -297,28 +297,35 @@
 }
 
 
-/* Motion system — restrained movement so the interface feels engineered, not templated. */
+/* Purposeful system motion — architecture moves, not generic page cards. */
 @keyframes ambient-drift {
-  0%, 100% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.42;
-  }
-  50% {
-    transform: translate3d(2%, -1.5%, 0) scale(1.04);
-    opacity: 0.58;
-  }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.42; }
+  50% { transform: translate3d(2%, -1.5%, 0) scale(1.04); opacity: 0.58; }
 }
-
-@keyframes scan-line {
+@keyframes signal-travel {
   0% { transform: translateX(-120%); opacity: 0; }
-  18% { opacity: 0.7; }
-  52% { opacity: 0.25; }
-  100% { transform: translateX(420%); opacity: 0; }
+  12% { opacity: 0.9; }
+  70% { opacity: 0.45; }
+  100% { transform: translateX(520%); opacity: 0; }
 }
-
-@keyframes border-breathe {
-  0%, 100% { border-color: color-mix(in oklab, var(--electric) 16%, var(--border)); }
-  50% { border-color: color-mix(in oklab, var(--electric) 38%, var(--border)); }
+@keyframes node-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.68 0.17 255 / 0); }
+  45% { box-shadow: 0 0 0 5px oklch(0.68 0.17 255 / 0.08); }
+}
+@keyframes flow-pulse {
+  0% { transform: scaleX(0); transform-origin: left; opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: scaleX(1); transform-origin: left; opacity: 0.55; }
+}
+@keyframes phase-enter {
+  from { opacity: 0.25; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes footer-scan {
+  0% { transform: translateX(-100%); opacity: 0; }
+  18% { opacity: 0.7; }
+  55% { opacity: 0.15; }
+  100% { transform: translateX(500%); opacity: 0; }
 }
 
 .ambient-field {
@@ -333,7 +340,6 @@
     radial-gradient(circle at 18% 72%, oklch(0.76 0.14 275 / 0.045), transparent 28%);
   animation: ambient-drift 14s ease-in-out infinite;
 }
-
 .ambient-field::before {
   content: "";
   position: absolute;
@@ -346,80 +352,129 @@
   opacity: 0.55;
 }
 
+/* Desktop keeps the chapter/viewport model; mobile remains a natural document. */
 main[data-motion-ready] section {
-  opacity: 0;
-  transform: translate3d(0, 24px, 0);
-  transition:
-    opacity 700ms var(--ease-smooth),
-    transform 900ms var(--ease-smooth);
-  will-change: opacity, transform;
+  opacity: 1;
+  transform: none;
 }
-
 main[data-motion-ready] section.is-visible {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: none;
 }
 
-main[data-motion-ready] section.is-visible article {
-  animation: rise 700ms var(--ease-smooth) both;
-  animation-delay: 90ms;
-}
-
-main[data-motion-ready] section.is-visible article:nth-child(2) { animation-delay: 150ms; }
-main[data-motion-ready] section.is-visible article:nth-child(3) { animation-delay: 210ms; }
-main[data-motion-ready] section.is-visible article:nth-child(4) { animation-delay: 270ms; }
-main[data-motion-ready] section.is-visible article:nth-child(5) { animation-delay: 330ms; }
-
-.hero-stage::after,
-section[id]::after {
+/* Selected systems: the architecture itself carries the motion. */
+.system-panel { isolation: isolate; transition: border-color 300ms ease, background-color 300ms ease; }
+.system-panel::after {
   content: "";
   position: absolute;
-  top: 0;
   left: 0;
+  top: 0;
   width: 18rem;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--electric), transparent);
-  opacity: 0.28;
-  animation: scan-line 7s var(--ease-smooth) infinite;
-  pointer-events: none;
+  opacity: 0.35;
+  animation: signal-travel 6s linear infinite;
 }
+.system-panel:hover { border-color: color-mix(in oklab, var(--electric) 42%, var(--border)); background: color-mix(in oklab, var(--surface) 80%, var(--electric) 5%); }
+.system-panel__edge {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--electric), transparent);
+  opacity: 0.7;
+}
+.system-flow { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 0; }
+.system-flow__rail { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--border); }
+.system-flow__item { position: relative; z-index: 1; display: flex; align-items: center; animation: phase-enter 650ms var(--ease-smooth) both; animation-delay: var(--flow-delay); }
+.system-flow__node {
+  position: relative; display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border); background: var(--background); padding: 8px 10px;
+  font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: .08em;
+  transition: border-color 250ms ease, transform 250ms ease, background-color 250ms ease;
+}
+.system-flow__node-dot { width: 5px; height: 5px; flex: 0 0 auto; background: var(--electric); animation: node-pulse 2.2s ease-in-out infinite; }
+.system-flow__item:hover .system-flow__node { border-color: var(--electric); transform: translateY(-2px); }
+.system-flow__arrow { padding: 0 8px; color: color-mix(in oklab, var(--electric) 70%, transparent); }
 
-.hero-stage::after {
-  animation-delay: 1.2s;
+/* Services: hover feels like inspecting a live subsystem. */
+.service-node { isolation: isolate; transition: background-color 300ms ease, box-shadow 300ms ease; }
+.service-node::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 20%, color-mix(in oklab, var(--electric) 8%, transparent) 50%, transparent 80%);
+  transform: translateX(-100%); transition: transform 650ms var(--ease-smooth);
 }
+.service-node:hover::before { transform: translateX(100%); }
+.service-node__signal { position: absolute; left: 0; top: 0; width: 2px; height: 100%; background: linear-gradient(180deg, transparent, var(--electric), transparent); opacity: 0; transition: opacity 250ms ease; }
+.service-node:hover .service-node__signal { opacity: .8; }
+.service-node__icon { transition: transform 350ms var(--ease-smooth), box-shadow 350ms ease; }
+.service-node:hover .service-node__icon { transform: translateY(-3px); box-shadow: 0 10px 30px -18px var(--electric); }
+.service-node__footer { transition: transform 300ms var(--ease-smooth); }
+.service-node:hover .service-node__footer { transform: translateX(5px); }
 
-main[data-motion-ready] section:hover::after {
-  opacity: 0.48;
+/* Capabilities: each cell activates in sequence when its section becomes visible. */
+.capability-node { position: relative; isolation: isolate; }
+.capability-node::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--electric);
+  transition: width 650ms var(--ease-smooth);
 }
+.capability-node:hover::after { width: 100%; }
+.capability-node:hover { background: color-mix(in oklab, var(--background) 92%, var(--electric) 8%); }
+.capability-node:hover .text-primary { color: var(--electric); }
 
-main[data-motion-ready] section article {
-  transition:
-    transform 450ms var(--ease-smooth),
-    border-color 300ms ease,
-    background-color 300ms ease;
+/* Lead journey: a visible signal travels through the operating pattern. */
+.journey-map { position: relative; }
+.journey-map::before {
+  content: ""; position: absolute; left: 5%; right: 5%; top: 42px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  transform: scaleX(0); transform-origin: left; animation: flow-pulse 2.2s 300ms var(--ease-smooth) forwards;
 }
+.journey-step { position: relative; min-height: 220px; }
+.journey-step__dot {
+  display: block; width: 7px; height: 7px; margin-top: 13px; background: var(--electric);
+  box-shadow: 0 0 0 0 oklch(0.68 0.17 255 / 0.18);
+  animation: node-pulse 2.2s ease-in-out infinite;
+}
+.journey-step__arrow { transition: transform 250ms ease, color 250ms ease; }
+.journey-step:hover .journey-step__arrow { transform: translateX(4px); color: var(--electric); }
 
-main[data-motion-ready] section article:hover {
-  transform: translateY(-3px);
+/* Process: THINK → BUILD → COMPOUND reads as a progression. */
+.process-track { position: relative; }
+.process-phase { position: relative; animation: phase-enter 700ms var(--ease-smooth) both; animation-delay: var(--phase-delay); }
+.process-phase::before {
+  content: ""; position: absolute; left: 0; top: -1px; width: 0; height: 2px; background: var(--electric);
+  transition: width 800ms var(--ease-smooth);
 }
+.process-phase:hover::before { width: 100%; }
+.process-phase article { transition: transform 300ms var(--ease-smooth), padding-left 300ms var(--ease-smooth); }
+.process-phase article:hover { transform: translateX(5px); }
+
+/* Footer is the closing chapter, not just the copyright strip. */
+.site-footer { position: relative; overflow: hidden; }
+.site-footer::before {
+  content: ""; position: absolute; left: 0; top: 0; width: 16rem; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  animation: footer-scan 7s linear infinite;
+}
+.site-footer__statement { border-left: 2px solid var(--electric); padding-left: 18px; }
+.site-footer a { transition: color 220ms ease, transform 220ms var(--ease-smooth); }
+.site-footer nav a:hover { transform: translateX(3px); }
 
 @media (prefers-reduced-motion: reduce) {
   .ambient-field,
-  .hero-stage::after,
-  section[id]::after {
+  .system-panel::after,
+  .system-flow__item,
+  .service-node::before,
+  .journey-map::before,
+  .journey-step__dot,
+  .process-phase,
+  .site-footer::before {
     animation: none;
   }
-
-  main[data-motion-ready] section,
-  main[data-motion-ready] section.is-visible {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  main[data-motion-ready] section.is-visible article,
-  main[data-motion-ready] section article:hover {
-    animation: none;
-    transform: none;
-  }
+  .system-flow__item,
+  .process-phase { opacity: 1; transform: none; }
+  .service-node::before { transform: none; }
+  .capability-node::after { transition: none; }
+  .system-panel:hover,
+  .service-node:hover,
+  .process-phase article:hover { transform: none; }
 }
