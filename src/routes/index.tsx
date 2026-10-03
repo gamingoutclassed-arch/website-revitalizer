@@ -682,7 +682,7 @@ function SystemSnapshot({ system }: { system: (typeof SELECTED_SYSTEMS)[number] 
             </div>
             <button type="button" onClick={() => { setRunning((value) => !value); setActiveNode(0); }} aria-pressed={running} className="inline-flex min-h-9 items-center gap-2 border border-border px-3 text-xs font-medium hover:border-primary/50">{running ? "Reset signal" : "Run signal"} <ArrowUpRight className="h-3.5 w-3.5" /></button>
           </div>
-          <div className="mt-5 grid gap-2 sm:grid-cols-3">
+          <div className={"system-snapshot-flow mt-5 grid gap-2 " + (view === "business" ? "system-snapshot-flow--business sm:grid-cols-3" : "system-snapshot-flow--architecture sm:grid-cols-2")}>
             {system.architecture.map((node, index) => {
               const active = activeNode === index;
               return (
