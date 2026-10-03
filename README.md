@@ -1,26 +1,38 @@
-# Website Revitalizer
+# Alligentics Website
 
-Okay, the following zip I have attached is for my already made website. I need you to use that zip to uh firstly, you know, get that website the original, all of the features, all of the website. And now we will be making changes once we are imported the website correctly
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/4dfe76bb-4f09-4126-8b58-cb6ab1e4ab82).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+The public marketing website for Alligentics, built with React, TanStack Start, Vite, and Tailwind CSS.
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+This repository uses **Bun**.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+git clone <repository-url>
+cd website-revitalizer
+bun install
+bun run dev
 ```
 
-<!-- Vercel preview trigger for the Alligentics Phase 1 branch. -->
+## Production build
+
+```sh
+bun run build
+bun run preview
+```
+
+## Project structure
+
+- `src/routes/index.tsx` — homepage and desktop chapter navigation
+- `src/components/site-sections.tsx` — reusable homepage sections
+- `src/components/marketing-page.tsx` — standalone marketing pages
+- `public/` — static assets
+
+## Content model
+
+The homepage provides concise previews and routes visitors to dedicated pages for Capabilities, Solutions, Work, Insights, and About. Pricing remains on the homepage as a project starting-point section.
+
+## Notes
+
+- Contact-form delivery is intentionally not wired to a production endpoint yet.
+- Prices shown on the website are starting points; final scope is confirmed during discovery.
+- Accessibility and reduced-motion behavior should be checked in each production browser target.
