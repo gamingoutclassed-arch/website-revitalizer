@@ -329,8 +329,8 @@ function Header({
         </details>
         {/* CTA */}
         <Button asChild className="group h-10 shrink-0 rounded-md px-3 text-xs font-semibold shadow-lg sm:h-12 sm:px-6 sm:text-sm">
-          <a href="#contact" aria-label="Book a free call">
-            <span className="sm:hidden">Book a call</span>
+          <a href="#contact" aria-label="Talk to an AI strategist">
+            <span className="sm:hidden">Talk to our team</span>
             <span className="hidden sm:inline">Book a free call</span>
             <ArrowUpRight className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
@@ -359,14 +359,12 @@ function Hero() {
           </span>
 
           <h1 className="animate-rise mt-7 font-display text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-balance sm:text-[clamp(3rem,6vw,5.25rem)] [animation-delay:0.08s]">
-            We engineer intelligence{" "}
-            <span className="text-electric">into business.</span>
+            We turn complex workflows{" "}
+            <span className="text-electric">into intelligent systems.</span>
           </h1>
 
           <p className="animate-rise mt-7 max-w-[50ch] text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 [animation-delay:0.16s]">
-            We design and engineer intelligent systems around how your business
-            actually operates — connecting customer signals, AI, workflows,
-            applications, data, and the people who run the business.
+            Strategy, integration, and AI products for teams ready to move from experimentation to real-world impact.
           </p>
 
           <div className="animate-rise mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 [animation-delay:0.24s]">
@@ -374,14 +372,14 @@ function Hero() {
               href="#contact"
               className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-electric px-7 py-3.5 text-sm font-semibold text-electric-foreground shadow-[var(--shadow-electric)] transition-all duration-300 hover:brightness-110"
             >
-              Book an AI strategy call
+              Talk to our team
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
             <a
               href="#solutions"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-electric/60 hover:bg-electric/5"
             >
-              Explore our capabilities
+              Explore the system
             </a>
           </div>
 
@@ -904,60 +902,111 @@ const CONTACT_LINKS = [
 ];
 
 function Contact() {
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const subject = "New Alligentics discovery request";
+    const body = [
+      `Name: ${form.get("name") || ""}`,
+      `Work email: ${form.get("email") || ""}`,
+      `Company: ${form.get("company") || ""}`,
+      `Challenge: ${form.get("challenge") || ""}`,
+      `Timeline: ${form.get("timeline") || "Not specified"}`,
+      `Budget: ${form.get("budget") || "Not specified"}`,
+    ].join("\n\n");
+    window.location.href = `mailto:alligenticsai@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSubmitted(true);
+  }
+
   return (
     <section id="contact" className="relative scroll-mt-20 overflow-hidden">
       <div className="contact-orbit absolute -right-32 top-16 h-[34rem] w-[34rem]" aria-hidden="true" />
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
-        <div className="contact-shell relative overflow-hidden border border-border bg-background/80">
+        <div className="contact-shell relative overflow-hidden border border-border bg-background/90">
           <div className="contact-signal" aria-hidden="true" />
-          <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
             <div className="relative p-7 sm:p-10 md:p-14">
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">Start with the system</p>
               <h2 className="mt-4 max-w-3xl font-display text-[2.2rem] font-bold leading-[1.05] tracking-tight text-balance sm:text-[clamp(2.6rem,5vw,4.4rem)]">
-                Tell us how your business works today.
+                Bring us the messy problem.
               </h2>
               <p className="mt-5 max-w-[54ch] text-base leading-7 text-muted-foreground sm:text-lg">
-                Tell us where the operation is fragmented, where work gets stuck, or where growth is being limited by manual processes. We will map the system around the problem.
+                Tell us where the operation is fragmented, where work gets stuck, or where growth is being limited by manual processes. We will help find the intelligent system inside it.
               </p>
-              <a
-                href="mailto:alligenticsai@gmail.com?subject=Discovery%20session%20with%20Alligentics"
-                className="contact-cta mt-9 inline-flex items-center gap-3 px-7 py-3.5 text-sm font-semibold text-primary-foreground"
-                style={{ background: "var(--gradient-brand)" }}
-              >
-                Start the conversation
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
+              <div className="mt-8 border-t border-border pt-6">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Typical starting points</p>
+                <ul className="mt-4 grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
+                  {["Manual lead handling", "Disconnected business tools", "Repetitive customer work", "AI product opportunities"].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            <div className="contact-console border-t border-border p-5 sm:p-7 lg:border-l lg:border-t-0">
-              <div className="mb-5 flex items-center justify-between">
-                <div>
-                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">Communication layer</p>
-                  <p className="mt-1 font-display text-sm font-semibold">Choose the channel that fits the conversation.</p>
-                </div>
-                <span className="contact-live"><span /> LIVE</span>
-              </div>
-
-              <div className="space-y-2.5">
-                {CONTACT_LINKS.map((link, index) => (
-                  <a key={link.label} href={link.href} className="contact-channel group" style={{ "--channel-delay": `${index * 70}ms` } as React.CSSProperties}>
-                    <span className="contact-channel__icon"><link.icon className="h-4 w-4" /></span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">{link.label === "Instagram" || link.label === "LinkedIn" ? "Social" : link.label.includes("@") ? "Email" : link.label.startsWith("+") ? "Direct" : "Channel"}</span>
-                      <span className="mt-0.5 block truncate text-sm font-medium">{link.label}</span>
-                    </span>
-                    <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            <div className="contact-console border-t border-border p-6 sm:p-8 lg:border-l lg:border-t-0">
+              {submitted ? (
+                <div className="flex min-h-[420px] flex-col justify-center">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">Request prepared</p>
+                  <h3 className="mt-4 font-display text-3xl font-semibold">Your email draft is ready.</h3>
+                  <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
+                    Your email client should now contain the details you entered. If it did not open, contact us directly at alligenticsai@gmail.com.
+                  </p>
+                  <a href="mailto:alligenticsai@gmail.com" className="mt-7 inline-flex w-fit items-center gap-2 border border-border px-5 py-3 text-sm font-semibold hover:border-primary">
+                    Email Alligentics <ArrowUpRight className="h-4 w-4" />
                   </a>
-                ))}
-                <a href="https://alligentics.com/" className="contact-channel group" style={{ "--channel-delay": `${CONTACT_LINKS.length * 70}ms` } as React.CSSProperties}>
-                  <span className="contact-channel__icon"><Globe className="h-4 w-4" /></span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Website</span>
-                    <span className="mt-0.5 block truncate text-sm font-medium">alligentics.com</span>
-                  </span>
-                  <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </a>
-              </div>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5" aria-label="Alligentics project inquiry form">
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <label className="block">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Name</span>
+                      <input name="name" required autoComplete="name" className="mt-2 w-full border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                    </label>
+                    <label className="block">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Work email</span>
+                      <input name="email" type="email" required autoComplete="email" className="mt-2 w-full border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                    </label>
+                  </div>
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <label className="block">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Company</span>
+                      <input name="company" required autoComplete="organization" className="mt-2 w-full border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                    </label>
+                    <label className="block">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Timeline <span className="normal-case">(optional)</span></span>
+                      <select name="timeline" className="mt-2 w-full border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                        <option value="">Not sure yet</option>
+                        <option>Within 30 days</option>
+                        <option>1–3 months</option>
+                        <option>3–6 months</option>
+                        <option>6+ months</option>
+                      </select>
+                    </label>
+                  </div>
+                  <label className="block">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Main challenge</span>
+                    <textarea name="challenge" required rows={5} className="mt-2 w-full resize-y border border-border bg-background px-4 py-3 text-sm leading-6 outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="What is currently manual, fragmented, slow, or difficult to scale?" />
+                  </label>
+                  <label className="block">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Budget <span className="normal-case">(optional)</span></span>
+                    <select name="budget" className="mt-2 w-full border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+                      <option value="">Prefer to discuss</option>
+                      <option>Under PKR 30,000</option>
+                      <option>PKR 30,000–100,000</option>
+                      <option>PKR 100,000+</option>
+                    </select>
+                  </label>
+                  <p className="text-xs leading-5 text-muted-foreground">By submitting, you agree that Alligentics may use these details to respond to your inquiry.</p>
+                  <button type="submit" className="contact-cta inline-flex w-full items-center justify-center gap-3 px-6 py-3.5 text-sm font-semibold text-primary-foreground sm:w-auto" style={{ background: "var(--gradient-brand)" }}>
+                    Start the conversation <ArrowUpRight className="h-4 w-4" />
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
