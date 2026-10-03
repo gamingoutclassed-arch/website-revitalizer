@@ -353,37 +353,11 @@ export function HumanLoop() {
 }
 
 const PROCESS = [
-  {
-    phase: "THINK",
-    title: "Understand",
-    body: "Map the business, customer journey, constraints, tools, decisions, and the real bottleneck.",
-  },
-  {
-    phase: "THINK",
-    title: "Architect",
-    body: "Define the signals, intelligence layer, systems, integrations, data, and human handoffs before building.",
-  },
-  {
-    phase: "BUILD",
-    title: "Engineer & integrate",
-    body: "Build the agents, applications, workflows, and integrations — then connect them to the tools the team already uses.",
-  },
-  {
-    phase: "BUILD",
-    title: "Test & deploy",
-    body: "Test normal paths, edge cases, permissions, handoffs, and failure modes before the system goes live.",
-  },
-  {
-    phase: "COMPOUND",
-    title: "Measure & learn",
-    body: "Watch the system in operation and use real interactions and outcomes to identify friction and improvement opportunities.",
-  },
-  {
-    phase: "COMPOUND",
-    title: "Improve & expand",
-    body: "Strengthen what works, remove friction, and extend the system into the next valuable workflow.",
-  },
-];
+  { phase: "DIAGNOSE", title: "Find the opportunity", body: "Map the business, customer journey, constraints, tools, decisions, and the highest-value bottleneck." },
+  { phase: "DESIGN", title: "Architect the system", body: "Define the experience, intelligence layer, integrations, data flows, human handoffs, and success measures." },
+  { phase: "DEPLOY", title: "Engineer & integrate", body: "Build the agents, applications, workflows, and integrations, then test edge cases before the system goes live." },
+  { phase: "SCALE", title: "Measure & improve", body: "Monitor real operation, remove friction, improve reliability and adoption, and expand what creates measurable value." },
+] as const;
 
 const CLIENT_INPUTS = [
   "Business information",
@@ -404,31 +378,23 @@ export function Process() {
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
         <SectionHeading
           eyebrow="How we work"
-          title="Think. Build. Compound."
+          title="Diagnose. Design. Deploy. Scale."
+          intro="A clear path from a messy business problem to a reliable AI system that keeps improving."
         />
-        <div className="process-track mt-12 grid gap-10 lg:grid-cols-3">
-          {(["THINK", "BUILD", "COMPOUND"] as const).map((phase, phaseIndex) => (
-            <div key={phase} className="process-phase border-t border-border" style={{ "--phase-delay": `${phaseIndex * 180}ms` } as React.CSSProperties}>
-              <div className="flex items-center justify-between py-5">
-                <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">{phase}</h3>
-                <span className="font-mono text-[10px] text-muted-foreground">
-                  {PROCESS.filter((step) => step.phase === phase).length.toString().padStart(2, "0")} moves
-                </span>
+        <div className="process-track mt-12 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          {PROCESS.map((step, index) => (
+            <article
+              key={step.phase}
+              className="process-phase flex min-h-[280px] flex-col bg-background p-6 sm:p-7"
+              style={{ "--phase-delay": `${index * 140}ms` } as React.CSSProperties}
+            >
+              <div className="flex items-center justify-between border-b border-border pb-5">
+                <span className="font-mono text-[10px] tracking-[0.2em] text-primary">0{index + 1}</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">{step.phase}</span>
               </div>
-              <div className="divide-y divide-border border-y border-border">
-                {PROCESS.filter((step) => step.phase === phase).map((step, index) => (
-                  <article key={step.title} className="py-6">
-                    <div className="flex items-start gap-4">
-                      <span className="font-mono text-[10px] text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
-                      <div>
-                        <h4 className="font-display text-lg font-semibold">{step.title}</h4>
-                        <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.body}</p>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
+              <h3 className="mt-8 font-display text-xl font-semibold">{step.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">{step.body}</p>
+            </article>
           ))}
         </div>
 
