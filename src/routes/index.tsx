@@ -116,7 +116,7 @@ function Index() {
   const [page, setPage] = useState(0);
   const mainRef = useRef<HTMLElement>(null);
 
-  const isDesktop = () => window.matchMedia(DESKTOP_QUERY).matches;
+  const isDesktop = () =>\n    typeof window !== "undefined" &&\n    window.matchMedia(DESKTOP_QUERY).matches;
 
   function openPage(index: number, targetId?: string) {
     setPage(index);
