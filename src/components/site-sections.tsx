@@ -507,6 +507,35 @@ export function Packages() {
         intro="We scope each build around the business problem, workflow complexity, integrations, and ongoing support required. Pricing is discussed after the system is understood."
       />
 
+      <div className="mt-12 grid gap-px border border-border bg-border md:grid-cols-3">
+        {PACKAGE_DETAILS.map((detail, index) => (
+          <article
+            key={detail.tier}
+            className="group relative flex min-h-[250px] flex-col bg-background p-6 sm:p-8 transition-colors duration-300 hover:bg-surface/30"
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] tracking-[0.2em] text-primary">
+                0{index + 1}
+              </span>
+              {index === 1 ? (
+                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-accent">
+                  Most connected
+                </span>
+              ) : null}
+            </div>
+            <h3 className="mt-8 font-display text-2xl font-semibold">{detail.tier}</h3>
+            <p className="mt-1 text-sm font-medium text-primary">{detail.strapline}</p>
+            <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">{detail.audience}</p>
+            <div className="mt-auto border-t border-border pt-5">
+              <p className="font-display text-2xl font-semibold text-foreground">{detail.price}</p>
+              <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
+                Discovery · Build · Ongoing
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+
       <div className="mt-10 grid gap-4 md:hidden">
         {PACKAGE_DETAILS.map((detail, tierIndex) => (
           <article key={detail.tier} className="border-y border-border bg-surface/10 p-5">
