@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowUpRight,
@@ -116,6 +116,40 @@ function Index() {
   const [page, setPage] = useState(0);
   const mainRef = useRef<HTMLElement>(null);
 
+  useEffect(() => {
+    const main = mainRef.current;
+    if (!main) return;
+
+    main.dataset.motionReady = "true";
+
+    const sections = Array.from(main.querySelectorAll<HTMLElement>("section"));
+    if (!sections.length) return;
+
+    const reveal = (section: HTMLElement) => section.classList.add("is-visible");
+
+    if (!("IntersectionObserver" in window)) {
+      sections.forEach(reveal);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) reveal(entry.target as HTMLElement);
+        });
+      },
+      {
+        root: main,
+        rootMargin: "0px 0px -10% 0px",
+        threshold: 0.08,
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [page]);
+
   const isDesktop = () => typeof window !== "undefined" && window.matchMedia(DESKTOP_QUERY).matches;
 
   function openPage(index: number, targetId?: string) {
@@ -168,9 +202,10 @@ function Index() {
 
   return (
     <div
-      className="min-h-screen overflow-x-clip bg-background font-body text-foreground"
+      className="site-shell relative min-h-screen overflow-x-clip bg-background font-body text-foreground"
       onClick={handleClick}
     >
+      <div className="ambient-field" aria-hidden="true" />
       <Header activePage={page} onHome={goHome} />
 
       {/* Desktop: one page at a time. Mobile/tablet: normal continuous scroll. */}
