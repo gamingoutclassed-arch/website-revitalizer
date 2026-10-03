@@ -333,7 +333,7 @@ function Header({
         <Button asChild className="group h-10 shrink-0 rounded-md px-3 text-xs font-semibold shadow-lg sm:h-12 sm:px-6 sm:text-sm">
           <a href="#contact" aria-label="Talk to an AI strategist">
             <span className="sm:hidden">Talk to our team</span>
-            <span className="hidden sm:inline">Book a free call</span>
+            <span className="hidden sm:inline">Talk to an AI strategist</span>
             <ArrowUpRight className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </Button>
@@ -1214,11 +1214,8 @@ function Footer({ onHome }: { onHome: () => void }) {
         <div className="site-footer__statement">
           <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">Alligentics / 2026</span>
           <h2 className="mt-5 max-w-4xl font-display text-3xl font-semibold tracking-tight sm:text-5xl">
-            THINK. BUILD. COMPOUND.
+            Intelligence, engineered for business.
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
-            Intelligence engineered for the way your business actually works.
-          </p>
         </div>
 
         <div className="mt-12 grid gap-8 border-t border-border pt-7 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-end">
