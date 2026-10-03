@@ -78,7 +78,7 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
   const data = DATA[page];
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-xl"><div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8"><a href="/" className="font-display text-lg font-semibold tracking-tight">Alligentics</a><nav className="hidden items-center gap-5 md:flex" aria-label="Primary navigation">{[["Capabilities","/capabilities"],["Solutions","/solutions"],["Work","/work"],["Insights","/insights"],["Pricing","/#packages"],["About","/about"]].map(([label,href]) => <a key={href} href={href} className="text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">{label}</a>)}</nav><a href="/contact" className="border border-border px-4 py-2.5 text-xs font-semibold transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">Talk to an AI strategist <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" /></a></div></header>
+      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-xl"><div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8"><a href="/" className="font-display text-lg font-semibold tracking-tight">Alligentics</a><nav className="hidden items-center gap-5 md:flex" aria-label="Primary navigation">{[["Capabilities","/capabilities"],["Solutions","/solutions"],["Work","/work"],["Insights","/insights"],["Pricing","/#packages"],["About","/about"]].map(([label,href]) => <a key={href} href={href} className="text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">{label}</a>)}</nav><a href="/contact" className="border border-border px-4 py-2.5 text-xs font-semibold transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" aria-label="Talk to an AI strategist">Talk to an AI strategist <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" /></a></div></header>
       <section className="relative overflow-hidden border-b border-border px-5 pb-24 pt-28 sm:px-8 lg:pb-32 lg:pt-40">
         <div className="grid-veil absolute inset-0 opacity-30" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl">
@@ -191,6 +191,14 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
                 <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
                 <h2 className="mt-8 font-display text-2xl font-semibold">{item.title}</h2>
                 <p className="mt-4 max-w-lg text-sm leading-7 text-muted-foreground">{item.body}</p>
+                {page === "contact" && index < 2 ? (
+                  <a
+                    href={index === 0 ? "mailto:alligenticsai@gmail.com" : "tel:+923292474455"}
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                  >
+                    {index === 0 ? "Email us" : "Call / WhatsApp"} <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                ) : null}
               </article>
             ))}
           </div>
