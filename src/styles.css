@@ -67,11 +67,11 @@
   --electric-foreground: oklch(0.99 0.005 250);
   --shadow-electric: 0 14px 40px -16px oklch(0.66 0.17 255 / 0.7);
 
-  /* teal / cyan from the logo swoosh */
-  --primary: oklch(0.74 0.115 195);
-  --primary-foreground: oklch(0.17 0.035 250);
-  --accent: oklch(0.82 0.13 185);
-  --accent-foreground: oklch(0.17 0.035 250);
+  /* secondary accents stay close to the electric-blue brand system */
+  --primary: oklch(0.68 0.17 255);
+  --primary-foreground: oklch(0.99 0.005 250);
+  --accent: oklch(0.76 0.14 275);
+  --accent-foreground: oklch(0.99 0.005 250);
 
   --secondary: oklch(0.26 0.04 248);
   --secondary-foreground: oklch(0.96 0.008 220);
@@ -82,7 +82,7 @@
   --destructive-foreground: oklch(0.97 0.008 220);
   --border: oklch(0.86 0.05 200 / 0.14);
   --input: oklch(0.86 0.05 200 / 0.2);
-  --ring: oklch(0.74 0.115 195);
+  --ring: oklch(0.68 0.17 255);
 
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
@@ -90,9 +90,9 @@
 
   --gradient-brand: linear-gradient(
     135deg,
-    oklch(0.74 0.115 195) 0%,
-    oklch(0.82 0.13 185) 50%,
-    oklch(0.6 0.11 235) 100%
+    oklch(0.68 0.17 255) 0%,
+    oklch(0.76 0.14 275) 50%,
+    oklch(0.52 0.12 245) 100%
   );
   --gradient-veil: linear-gradient(
     180deg,
@@ -100,7 +100,7 @@
     oklch(0.17 0.035 250 / 0.75) 55%,
     oklch(0.17 0.035 250) 100%
   );
-  --shadow-glow: 0 24px 70px -30px oklch(0.74 0.115 195 / 0.55);
+  --shadow-glow: 0 24px 70px -30px oklch(0.68 0.17 255 / 0.55);
   --shadow-card: 0 20px 50px -30px oklch(0.08 0.03 250 / 0.9);
   --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
 }
@@ -134,7 +134,7 @@
 @utility glow-orb {
   background: radial-gradient(
     circle,
-    oklch(0.74 0.115 195 / 0.28) 0%,
+    oklch(0.68 0.17 255 / 0.28) 0%,
     transparent 70%
   );
   filter: blur(30px);
@@ -163,7 +163,7 @@
 
 @keyframes pulse-ring {
   0% {
-    box-shadow: 0 0 0 0 oklch(0.74 0.115 195 / 0.4);
+    box-shadow: 0 0 0 0 oklch(0.68 0.17 255 / 0.4);
   }
   70% {
     box-shadow: 0 0 0 16px oklch(0.74 0.115 195 / 0);
@@ -247,7 +247,7 @@
   }
 
   ::selection {
-    background: oklch(0.74 0.115 195 / 0.3);
+    background: oklch(0.68 0.17 255 / 0.3);
   }
 }
 
@@ -280,4 +280,18 @@
   html {
     scroll-behavior: auto;
   }
+}
+
+
+/* Phase 4 — unified visual language: technical editorial surfaces, restrained radius, electric-blue accents. */
+@utility system-rule {
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklab, var(--background) 82%, var(--electric) 4%);
+}
+
+@utility technical-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--electric) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--electric) 8%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
