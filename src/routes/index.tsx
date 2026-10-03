@@ -35,7 +35,6 @@ import {
   Zap,
 } from "lucide-react";
 
-import heroNetwork from "../assets/hero-network.jpg";
 import { Button } from "../components/ui/button";
 import { HeroSystem } from "../components/hero-system";
 import {
