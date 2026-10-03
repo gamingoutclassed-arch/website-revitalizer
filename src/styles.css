@@ -371,14 +371,15 @@ main[data-motion-ready] section.is-visible {
 }
 .system-panel:hover { border-color: color-mix(in oklab, var(--electric) 42%, var(--border)); background: color-mix(in oklab, var(--surface) 80%, var(--electric) 5%); transform: translateY(-2px); }
 .system-panel__edge { position: absolute; inset: 0 auto 0 0; width: 2px; background: linear-gradient(180deg, transparent, var(--electric), transparent); opacity: .7; }
-.system-flow { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); align-items: center; gap: 0; min-height: 76px; }
+.system-flow { position: relative; display: grid; grid-template-columns: repeat(var(--flow-count, 6), minmax(0, 1fr)); align-items: center; gap: 0; min-height: 76px; }
 .system-flow__rail { position: absolute; left: 4%; right: 4%; top: 50%; height: 1px; background: color-mix(in oklab, var(--electric) 22%, var(--border)); }
 .system-flow__signal { position: absolute; left: 4%; top: calc(50% - 2px); width: 28px; height: 4px; border-radius: 999px; background: var(--electric); box-shadow: 0 0 18px color-mix(in oklab, var(--electric) 70%, transparent); animation: system-signal 3.8s linear infinite; z-index: 3; }
 .system-flow__item { position: relative; z-index: 2; display: flex; justify-content: center; animation: phase-enter 650ms var(--ease-smooth) both; animation-delay: var(--flow-delay); }
 .system-flow__node {
   position: relative; display: inline-flex; min-height: 42px; align-items: center; justify-content: center; gap: 7px;
-  border: 1px solid var(--border); background: var(--background); padding: 8px 9px;
-  font-family: var(--font-mono); font-size: 8px; text-align: center; text-transform: uppercase; letter-spacing: .06em;
+  width: calc(100% - 10px); min-height: 46px;
+  border: 1px solid var(--border); background: var(--background); padding: 8px 7px;
+  font-family: var(--font-mono); font-size: 8px; line-height: 1.25; text-align: center; text-transform: uppercase; letter-spacing: .06em;
   transition: border-color 250ms ease, transform 250ms ease, background-color 250ms ease;
 }
 .system-flow__node-dot { width: 5px; height: 5px; flex: 0 0 auto; background: var(--electric); animation: node-pulse 2.2s ease-in-out infinite; }
