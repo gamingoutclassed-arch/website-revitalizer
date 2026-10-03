@@ -834,75 +834,66 @@ const CONTACT_LINKS = [
 function Contact() {
   return (
     <section id="contact" className="relative scroll-mt-20 overflow-hidden">
-      <div
-        className="glow-orb absolute -bottom-20 right-0 h-96 w-96"
-        aria-hidden="true"
-      />
-
+      <div className="contact-orbit absolute -right-32 top-16 h-[34rem] w-[34rem]" aria-hidden="true" />
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
-        <div className="relative grid gap-10 border-y border-border bg-surface/10 p-6 sm:p-8 md:p-14 lg:grid-cols-12 technical-grid">
-          <div className="lg:col-span-7">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">
-              Start with the system
-            </p>
-
-            <h2 className="mt-4 font-display text-[2rem] font-bold leading-[1.12] tracking-normal text-balance sm:text-[clamp(2rem,4vw,3.25rem)] sm:leading-[1.08] sm:tracking-tight">
-              Tell us how your business works today.
-            </h2>
-
-            <p className="mt-4 max-w-[52ch] text-base leading-7 text-muted-foreground sm:mt-5 sm:text-lg sm:leading-relaxed">
-              Tell us where the operation is fragmented, where work gets stuck, or where growth is being limited by manual processes. We will map the system around the problem.
-            </p>
-
-            <a
-              href="mailto:alligenticsai@gmail.com?subject=Discovery%20session%20with%20Alligentics"
-              className="mt-9 inline-flex items-center gap-2 border border-primary/50 bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-electric"
-              style={{ background: "var(--gradient-brand)" }}
-            >
-              Start the conversation
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
-
-          <ul className="flex flex-col gap-3 lg:col-span-5">
-            {CONTACT_LINKS.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="group grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-y border-border px-2 py-4 transition-colors hover:border-electric/50 hover:bg-electric/5 sm:px-3"
-                >
-                  <span className="flex min-w-0 items-center gap-3 text-sm">
-                    <link.icon className="h-4.5 w-4.5 shrink-0 text-primary" />
-                    <span className="min-w-0 break-all">{link.label}</span>
-                  </span>
-
-                  <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-              </li>
-            ))}
-
-            <li>
+        <div className="contact-shell relative overflow-hidden border border-border bg-background/80">
+          <div className="contact-signal" aria-hidden="true" />
+          <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="relative p-7 sm:p-10 md:p-14">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">Start with the system</p>
+              <h2 className="mt-4 max-w-3xl font-display text-[2.2rem] font-bold leading-[1.05] tracking-tight text-balance sm:text-[clamp(2.6rem,5vw,4.4rem)]">
+                Tell us how your business works today.
+              </h2>
+              <p className="mt-5 max-w-[54ch] text-base leading-7 text-muted-foreground sm:text-lg">
+                Tell us where the operation is fragmented, where work gets stuck, or where growth is being limited by manual processes. We will map the system around the problem.
+              </p>
               <a
-                href="https://alligentics.com/"
-                className="group grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-y border-border px-2 py-4 transition-colors hover:border-electric/50 hover:bg-electric/5 sm:px-3"
+                href="mailto:alligenticsai@gmail.com?subject=Discovery%20session%20with%20Alligentics"
+                className="contact-cta mt-9 inline-flex items-center gap-3 px-7 py-3.5 text-sm font-semibold text-primary-foreground"
+                style={{ background: "var(--gradient-brand)" }}
               >
-                <span className="flex min-w-0 items-center gap-3 text-sm">
-                  <Globe className="h-4.5 w-4.5 shrink-0 text-primary" />
-
-                  <span className="min-w-0 break-all">
-                    https://alligentics.com
-                  </span>
-                </span>
-
-                <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                Start the conversation
+                <ArrowUpRight className="h-4 w-4" />
               </a>
-            </li>
-          </ul>
+            </div>
+
+            <div className="contact-console border-t border-border p-5 sm:p-7 lg:border-l lg:border-t-0">
+              <div className="mb-5 flex items-center justify-between">
+                <div>
+                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">Communication layer</p>
+                  <p className="mt-1 font-display text-sm font-semibold">Choose the channel that fits the conversation.</p>
+                </div>
+                <span className="contact-live"><span /> LIVE</span>
+              </div>
+
+              <div className="space-y-2.5">
+                {CONTACT_LINKS.map((link, index) => (
+                  <a key={link.label} href={link.href} className="contact-channel group" style={{ "--channel-delay": `${index * 70}ms` } as React.CSSProperties}>
+                    <span className="contact-channel__icon"><link.icon className="h-4 w-4" /></span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">{link.label === "Instagram" || link.label === "LinkedIn" ? "Social" : link.label.includes("@") ? "Email" : link.label.startsWith("+") ? "Direct" : "Channel"}</span>
+                      <span className="mt-0.5 block truncate text-sm font-medium">{link.label}</span>
+                    </span>
+                    <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                ))}
+                <a href="https://alligentics.com/" className="contact-channel group" style={{ "--channel-delay": `${CONTACT_LINKS.length * 70}ms` } as React.CSSProperties}>
+                  <span className="contact-channel__icon"><Globe className="h-4 w-4" /></span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Website</span>
+                    <span className="mt-0.5 block truncate text-sm font-medium">alligentics.com</span>
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 const WHATSAPP_NUMBER = "923292474455";
 const WHATSAPP_MESSAGE =
