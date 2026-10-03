@@ -862,9 +862,9 @@ function Contact() {
                 Tell us where the operation is fragmented, where work gets stuck, or where growth is being limited by manual processes. We will help find the intelligent system inside it.
               </p>
               <div className="mt-8 border-t border-border pt-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Typical starting points</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Useful discovery inputs</p>
                 <ul className="mt-4 grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
-                  {["Manual lead handling", "Disconnected business tools", "Repetitive customer work", "AI product opportunities"].map((item) => (
+                  {["Current workflow", "Existing tools", "Known exceptions", "Success measure"].map((item) => (
                     <li key={item} className="flex items-start gap-3">
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
                       {item}
@@ -1163,12 +1163,7 @@ function Footer({ onHome }: { onHome: () => void }) {
               <a key={item.href} href={item.href} data-go-page={item.page} className="transition-colors hover:text-foreground">{item.label}</a>
             ))}
             <a href="#contact" className="transition-colors hover:text-foreground">Contact</a>
-            <span className="hidden md:inline-block h-3 w-px bg-border" aria-hidden="true" />
-            <a href="/capabilities" className="transition-colors hover:text-foreground">Capabilities page</a>
-            <a href="/solutions" className="transition-colors hover:text-foreground">Solutions page</a>
-            <a href="/work" className="transition-colors hover:text-foreground">Work page</a>
-            <a href="/insights" className="transition-colors hover:text-foreground">Insights page</a>
-            <a href="/about" className="transition-colors hover:text-foreground">About page</a>
+            
           </nav>
 
           <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
