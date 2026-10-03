@@ -495,11 +495,11 @@ function Problem() {
 }
 
 const SERVICES = [
-  { number: "01", icon: Bot, title: "AI Agents", body: "Task-oriented digital agents with a defined role, tool access, and clear boundaries.", wide: true },
-  { number: "02", icon: Workflow, title: "Intelligent Automation", body: "Event-driven automations that apply rules, move records, and manage exceptions." },
-  { number: "03", icon: Cpu, title: "AI Applications", body: "Purpose-built software that puts a focused AI capability inside a usable product." },
-  { number: "04", icon: Globe, title: "Digital Systems", body: "Customer and internal platforms that give a business a coherent digital front door." },
-  { number: "05", icon: TrendingUp, title: "Growth Systems", body: "Reusable acquisition and retention products for teams managing ongoing demand.", wide: true },
+  { number: "01", icon: Globe, title: "Experience layer", body: "The interfaces people and customers actually use: website, workspace, chat, forms, and focused AI experiences." },
+  { number: "02", icon: Bot, title: "Intelligence layer", body: "Models, agents, retrieval, classification, and decision support that add context and reasoning to the workflow." },
+  { number: "03", icon: Workflow, title: "Orchestration layer", body: "Triggers, rules, state, routing, approvals, retries, and exception handling that move work from one step to the next." },
+  { number: "04", icon: Database, title: "Data layer", body: "Business records, documents, events, and system state organized so the right context is available when it is needed." },
+  { number: "05", icon: UserCheck, title: "Human layer", body: "Ownership, approvals, escalation, and review points that keep automated work accountable.", wide: true },
 ];
 
 function Services() {
@@ -513,14 +513,14 @@ function Services() {
     { label: "DEMAND → RELATIONSHIP", nodes: ["Signal", "Qualification", "Conversation", "Retention"] },
   ];
   const visual = visuals[selected];
-  const ctas = ["See an agent in action", "Explore an automation flow", "Open the product pattern", "See the connected experience", "Trace the growth loop"];
+  const ctas = ["Inspect the experience", "Inspect the intelligence", "Inspect the orchestration", "Inspect the data flow", "Inspect the human handoff"];
 
   return (
     <section id="build" className="relative scroll-mt-20 overflow-hidden border-y border-border bg-surface/30">
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
         <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
-          <SectionHeading eyebrow="What we build" title="Choose the kind of product you need." intro="Five build archetypes. Each solves a different kind of engineering problem; select one to inspect its shape and components." />
-          <p className="max-w-xl text-sm leading-6 text-muted-foreground lg:justify-self-end">These are implementation categories, not a list of business outcomes. The right combination depends on the use case.</p>
+          <SectionHeading eyebrow="System anatomy" title="Five layers. One operating system." intro="Instead of treating AI as a standalone feature, we connect the experience, intelligence, orchestration, data, and human layers around the work." />
+          <p className="max-w-xl text-sm leading-6 text-muted-foreground lg:justify-self-end">A project may use every layer or only a few. The architecture follows the business process, not a fixed stack.</p>
         </div>
         <div className="mt-12 grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
           <div className="border-y border-border">
@@ -528,7 +528,7 @@ function Services() {
               const active = selected === index;
               return (
                 <button key={item.number} type="button" onClick={() => setSelected(index)} aria-pressed={active}
-                  className={"flex min-h-[76px] w-full items-center gap-4 border-b border-border px-4 py-4 text-left transition-colors last:border-b-0 " + (active ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:bg-surface/30 hover:text-foreground")}>
+                  className={"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary flex min-h-[76px] w-full items-center gap-4 border-b border-border px-4 py-4 text-left transition-colors last:border-b-0 " + (active ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:bg-surface/30 hover:text-foreground")}>
                   <span className="font-mono text-[10px] text-primary">{item.number}</span>
                   <span className="min-w-0 flex-1 font-display text-lg font-semibold">{item.title}</span>
                   <ArrowUpRight className={"h-4 w-4 shrink-0 transition-transform " + (active ? "-translate-y-0.5 translate-x-0.5 text-primary" : "")} />
@@ -538,7 +538,7 @@ function Services() {
           </div>
           <article className="relative min-w-0 overflow-hidden border border-border bg-background p-5 sm:p-8" aria-live="polite">
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-5">
-              <div><p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">Build archetype / {service.number}</p><h3 className="mt-2 font-display text-2xl font-semibold">{service.title}</h3></div>
+              <div><p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">System layer / {service.number}</p><h3 className="mt-2 font-display text-2xl font-semibold">{service.title}</h3></div>
               <service.icon className="h-6 w-6 text-primary" aria-hidden="true" />
             </div>
             <div className={"archetype-visual archetype-visual--" + (selected + 1) + " mt-6"}>
@@ -553,7 +553,7 @@ function Services() {
             </div>
             <p className="mt-6 max-w-2xl text-sm leading-6 text-muted-foreground">{service.body}</p>
             <div className="mt-7 flex flex-col gap-4 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-xs leading-5 text-muted-foreground">Typical components: {visual.nodes.join(" · ")}</p>
+              <p className="text-xs leading-5 text-muted-foreground">Typical signals: {visual.nodes.join(" · ")}</p>
               <a href={selected === 0 ? "#walkthrough" : "#automation"} className="inline-flex min-h-10 shrink-0 items-center gap-2 text-sm font-semibold text-primary hover:text-accent">{ctas[selected]} <ArrowUpRight className="h-4 w-4" /></a>
             </div>
           </article>
@@ -565,21 +565,21 @@ function Services() {
 
 const SELECTED_SYSTEMS = [
   {
-    number: "01", title: "Lead response",
-    description: "A compact preview of how an incoming signal becomes a visible next step.",
-    outcome: "Less uncertainty about what should happen next.",
-    architecture: ["Input", "Context", "Decision", "Outcome"],
-    businessLabels: ["New signal", "Useful context", "Chosen route", "Next step"],
-    details: ["An event enters the system.", "Relevant context is brought together.", "A suitable route is selected.", "The next step becomes visible."],
+    number: "01", title: "Signal → decision",
+    description: "How a connected system carries an event from intake to a deliberate next action.",
+    outcome: "Context survives the handoff instead of being rebuilt at every step.",
+    architecture: ["Signal", "Context", "Decision", "Action"],
+    businessLabels: ["What happened", "What matters", "What should happen", "What moves next"],
+    details: ["A useful event enters the system.", "Relevant context is assembled around it.", "Rules and intelligence determine the next route.", "The next action is created, queued, or surfaced."],
     tools: ["Illustrative pattern"],
   },
   {
-    number: "02", title: "Content operations",
-    description: "A high-level view of an idea moving toward a publish-ready state.",
-    outcome: "A clearer path from idea to approved output.",
-    architecture: ["Source", "Shape", "Review", "Ready"],
-    businessLabels: ["Starting point", "Useful form", "Review state", "Ready to use"],
-    details: ["A source idea enters.", "It takes a useful form.", "The result is checked.", "A ready state is recorded."],
+    number: "02", title: "Human oversight",
+    description: "Where the system pauses, explains its state, and hands judgment back to a person.",
+    outcome: "Automation stays accountable when confidence, policy, or context is not enough.",
+    architecture: ["Detect", "Explain", "Review", "Resume"],
+    businessLabels: ["Exception found", "Context shown", "Human decision", "Workflow continues"],
+    details: ["The system detects an exception or uncertainty.", "The relevant context and proposed action are surfaced.", "A person approves, changes, or rejects the next step.", "The workflow resumes with the decision recorded."],
     tools: ["Illustrative pattern"],
   },
 ] as const;
@@ -611,17 +611,17 @@ function SystemSnapshot({ system }: { system: (typeof SELECTED_SYSTEMS)[number] 
         <div className="min-w-0">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
             <div className="inline-flex border border-border p-1" role="group" aria-label={"View mode for " + system.title}>
-              <button type="button" onClick={() => setView("business")} aria-pressed={view === "business"} className={"px-3 py-2 text-xs transition-colors " + (view === "business" ? "bg-primary/10 text-foreground" : "text-muted-foreground hover:text-foreground")}>Business view</button>
-              <button type="button" onClick={() => setView("architecture")} aria-pressed={view === "architecture"} className={"px-3 py-2 text-xs transition-colors " + (view === "architecture" ? "bg-primary/10 text-foreground" : "text-muted-foreground hover:text-foreground")}>Architecture view</button>
+              <button type="button" onClick={() => setView("business")} aria-pressed={view === "business"} className={"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary px-3 py-2 text-xs transition-colors " + (view === "business" ? "bg-primary/10 text-foreground" : "text-muted-foreground hover:text-foreground")}>Business view</button>
+              <button type="button" onClick={() => setView("architecture")} aria-pressed={view === "architecture"} className={"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary px-3 py-2 text-xs transition-colors " + (view === "architecture" ? "bg-primary/10 text-foreground" : "text-muted-foreground hover:text-foreground")}>Architecture view</button>
             </div>
-            <button type="button" onClick={() => { setRunning((value) => !value); setActiveNode(0); }} aria-pressed={running} className="inline-flex min-h-9 items-center gap-2 border border-border px-3 text-xs font-medium hover:border-primary/50">{running ? "Reset signal" : "Run signal"} <ArrowUpRight className="h-3.5 w-3.5" /></button>
+            <button type="button" onClick={() => { setRunning((value) => !value); setActiveNode(0); }} aria-pressed={running} className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary inline-flex min-h-9 items-center gap-2 border border-border px-3 text-xs font-medium hover:border-primary/50">{running ? "Reset signal" : "Run signal"} <ArrowUpRight className="h-3.5 w-3.5" /></button>
           </div>
           <div className={"system-snapshot-flow mt-5 grid gap-2 " + (view === "business" ? "system-snapshot-flow--business sm:grid-cols-3" : "system-snapshot-flow--architecture sm:grid-cols-2")}>
             {system.architecture.map((node, index) => {
               const active = activeNode === index;
               return (
                 <button key={node} type="button" onClick={() => setActiveNode(index)} aria-pressed={active}
-                  className={"system-snapshot-node relative min-h-[74px] border p-3 text-left transition-colors " + (active ? "border-primary/60 bg-primary/5" : "border-border hover:border-primary/30") + (running && index === activeNode ? " is-signal-active" : "")}>
+                  className={"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary system-snapshot-node relative min-h-[74px] border p-3 text-left transition-colors " + (active ? "border-primary/60 bg-primary/5" : "border-border hover:border-primary/30") + (running && index === activeNode ? " is-signal-active" : "")}>
                   <span className="block font-mono text-[9px] text-primary">0{index + 1}</span>
                   <span className="mt-2 block text-xs font-medium">{view === "business" ? system.businessLabels[index] : node}</span>
                 </button>
@@ -643,11 +643,11 @@ function SelectedSystems() {
   return (
     <section id="systems" className="border-y border-border bg-background">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
-        <SectionHeading eyebrow="Selected systems" title="A glimpse of engineered outcomes." intro="Two short snapshots from the kinds of operational patterns we work on. Explore the business view or open the architecture details." />
+        <SectionHeading eyebrow="System anatomy" title="What makes an intelligent system work." intro="Two operating patterns that sit underneath many of our builds: carrying context forward, and keeping human judgment in the loop." />
         <div className="mt-12 space-y-5">
           {SELECTED_SYSTEMS.map((system) => <SystemSnapshot key={system.number} system={system} />)}
         </div>
-        <div className="mt-7"><a href="/work" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-foreground">Explore implementation patterns <ArrowUpRight className="h-4 w-4" /></a></div>
+        <div className="mt-7"><a href="/work" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">See representative implementations <ArrowUpRight className="h-4 w-4" /></a></div>
       </div>
     </section>
   );
@@ -855,7 +855,7 @@ function Contact() {
             <div className="relative p-7 sm:p-10 md:p-14">
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">Start with the system</p>
               <h2 className="mt-4 max-w-3xl font-display text-[2.2rem] font-bold leading-[1.05] tracking-tight text-balance sm:text-[clamp(2.6rem,5vw,4.4rem)]">
-                Bring us the messy problem.
+                Let's map the next move.
               </h2>
               <p className="mt-5 max-w-[54ch] text-base leading-7 text-muted-foreground sm:text-lg">
                 Tell us where the operation is fragmented, where work gets stuck, or where growth is being limited by manual processes. We will help find the intelligent system inside it.
