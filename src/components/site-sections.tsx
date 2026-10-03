@@ -199,6 +199,114 @@ export function LeadJourney() {
   );
 }
 
+const WORKFLOW_EXAMPLES = [
+  {
+    title: "New website inquiry",
+    icon: MessageCircle,
+    signal: "A prospect submits the website form.",
+    understand: "Extract the company, need, urgency, and contact details.",
+    decide: "Check fit and route the inquiry using the business's criteria.",
+    act: "Create a CRM record and prepare a relevant follow-up.",
+    handoff: "Send the owner a concise summary when human attention is needed.",
+  },
+  {
+    title: "Missed business call",
+    icon: PhoneMissed,
+    signal: "A customer calls while the team is unavailable.",
+    understand: "Capture the callback number and available call context.",
+    decide: "Apply the business's callback and escalation rules.",
+    act: "Send an acknowledgement and create a callback task.",
+    handoff: "Give the team the context needed to return the call.",
+  },
+  {
+    title: "Customer support request",
+    icon: Mail,
+    signal: "A support request arrives by email.",
+    understand: "Identify the topic, urgency, and relevant account details.",
+    decide: "Match the request against approved guidance and escalation rules.",
+    act: "Prepare a response or route the request to the right queue.",
+    handoff: "Escalate uncertain or sensitive cases to a person.",
+  },
+] as const;
+
+export function WorkflowDemo() {
+  const [selected, setSelected] = useState(0);
+  const example = WORKFLOW_EXAMPLES[selected];
+  const steps = [
+    { label: "Signal", body: example.signal },
+    { label: "Understand", body: example.understand },
+    { label: "Decide", body: example.decide },
+    { label: "Act", body: example.act },
+    { label: "Human handoff", body: example.handoff },
+  ];
+
+  return (
+    <section className="border-y border-border bg-surface/10">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 md:py-24">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary sm:text-[11px]">Interactive system walkthrough</p>
+            <h2 className="mt-4 font-display text-[2rem] font-bold leading-tight tracking-tight text-balance sm:text-4xl">
+              See how a workflow becomes a system.
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">
+              Choose a common business signal to explore how information can move through understanding, decisions, action, and human oversight.
+            </p>
+            <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+              Illustrative walkthrough · Not a live integration
+            </p>
+            <div className="mt-8 flex flex-col gap-2">
+              {WORKFLOW_EXAMPLES.map((item, index) => {
+                const Icon = item.icon;
+                const active = selected === index;
+                return (
+                  <button
+                    key={item.title}
+                    type="button"
+                    onClick={() => setSelected(index)}
+                    aria-pressed={active}
+                    className={`flex min-h-14 items-center gap-4 border px-4 py-3 text-left transition-colors ${active ? "border-primary/60 bg-primary/5 text-foreground" : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"}`}
+                  >
+                    <Icon className={`h-4 w-4 shrink-0 ${active ? "text-primary" : ""}`} />
+                    <span className="flex-1 text-sm font-medium">{item.title}</span>
+                    <ArrowUpRight className="h-4 w-4 shrink-0" />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="relative border border-border bg-background p-5 sm:p-7">
+            <div className="flex items-center justify-between gap-4 border-b border-border pb-5">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">System flow</p>
+                <h3 className="mt-2 font-display text-xl font-semibold">{example.title}</h3>
+              </div>
+              <Workflow className="h-5 w-5 shrink-0 text-primary" />
+            </div>
+            <div className="mt-5 space-y-0">
+              {steps.map((step, index) => (
+                <div key={step.label} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3">
+                  <div className="flex flex-col items-center">
+                    <span className={`flex h-8 w-8 items-center justify-center border font-mono text-[10px] ${index === steps.length - 1 ? "border-accent/50 text-accent" : "border-primary/40 text-primary"}`}>
+                      0{index + 1}
+                    </span>
+                    {index < steps.length - 1 ? <span className="my-1 min-h-7 w-px flex-1 bg-border" aria-hidden="true" /> : null}
+                  </div>
+                  <div className={`pb-6 ${index === steps.length - 1 ? "pb-1" : ""}`}>
+                    <p className="text-sm font-semibold">{step.label}</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{step.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function Insights() {
   return (
     <section id="insights" className="border-y border-border bg-surface/30">
