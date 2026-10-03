@@ -123,10 +123,10 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
                 ["Document intake", "Field extraction", "Validation", "Exception review", "Structured record", "Audit trail"],
               ][index];
               const details = [
-                { context: "Outbound prospecting across multiple tools.", constraint: "Lead context and reply status can become fragmented across steps.", oversight: "Low-confidence replies and scheduling exceptions are routed to a person.", outcome: "Lead-to-next-action continuity" },
-                { context: "A repeatable content publishing routine.", constraint: "Ideas, assets, approvals, and platform scheduling live in separate stages.", oversight: "A human reviews content and creative assets before publishing.", outcome: "Consistent publishing operations" },
-                { context: "Customer requests arriving through multiple channels.", constraint: "Teams can lose context when a request changes channel or owner.", oversight: "Sensitive or uncertain requests are escalated with the captured context.", outcome: "Context-rich customer handoff" },
-                { context: "Business documents that need structured handling.", constraint: "Manual extraction and inconsistent validation slow the next decision.", oversight: "Exceptions are reviewed before the record proceeds.", outcome: "Traceable information processing" },
+                { context: "Outbound prospecting across multiple tools.", constraint: "Lead context and reply status can become fragmented across steps.", oversight: "Low-confidence replies and scheduling exceptions are routed to a person.", outcome: "Lead-to-next-action continuity", integration: "Lead source · enrichment provider · email delivery · reply inbox · intent classifier · calendar · sales owner", cta: "Trace the lead path", signal: ["Lead", "Context", "Intent", "Next touch", "Owner"] },
+                { context: "A repeatable content publishing routine.", constraint: "Ideas, assets, approvals, and platform scheduling live in separate stages.", oversight: "A human reviews content and creative assets before publishing.", outcome: "Consistent publishing operations", integration: "Strategy brief · language model · image generation · approval queue · content calendar · publishing API", cta: "Follow the publishing loop", signal: ["Brief", "Formats", "Assets", "Review", "Publish"] },
+                { context: "Customer requests arriving through multiple channels.", constraint: "Teams can lose context when a request changes channel or owner.", oversight: "Sensitive or uncertain requests are escalated with the captured context.", outcome: "Context-rich customer handoff", integration: "Website · WhatsApp · email · phone capture · CRM · scheduling · escalation queue · customer record", cta: "Explore the customer journey", signal: ["Request", "Context", "Route", "Respond", "Resolve"] },
+                { context: "Business documents that need structured handling.", constraint: "Manual extraction and inconsistent validation slow the next decision.", oversight: "Exceptions are reviewed before the record proceeds.", outcome: "Traceable information processing", integration: "File intake · OCR/parser · extraction model · validation rules · exception queue · database · audit log", cta: "Inspect the document trail", signal: ["Intake", "Extract", "Validate", "Review", "Record"] },
               ][index];
               return (
                 <article key={item.title} className="overflow-hidden border border-border">
@@ -140,7 +140,13 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
                       <p className="mt-6 font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Representative pattern · not a client case study</p>
                     </div>
                     <div className="p-6 sm:p-8">
-                      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Implementation path</p>
+                      <div className={`work-signal-visual work-signal-visual--${index + 1}`} aria-label={`Illustrative system path: ${details.signal.join(" to ")}`}>
+                        <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Signal path</p>
+                        <div className="work-signal-visual__nodes">
+                          {details.signal.map((signalNode) => <span key={signalNode} className="work-signal-visual__node"><i aria-hidden="true" />{signalNode}</span>)}
+                        </div>
+                      </div>
+                      <p className="mt-7 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Implementation path</p>
                       <div className="mt-6 space-y-0">
                         {stages.map((stage, stageIndex) => (
                           <div key={stage} className="grid grid-cols-[2.5rem_1fr] gap-3">
@@ -150,8 +156,8 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
                         ))}
                       </div>
                       <p className="mt-6 border-t border-border pt-5 text-sm leading-6 text-muted-foreground"><strong className="text-foreground">System built:</strong> {item.body}</p>
-                      <p className="mt-3 text-xs leading-5 text-muted-foreground"><strong className="text-foreground">Integration surface:</strong> Selected APIs, business data, communication channels, and scheduling or publishing services as required by the implementation.</p>
-                      <a href="/contact" className="mt-6 inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-primary hover:text-foreground">View the implementation approach <ArrowUpRight className="h-4 w-4" /></a>
+                      <p className="mt-3 text-xs leading-5 text-muted-foreground"><strong className="text-foreground">Integration surface:</strong> {details.integration}</p>
+                      <a href="/contact" className="mt-6 inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-primary hover:text-foreground">{details.cta} <ArrowUpRight className="h-4 w-4" /></a>
                     </div>
                   </div>
                 </article>
