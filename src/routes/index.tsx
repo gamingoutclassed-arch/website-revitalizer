@@ -41,6 +41,7 @@ import {
   Capabilities,
   HumanLoop,
   LeadJourney,
+  Packages,
   Process,
 } from "../components/site-sections";
 
@@ -242,6 +243,7 @@ function Index() {
         {/* Page 5 — Value, pricing + trust */}
         <Page index={4} active={page}>
           <Engagement />
+          <Packages />
           <WhyUs />
         </Page>
 
@@ -515,14 +517,19 @@ function Problem() {
         title="Software isn't the problem. Fragmentation is."
         intro="Website, WhatsApp, email, phone, CRM, spreadsheets, calendars and internal tools all create signals. When those systems do not connect, every gap becomes work for someone."
       />
-      <div className="relative mt-12 overflow-hidden border-y border-border py-8">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9">
-          {PROBLEMS.map((item) => (
-            <div key={item.label} className="group border-b border-r border-border px-4 py-6 lg:border-b-0">
-              <div className="flex items-center gap-3 lg:block">
-                <item.icon className="h-4 w-4 text-primary transition-colors group-hover:text-electric" />
-                <span className="mt-0 lg:mt-4 block font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{item.label}</span>
-              </div>
+      <div className="problem-network mt-12">
+        <div className="problem-network__line" aria-hidden="true" />
+        <div className="problem-network__nodes">
+          {PROBLEMS.map((item, index) => (
+            <div
+              key={item.label}
+              className="problem-node group"
+              style={{ "--problem-delay": `${index * 90}ms` } as React.CSSProperties}
+            >
+              <span className="problem-node__icon">
+                <item.icon className="h-4 w-4" />
+              </span>
+              <span className="problem-node__label">{item.label}</span>
             </div>
           ))}
         </div>
@@ -559,7 +566,7 @@ function Services() {
           title="Systems built around how your business works"
           intro="We combine intelligence, automation, software, and growth infrastructure into systems that fit the operation — not the other way around."
         />
-        <div className="mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+        <div className="services-grid mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, index) => (
             <article
               key={service.number}
@@ -651,13 +658,13 @@ function SelectedSystems() {
                   <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">System flow</p>
                   <div className="system-flow mt-5">
                     <span className="system-flow__rail" aria-hidden="true" />
+                    <span className="system-flow__signal" aria-hidden="true" />
                     {system.architecture.map((item, index) => (
                       <div key={item} className="system-flow__item" style={{ "--flow-delay": `${index * 120}ms` } as React.CSSProperties}>
                         <span className="system-flow__node">
                           <span className="system-flow__node-dot" aria-hidden="true" />
-                          {item}
+                          <span>{item}</span>
                         </span>
-                        {index < system.architecture.length - 1 && <span className="system-flow__arrow" aria-hidden="true">→</span>}
                       </div>
                     ))}
                   </div>
