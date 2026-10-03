@@ -88,12 +88,12 @@ const DESKTOP_QUERY = "(min-width: 1024px)";
 
 // `page` = which desktop page the link opens
 const NAV = [
-  { href: "#automation", label: "Capabilities", page: 2 },
-  { href: "#solutions", label: "Solutions", page: 1 },
-  { href: "#systems", label: "Work", page: 1 },
-  { href: "#insights", label: "Insights", page: 2 },
+  { href: "/capabilities", label: "Capabilities" },
+  { href: "/solutions", label: "Solutions" },
+  { href: "/work", label: "Work" },
+  { href: "/insights", label: "Insights" },
   { href: "#packages", label: "Pricing", page: 4 },
-  { href: "#team", label: "About", page: 5 },
+  { href: "/about", label: "About" },
 ];
 
 function Page({
@@ -310,7 +310,7 @@ function Header({
         {/* Navigation */}
         <nav className="hidden w-full max-w-[680px] items-center justify-between justify-self-center lg:flex" aria-label="Primary navigation">
           {NAV.map((item) => (
-            <a key={item.href} href={item.href} data-go-page={item.page}
+            <a key={item.href} href={item.href} data-go-page={item.href.startsWith("#") ? item.page : undefined}
               aria-current={activeNav === item.href ? "page" : undefined}
               className={activeNav === item.href ? "whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-foreground transition-colors duration-200" : "whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors duration-200 hover:text-foreground"}>
               {item.label}
@@ -377,7 +377,7 @@ function Hero() {
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
             <a
-              href="#solutions"
+              href="#build"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-electric/60 hover:bg-electric/5"
             >
               Explore the system
@@ -529,7 +529,7 @@ function Services() {
   const ctas = ["See an agent in action", "Explore an automation flow", "Open the product pattern", "See the connected experience", "Trace the growth loop"];
 
   return (
-    <section id="solutions" className="relative scroll-mt-20 overflow-hidden border-y border-border bg-surface/30">
+    <section id="build" className="relative scroll-mt-20 overflow-hidden border-y border-border bg-surface/30">
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
         <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
           <SectionHeading eyebrow="What we build" title="Choose the kind of product you need." intro="Five build archetypes. Each solves a different kind of engineering problem; select one to inspect its shape and components." />
