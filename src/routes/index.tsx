@@ -191,6 +191,7 @@ function Index() {
         <Page index={1} active={page}>
           <Problem />
           <Services />
+          <SelectedSystems />
           <Difference />
         </Page>
 
@@ -562,6 +563,64 @@ function Services() {
               <p className="mt-3 max-w-[52ch] text-sm leading-relaxed text-muted-foreground">
                 {service.body}
               </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const SELECTED_SYSTEMS = [
+  {
+    number: "01",
+    title: "AI Outreach Infrastructure",
+    description: "A connected outreach system that moves from lead data to personalised outreach, inbox handling, AI classification, follow-up, and calendar handoff.",
+    architecture: ["Lead data", "Enrichment", "Outreach", "Inbox", "AI classification", "Calendar / human handoff"],
+    tools: ["Python", "LLM", "Mailgun", "Make", "Calendly"],
+  },
+  {
+    number: "02",
+    title: "Social Content Engine",
+    description: "A content operation that turns strategy into publishable social media — combining content planning, AI generation, image creation, and platform publishing.",
+    architecture: ["Content strategy", "Generation", "Image creation", "Content calendar", "Publishing"],
+    tools: ["Python / n8n", "Gemini", "Zernio", "Instagram"],
+  },
+];
+
+function SelectedSystems() {
+  return (
+    <section id="systems" className="border-y border-border bg-background">
+      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
+        <SectionHeading
+          eyebrow="Selected systems"
+          title="We build the machine behind the workflow."
+          intro="These are examples of the kinds of connected systems we engineer. The architecture matters more than any single tool inside it."
+        />
+        <div className="mt-12 grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-2">
+          {SELECTED_SYSTEMS.map((system) => (
+            <article key={system.number} className="group bg-surface/30 p-7 sm:p-9 md:p-10">
+              <div className="flex items-center justify-between border-b border-border pb-5">
+                <span className="font-mono text-[10px] tracking-[0.2em] text-primary">{system.number}</span>
+                <Network className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-electric" />
+              </div>
+              <h3 className="mt-8 font-display text-2xl font-semibold tracking-tight">{system.title}</h3>
+              <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground">{system.description}</p>
+              <div className="mt-8">
+                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">Architecture</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {system.architecture.map((item, index) => (
+                    <span key={item} className="inline-flex items-center gap-2 border border-border px-3 py-2 font-mono text-[9px] uppercase tracking-[0.08em] text-foreground">
+                      {index > 0 && <span className="text-primary">→</span>}
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-8 border-t border-border pt-5">
+                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">Stack</p>
+                <p className="mt-2 text-xs text-muted-foreground">{system.tools.join(" · ")}</p>
+              </div>
             </article>
           ))}
         </div>
