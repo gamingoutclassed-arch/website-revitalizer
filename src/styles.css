@@ -662,3 +662,19 @@ main[data-motion-ready] section.is-visible {
 @media (prefers-reduced-motion: reduce) {
   .system-snapshot-node.is-signal-active { animation: none; }
 }
+
+/* Distinct archetype micro-interactions; each responds to the selected visual, not a shared card entrance. */
+.archetype-visual--1:hover .archetype-node:nth-child(2) { transform: translateY(-4px) scale(1.02); }
+.archetype-visual--2:hover .archetype-node:nth-child(2),
+.archetype-visual--2:hover .archetype-node:nth-child(4) { transform: translateX(3px); }
+.archetype-visual--3:hover .archetype-node:nth-child(1),
+.archetype-visual--3:hover .archetype-node:nth-child(3) { transform: scaleY(1.04); }
+.archetype-visual--4:hover .archetype-node:nth-child(2) { border-left-width: 4px; }
+.archetype-visual--5:hover .archetype-node:nth-child(4) { transform: translateY(-4px); border-color: var(--accent); }
+@media (prefers-reduced-motion: reduce) {
+  .archetype-visual--1:hover .archetype-node:nth-child(n),
+  .archetype-visual--2:hover .archetype-node:nth-child(n),
+  .archetype-visual--3:hover .archetype-node:nth-child(n),
+  .archetype-visual--4:hover .archetype-node:nth-child(n),
+  .archetype-visual--5:hover .archetype-node:nth-child(n) { transform: none; }
+}
