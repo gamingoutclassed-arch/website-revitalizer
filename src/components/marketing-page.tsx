@@ -64,8 +64,8 @@ const DATA: Record<MarketingPageKey, {
   },
   contact: {
     eyebrow: "Contact",
-    title: "Bring us the messy problem.",
-    intro: "Tell us where work gets stuck, where the operation is fragmented, or where growth is being limited by manual processes.",
+    title: "Start a conversation.",
+    intro: "Tell us what you are trying to improve, where work is getting stuck, or what you want an intelligent system to handle.",
     items: [
       { title: "Email", body: "alligenticsai@gmail.com" },
       { title: "WhatsApp", body: "+92 329 247 4455" },
@@ -78,14 +78,14 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
   const data = DATA[page];
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-xl"><div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8"><a href="/" className="font-display text-lg font-semibold tracking-tight">Alligentics</a><nav className="hidden items-center gap-5 md:flex" aria-label="Primary navigation">{[["Capabilities","/capabilities"],["Solutions","/solutions"],["Work","/work"],["Insights","/insights"],["About","/about"]].map(([label,href]) => <a key={href} href={href} className="text-xs text-muted-foreground transition-colors hover:text-foreground">{label}</a>)}</nav><a href="/contact" className="border border-border px-4 py-2.5 text-xs font-semibold transition-colors hover:border-primary">Talk to an AI strategist <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" /></a></div></header>
+      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-xl"><div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8"><a href="/" className="font-display text-lg font-semibold tracking-tight">Alligentics</a><nav className="hidden items-center gap-5 md:flex" aria-label="Primary navigation">{[["Capabilities","/capabilities"],["Solutions","/solutions"],["Work","/work"],["Insights","/insights"],["Pricing","/#packages"],["About","/about"]].map(([label,href]) => <a key={href} href={href} className="text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">{label}</a>)}</nav><a href="/contact" className="border border-border px-4 py-2.5 text-xs font-semibold transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">Talk to an AI strategist <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" /></a></div></header>
       <section className="relative overflow-hidden border-b border-border px-5 pb-24 pt-28 sm:px-8 lg:pb-32 lg:pt-40">
         <div className="grid-veil absolute inset-0 opacity-30" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl">
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">{data.eyebrow}</p>
           <h1 className="mt-5 max-w-5xl font-display text-[clamp(2.8rem,7vw,6.5rem)] font-semibold leading-[0.98] tracking-tight">{data.title}</h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">{data.intro}</p>
-          <a href="/#contact" className="mt-9 inline-flex items-center gap-2 bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground hover:opacity-90">
+          <a href="/#contact" className="mt-9 inline-flex items-center gap-2 bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
             Talk to an AI strategist <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
