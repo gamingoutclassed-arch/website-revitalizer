@@ -105,7 +105,7 @@ export function HeroSystem() {
           <g key={`in-${x}`}>
             <path id={`hs-in-${i}`} d={inPath(x)} fill="none" stroke="url(#hs-line)" strokeWidth="1" />
             <circle r="2.6" fill="var(--electric)" className="hs-dot">
-              <animateMotion dur={`${2.8 + i * 0.35}s`} begin={`-${i * 0.45}s`} repeatCount="indefinite">
+              <animateMotion dur={`${2.8 + i * 0.35}s`} begin={i === 0 ? "0s" : `-${i * 0.45}s`} repeatCount="indefinite">
                 <mpath href={`#hs-in-${i}`} />
               </animateMotion>
             </circle>
