@@ -87,10 +87,10 @@ const DESKTOP_QUERY = "(min-width: 1024px)";
 
 // `page` = which desktop page the link opens
 const NAV = [
-  { href: "#services", label: "Systems", page: 1 },
   { href: "#automation", label: "Capabilities", page: 2 },
-  { href: "#process", label: "Process", page: 3 },
-  { href: "#packages", label: "Pricing", page: 4 },
+  { href: "#solutions", label: "Solutions", page: 1 },
+  { href: "#systems", label: "Work", page: 1 },
+  { href: "#insights", label: "Insights", page: 2 },
   { href: "#team", label: "About", page: 5 },
 ];
 
@@ -366,14 +366,14 @@ function Hero() {
               href="#contact"
               className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-electric px-7 py-3.5 text-sm font-semibold text-electric-foreground shadow-[var(--shadow-electric)] transition-all duration-300 hover:brightness-110"
             >
-              Start a project
+              Book an AI strategy call
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
             <a
               href="#services"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-electric/60 hover:bg-electric/5"
             >
-              See what we build
+              Explore our capabilities
             </a>
           </div>
 
