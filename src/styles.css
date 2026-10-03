@@ -34,6 +34,8 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
+  --color-electric: var(--electric);
+  --color-electric-foreground: var(--electric-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -59,6 +61,11 @@
   /* brand navy from the logo */
   --brand: oklch(0.38 0.085 250);
   --brand-foreground: oklch(0.97 0.008 220);
+
+  /* electric blue — premium hero accent derived from the logo blue */
+  --electric: oklch(0.66 0.17 255);
+  --electric-foreground: oklch(0.99 0.005 250);
+  --shadow-electric: 0 14px 40px -16px oklch(0.66 0.17 255 / 0.7);
 
   /* teal / cyan from the logo swoosh */
   --primary: oklch(0.74 0.115 195);
@@ -191,13 +198,36 @@
   animation: marquee 32s linear infinite;
 }
 
+.hero-stage {
+  background:
+    radial-gradient(ellipse at 20% 0%, oklch(0.24 0.06 258 / 0.7), transparent 60%),
+    oklch(0.13 0.03 255);
+}
+
+@keyframes hs-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+@keyframes hs-dash {
+  to { stroke-dashoffset: -12; }
+}
+
+.hs-core-glow { animation: hs-pulse 4s ease-in-out infinite; }
+.hs-step { animation: hs-pulse 1.8s ease-in-out infinite; }
+.hs-dash { animation: hs-dash 1s linear infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   .animate-rise,
   .animate-float-slow,
   .animate-pulse-ring,
-  .animate-marquee {
+  .animate-marquee,
+  .hs-core-glow,
+  .hs-step,
+  .hs-dash {
     animation: none;
   }
+  .hs-dot { display: none; }
 }
 
 @layer base {
