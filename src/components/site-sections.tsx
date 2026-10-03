@@ -42,46 +42,43 @@ function SectionHeading({
 
 const CAPABILITIES = [
   {
-    icon: MessageCircle,
-    title: "WhatsApp automation",
+    icon: Bot,
+    title: "AI Agents",
     points: [
-      "AI replies, support and FAQ handling",
-      "Lead qualification and information capture",
-      "Appointment booking and order status",
-      "Automatic follow-ups with human handover",
-      "WhatsApp connected to CRM, email and internal alerts",
+      "Context-aware assistants for customer and internal workflows",
+      "Multi-step actions across connected business systems",
+      "Human handoff when a decision or exception needs a person",
+      "Conversation, classification, and task execution",
     ],
   },
   {
-    icon: PhoneCall,
-    title: "AI phone & call automation",
+    icon: Workflow,
+    title: "Workflow Automation",
     points: [
-      "AI receptionist for inbound calls",
-      "Outbound qualification and reminder calls",
-      "Appointment confirmation and follow-ups",
-      "Missed-call recovery, call notes into CRM",
-      "Escalation to a person when needed",
+      "Event-driven workflows across business tools",
+      "Lead, follow-up, notification, and approval flows",
+      "API integrations that move data between systems",
+      "Automation designed around the existing operation",
     ],
   },
   {
-    icon: Mail,
-    title: "Email automation",
+    icon: FileStack,
+    title: "Data & AI Applications",
     points: [
-      "AI-assisted replies and classification",
-      "Email connected to WhatsApp alerts, CRM or tasks",
-      "Automated follow-up sequences",
-      "Inquiry and attachment processing",
+      "Purpose-built applications around business data",
+      "Document and information processing",
+      "LLM-powered interfaces and decision support",
+      "Structured data flowing into the next action",
     ],
   },
   {
     icon: Globe,
-    title: "Website, social & ad leads",
+    title: "Digital & Growth Systems",
     points: [
-      "Connects to your existing site without a rebuild",
-      "Facebook and Instagram lead capture",
-      "AI qualifies each inquiry instantly",
-      "Confirmation by WhatsApp and email",
-      "Salesperson notified, follow-up scheduled",
+      "Customer-facing web experiences connected to operations",
+      "Lead capture and qualification infrastructure",
+      "Follow-up and conversion workflows",
+      "Measurement and reporting for continuous improvement",
     ],
   },
 ];
@@ -91,30 +88,26 @@ export function Capabilities() {
     <section id="automation" className="scroll-mt-20 border-y border-border bg-surface/30">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
         <SectionHeading
-          eyebrow="What we can automate"
-          title="Every channel your customers already use"
-          intro="We connect complete workflows across the channels your business already uses."
+          eyebrow="Engineering capabilities"
+          title="The intelligence underneath the system"
+          intro="We work across agents, applications, workflows, integrations, data, and customer-facing systems — selecting the technology that fits the problem."
         />
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
+        <div className="mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
           {CAPABILITIES.map((cap, index) => (
             <article
               key={cap.title}
-              className="surface-panel animate-rise rounded-2xl p-8"
+              className="group bg-background p-7 sm:p-9 md:min-h-[280px]"
               style={{ animationDelay: `${index * 0.07}s` }}
             >
-              <span
-                className="inline-flex h-12 w-12 items-center justify-center rounded-xl text-primary-foreground"
-                style={{ background: "var(--gradient-brand)" }}
-              >
-                <cap.icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-6 font-display text-2xl font-semibold tracking-tight">
-                {cap.title}
-              </h3>
-              <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+              <div className="flex items-start justify-between gap-4">
+                <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
+                <cap.icon className="h-5 w-5 text-primary transition-colors group-hover:text-electric" />
+              </div>
+              <h3 className="mt-10 font-display text-2xl font-semibold tracking-tight">{cap.title}</h3>
+              <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
                 {cap.points.map((point) => (
-                  <li key={point} className="flex items-baseline gap-3">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                  <li key={point} className="flex items-start gap-3">
+                    <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-accent" />
                     {point}
                   </li>
                 ))}
