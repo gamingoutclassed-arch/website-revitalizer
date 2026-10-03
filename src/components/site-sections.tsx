@@ -199,155 +199,24 @@ export function LeadJourney() {
   );
 }
 
-const BRIEF = [
-  { label: "Review new inquiries", detail: "Identify intent and route each request" },
-  { label: "Follow up with qualified leads", detail: "Prepare the next message for review" },
-  { label: "Check pending quotations", detail: "Flag proposals waiting for a response" },
-  { label: "Confirm upcoming appointments", detail: "Send reminders and surface conflicts" },
-  { label: "Escalate unanswered requests", detail: "Bring unresolved conversations to a person" },
-  { label: "Summarise activity", detail: "Deliver a concise brief to the team" },
-];
-
-const RECOVERY = [
-  { icon: PhoneMissed, title: "Missed-lead recovery", body: "A missed call triggers an instant message, an AI conversation, qualification, then a nudge to your sales team." },
-  { icon: Star, title: "Feedback automation", body: "Happy customers are asked for a review; unhappy ones reach management before they reach the internet." },
-  { icon: CalendarCheck, title: "Scheduling", body: "AI checks availability, books appointments, sends reminders, and handles rescheduling for your team." },
-  { icon: FileStack, title: "Document processing", body: "Invoices, quotations, forms and CVs read, validated, stored and passed to the next step automatically." },
-];
-
 export function Insights() {
   return (
     <section id="insights" className="border-y border-border bg-surface/30">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <SectionHeading
-              eyebrow="Reporting & insights"
-              title="Your business, summarised every morning"
-               intro="Instead of checking five systems, you get one clear brief with the items that need your attention."
-            />
-            <div className="mt-10 space-y-4">
-              {RECOVERY.map((item) => (
-                <div key={item.title} className="flex items-start gap-4">
-                  <item.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                  <div>
-                    <h3 className="font-display text-base font-semibold">{item.title}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="lg:col-span-7">
-            <div className="animate-rise border-y border-border bg-surface/10 p-6 sm:p-8 md:p-10">
-              <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-3">
-                <Bell className="h-4 w-4 text-accent" />
-                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                  Illustrative daily business brief
-                </p>
-              </div>
-              <ul className="mt-8 divide-y divide-border border-y border-border">
-                {BRIEF.map((row, index) => (
-                  <li key={row.label} className="flex items-start gap-4 bg-background px-4 py-4 sm:px-5">
-                    <span className="mt-0.5 font-mono text-[10px] text-primary">0{index + 1}</span>
-                    <div>
-                      <p className="text-sm font-medium text-foreground">{row.label}</p>
-                      <p className="mt-1 text-xs leading-5 text-muted-foreground">{row.detail}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-8 text-sm leading-relaxed text-muted-foreground">
-                Delivered through WhatsApp, email or Slack, based on how your team works.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-const WORKFLOW_EXAMPLES = [
-  {
-    name: "New website inquiry",
-    signal: "A prospect submits a website form.",
-    understand: "Extract the request, company context, and urgency.",
-    decide: "Check fit and route the inquiry using agreed qualification rules.",
-    act: "Create a CRM record and prepare a relevant follow-up.",
-    handoff: "Send the qualified opportunity to the right person with context.",
-  },
-  {
-    name: "Missed business call",
-    signal: "A call is missed outside the team's availability.",
-    understand: "Identify the caller and capture what they need.",
-    decide: "Apply contact and escalation rules; flag urgent requests.",
-    act: "Send an approved response and record the conversation.",
-    handoff: "Notify a teammate when a human response is needed.",
-  },
-  {
-    name: "Customer support request",
-    signal: "A customer asks a question by email or WhatsApp.",
-    understand: "Match the question to approved business knowledge.",
-    decide: "Check confidence, permissions, and whether escalation is required.",
-    act: "Answer a routine question or create a support task.",
-    handoff: "Pass uncertain or sensitive cases to a person with the conversation history.",
-  },
-];
-
-export function WorkflowDemo() {
-  const [activeExample, setActiveExample] = useState(0);
-  const example = WORKFLOW_EXAMPLES[activeExample];
-  const steps = [
-    { label: "Signal", detail: example.signal },
-    { label: "Understand", detail: example.understand },
-    { label: "Decide", detail: example.decide },
-    { label: "Act", detail: example.act },
-    { label: "Human handoff", detail: example.handoff },
-  ];
-
-  return (
-    <section className="border-y border-border bg-surface/20">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 md:py-24">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 md:py-20">
+        <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">Interactive system walkthrough</p>
-            <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">One pattern. Different business workflows.</h2>
-            <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
-              Choose an example to see how a signal moves through AI reasoning, business rules, connected tools, and human oversight. This is an illustrative walkthrough, not a live integration.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-2" role="group" aria-label="Choose a workflow example">
-              {WORKFLOW_EXAMPLES.map((item, index) => (
-                <button
-                  key={item.name}
-                  type="button"
-                  onClick={() => setActiveExample(index)}
-                  aria-pressed={activeExample === index}
-                  className={activeExample === index
-                    ? "border border-primary bg-primary/10 px-3 py-2.5 text-left text-xs font-medium text-foreground"
-                    : "border border-border px-3 py-2.5 text-left text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"}
-                >
-                  {item.name}
-                </button>
-              ))}
-            </div>
+            <SectionHeading
+              eyebrow="Insights"
+              title="Clear thinking for systems that have to work."
+              intro="Explore practical perspectives on workflow automation, AI product design, integration, and taking systems from prototype to production."
+            />
           </div>
-          <div className="border-y border-border">
-            {steps.map((step, index) => (
-              <article key={step.label} className="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-4 border-b border-border py-5 last:border-b-0 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-5">
-                <div className="flex flex-col items-center">
-                  <span className="flex h-8 w-8 items-center justify-center border border-primary/50 font-mono text-[10px] text-primary">{String(index + 1).padStart(2, "0")}</span>
-                  {index < steps.length - 1 ? <span className="mt-2 min-h-6 w-px flex-1 bg-border" aria-hidden="true" /> : null}
-                </div>
-                <div>
-                  <h3 className="font-display text-lg font-semibold">{step.label}</h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.detail}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+          <a
+            href="/insights"
+            className="inline-flex min-h-11 items-center gap-2 border border-border px-5 py-3 text-sm font-medium transition-colors hover:border-primary hover:text-foreground"
+          >
+            Explore insights <ArrowUpRight className="h-4 w-4" />
+          </a>
         </div>
       </div>
     </section>
