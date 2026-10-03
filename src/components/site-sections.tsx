@@ -149,29 +149,35 @@ const WORKFLOW_EXAMPLES = [
   {
     title: "New website inquiry",
     icon: MessageCircle,
-    signal: "A prospect submits the website form.",
-    understand: "Extract the company, need, urgency, and contact details.",
-    decide: "Check fit and route the inquiry using the business's criteria.",
-    act: "Create a CRM record and prepare a relevant follow-up.",
-    handoff: "Send the owner a concise summary when human attention is needed.",
+    steps: [
+      { label: "Form received", body: "A prospective customer submits a request for a specific service.", note: "Example record: company, requested service, work email." },
+      { label: "Lead brief", body: "The form fields are normalised and matched with the relevant service information.", note: "Output: one structured inquiry summary." },
+      { label: "Priority check", body: "The request is compared with the team's qualification criteria and urgency rules.", note: "Output: a proposed priority, with uncertainty flagged." },
+      { label: "Owner assigned", body: "A follow-up task is prepared for the appropriate sales owner.", note: "Output: a named next action with the captured details." },
+      { label: "Review if needed", body: "Incomplete or ambiguous requests are held for a team member before outreach.", note: "Illustrative scenario; no live CRM or email is connected." },
+    ],
   },
   {
     title: "Missed business call",
     icon: PhoneMissed,
-    signal: "A customer calls while the team is unavailable.",
-    understand: "Capture the callback number and available call context.",
-    decide: "Apply the business's callback and escalation rules.",
-    act: "Send an acknowledgement and create a callback task.",
-    handoff: "Give the team the context needed to return the call.",
+    steps: [
+      { label: "Call missed", body: "A call arrives outside staffed hours or while the team is occupied.", note: "Example record: caller ID, timestamp, available call metadata." },
+      { label: "Callback record", body: "Available details are assembled into a callback entry without inventing the caller's intent.", note: "Output: a traceable callback request." },
+      { label: "Service window", body: "The business's callback hours and urgency rules determine when the task should surface.", note: "Output: a due window and queue." },
+      { label: "Acknowledgement", body: "If configured, the caller receives a short acknowledgement that sets a clear expectation.", note: "No promise of immediate response is made." },
+      { label: "Team callback", body: "A staff member receives the number, time, and any captured context to return the call.", note: "Illustrative scenario; phone and CRM integrations are not live here." },
+    ],
   },
   {
     title: "Customer support request",
     icon: Mail,
-    signal: "A support request arrives by email.",
-    understand: "Identify the topic, urgency, and relevant account details.",
-    decide: "Match the request against approved guidance and escalation rules.",
-    act: "Prepare a response or route the request to the right queue.",
-    handoff: "Escalate uncertain or sensitive cases to a person.",
+    steps: [
+      { label: "Ticket opened", body: "A customer asks about an order, account, or service issue.", note: "Example record: request text, account reference, received time." },
+      { label: "Evidence gathered", body: "The relevant account and approved help content are retrieved for this specific request.", note: "Output: a draft with its supporting context." },
+      { label: "Policy check", body: "The draft is checked against support rules and any conditions requiring escalation.", note: "Output: reply-ready, needs-review, or restricted." },
+      { label: "Queue selected", body: "A routine request can be prepared for response; an exception is assigned to the right queue.", note: "Output: a clear status and responsible team." },
+      { label: "Resolution recorded", body: "The final response and resolution status can be recorded for later quality review.", note: "Illustrative scenario; this walkthrough does not send a response." },
+    ],
   },
 ] as const;
 
@@ -179,13 +185,7 @@ export function WorkflowDemo() {
   const [selected, setSelected] = useState(0);
   const [stepIndex, setStepIndex] = useState(0);
   const example = WORKFLOW_EXAMPLES[selected];
-  const steps = [
-    { label: "Signal", body: example.signal, note: "An event enters the business." },
-    { label: "Understand", body: example.understand, note: "Context is extracted before action." },
-    { label: "Decide", body: example.decide, note: "Rules and confidence determine the route." },
-    { label: "Act", body: example.act, note: "The next task is prepared or completed." },
-    { label: "Human handoff", body: example.handoff, note: "A person receives context when needed." },
-  ];
+  const steps = example.steps;
   const current = steps[stepIndex];
 
   function chooseExample(index: number) {
@@ -362,19 +362,6 @@ const PROCESS = [
   { phase: "SCALE", title: "Measure & improve", body: "Monitor real operation, remove friction, improve reliability and adoption, and expand what creates measurable value." },
 ] as const;
 
-const CLIENT_INPUTS = [
-  "Business information",
-  "Website / integration access",
-  "WhatsApp Business resources",
-  "Meta Business resources",
-  "Email authorisation",
-  "CRM access",
-  "Calendar access",
-  "Product & service information",
-  "FAQs and pricing information",
-  "Existing workflows and documents",
-];
-
 export function Process() {
   return (
     <section id="process" className="scroll-mt-20 border-y border-border bg-surface/30">
@@ -401,32 +388,6 @@ export function Process() {
           ))}
         </div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <h3 className="font-display text-2xl font-semibold tracking-tight">
-              What we need from you
-            </h3>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              We handle the technical implementation. You authorise the business resources the
-              selected automation needs.
-            </p>
-            <p className="mt-6 flex items-start gap-3 border-t border-border bg-background/40 p-5 text-sm">
-              <BadgeCheck className="mt-0.5 h-4.5 w-4.5 shrink-0 text-accent" />
-               You remain the owner of your accounts and data at all times.
-            </p>
-          </div>
-          <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-7">
-            {CLIENT_INPUTS.map((item) => (
-              <li
-                key={item}
-                className="flex items-baseline gap-3 border-t border-border bg-background/40 px-5 py-4 text-sm"
-              >
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );
@@ -468,6 +429,9 @@ function CellValue({ value }: { value: Cell }) {
 }
 
 export function Packages() {
+  const [selectedTier, setSelectedTier] = useState(0);
+  const detail = PACKAGE_DETAILS[selectedTier];
+
   return (
     <section id="packages" className="mx-auto max-w-7xl scroll-mt-20 px-5 py-20 sm:px-6 md:py-32">
       <SectionHeading
@@ -476,98 +440,51 @@ export function Packages() {
         intro="These are starting ranges, not fixed promises. Final pricing depends on the use case, integrations, delivery effort, and ongoing support required."
       />
 
-      <div className="mt-12 grid gap-px border border-border bg-border md:grid-cols-3">
-        {PACKAGE_DETAILS.map((detail, index) => (
-          <article
-            key={detail.tier}
-            className="group relative flex min-h-[250px] flex-col bg-background p-6 sm:p-8 transition-colors duration-300 hover:bg-surface/30"
-          >
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] tracking-[0.2em] text-primary">
-                0{index + 1}
+      <div className="mt-12 grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+        <div className="border-y border-border" role="group" aria-label="Choose a pricing starting point">
+          {PACKAGE_DETAILS.map((item, index) => (
+            <button
+              key={item.tier}
+              type="button"
+              onClick={() => setSelectedTier(index)}
+              aria-pressed={selectedTier === index}
+              className={"flex min-h-[88px] w-full items-center gap-4 border-b border-border px-4 py-4 text-left last:border-b-0 " + (selectedTier === index ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:bg-surface/30 hover:text-foreground")}
+            >
+              <span className="font-mono text-[10px] text-primary">0{index + 1}</span>
+              <span className="min-w-0 flex-1">
+                <span className="block font-display text-lg font-semibold">{item.tier}</span>
+                <span className="mt-1 block text-xs leading-5">{item.strapline}</span>
               </span>
-              {index === 1 ? (
-                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-accent">
-                  Most connected
-                </span>
-              ) : null}
-            </div>
-            <h3 className="mt-8 font-display text-2xl font-semibold">{detail.tier}</h3>
-            <p className="mt-1 text-sm font-medium text-primary">{detail.strapline}</p>
-            <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">{detail.audience}</p>
-            <div className="mt-auto border-t border-border pt-5">
-              <p className="font-display text-2xl font-semibold text-foreground">{detail.price}</p>
-              <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
-                Discovery · Build · Ongoing
-              </p>
-            </div>
-          </article>
-        ))}
-      </div>
+              <ArrowUpRight className={"h-4 w-4 shrink-0 " + (selectedTier === index ? "text-primary" : "opacity-40")} />
+            </button>
+          ))}
+        </div>
 
-      <div className="mt-10 grid gap-4 md:hidden">
-        {PACKAGE_DETAILS.map((detail, tierIndex) => (
-          <article key={detail.tier} className="border-y border-border bg-surface/10 p-5">
-            <h3 className="font-display text-xl font-semibold">{detail.tier}</h3>
-            <p className="mt-1 text-sm font-medium text-primary">{detail.strapline}</p>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{detail.audience}</p>
-            <dl className="mt-5 divide-y divide-border">
+        <article className="border border-border bg-background p-6 sm:p-9" aria-live="polite">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Selected starting point / 0{selectedTier + 1}</p>
+              <h3 className="mt-3 font-display text-3xl font-semibold">{detail.tier}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{detail.audience}</p>
+            </div>
+            <p className="font-display text-2xl font-semibold text-foreground">{detail.price}</p>
+          </div>
+          <div className="mt-6">
+            <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Typical scope indicators</p>
+            <dl className="mt-3 divide-y divide-border">
               {PACKAGE_ROWS.map((row) => {
-                const value = row.values[tierIndex] ?? false;
+                const value = row.values[selectedTier] ?? false;
                 return (
-                  <div key={`${detail.tier}-${row.feature}`} className="grid grid-cols-[minmax(0,1fr)_minmax(5rem,auto)] items-center gap-4 py-3">
-                    <dt className="min-w-0 text-sm leading-5 text-muted-foreground">{row.feature}</dt>
-                    <dd className="shrink-0 text-right"><CellValue value={value} /></dd>
+                  <div key={row.feature} className="grid grid-cols-[minmax(0,1fr)_minmax(6rem,auto)] items-center gap-4 py-3">
+                    <dt className="text-sm text-muted-foreground">{row.feature}</dt>
+                    <dd className="text-right text-sm"><CellValue value={value} /></dd>
                   </div>
                 );
               })}
             </dl>
-            <p className="mt-5 border-t border-border pt-4 font-display text-xl font-semibold text-foreground">{detail.price}</p>
-            <p className="mt-1 text-xs text-muted-foreground">Final scope follows discovery and architecture.</p>
-          </article>
-        ))}
-      </div>
-
-      <div className="mt-14 hidden overflow-x-auto border-y border-border md:block">
-        <table className="w-full min-w-[640px] border-collapse text-sm">
-          <thead>
-            <tr className="bg-surface/60">
-              <th className="px-6 py-5 text-left font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-                Feature
-              </th>
-              {PACKAGE_DETAILS.map((detail) => (
-                <th
-                  key={detail.tier}
-                  className="px-6 py-5 text-center font-display text-base font-semibold"
-                >
-                  {detail.tier}
-                  <span className="mt-1 block font-body text-xs font-normal text-muted-foreground">{detail.strapline}</span>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {PACKAGE_ROWS.map((row) => (
-              <tr key={row.feature} className="border-t border-border">
-                <td className="px-6 py-4 text-left">{row.feature}</td>
-                {row.values.map((value, i) => (
-                  <td key={`${row.feature}-${i}`} className="px-6 py-4 text-center">
-                    <CellValue value={value} />
-                  </td>
-                ))}
-              </tr>
-            ))}
-            <tr className="border-t border-border bg-surface/40">
-              <td className="px-6 py-5 text-left font-semibold">Pricing</td>
-               {PACKAGE_DETAILS.map((detail) => (
-                 <td key={`price-${detail.tier}`} className="px-6 py-5 text-center text-xs text-muted-foreground">
-                   <span className="block font-semibold text-foreground">{detail.price}</span>
-                   Discovery · Build · Ongoing
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
+          </div>
+          <p className="mt-5 border-t border-border pt-4 text-xs leading-5 text-muted-foreground">Illustrative scope only. Final deliverables and support are confirmed during discovery.</p>
+        </article>
       </div>
 
       <div className="mt-14 grid gap-6 lg:grid-cols-12">
@@ -576,23 +493,14 @@ export function Packages() {
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             We do not force a complex business into an arbitrary tier. Scope follows the workflow, integrations, intelligence requirements, and level of support.
           </p>
-          <a
-            href="#contact"
-            className="mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-primary hover:text-accent"
-          >
+          <a href="#contact" className="mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-primary hover:text-accent">
             Request a quote <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
         <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-7">
           {PRICING_FACTORS.map((factor) => (
-            <li
-              key={factor}
-              className="flex items-baseline gap-3 border-t border-border bg-background/40 px-5 py-4 text-sm"
-            >
-              <span
-                className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
-                style={{ background: "var(--gradient-brand)" }}
-              />
+            <li key={factor} className="flex items-baseline gap-3 border-t border-border bg-background/40 px-5 py-4 text-sm">
+              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "var(--gradient-brand)" }} />
               {factor}
             </li>
           ))}
