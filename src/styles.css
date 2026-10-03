@@ -525,3 +525,31 @@ main[data-motion-ready] section.is-visible {
 @media (max-width: 767px) {
   .contact-orbit { right: -18rem; top: 7rem; }
 }
+
+/* Service visuals: communicate the idea, not just the label. */
+.service-visual { min-height: 42px; }
+.voice-visual__label,.message-visual__label { font-family: var(--font-mono); font-size: 8px; letter-spacing: .16em; color: var(--muted-foreground); }
+.voice-bars { display: flex; align-items: center; gap: 4px; height: 28px; margin-top: 7px; overflow: hidden; }
+.voice-bars i { display: block; width: 3px; height: var(--bar); background: var(--electric); opacity: .75; transform-origin: center; animation: voice-wave 1.15s ease-in-out infinite alternate; animation-delay: var(--bar-delay); }
+@keyframes voice-wave { from { transform: scaleY(.35); opacity: .3; } to { transform: scaleY(1); opacity: 1; } }
+.message-stream { position: relative; height: 28px; margin-top: 7px; overflow: hidden; border-left: 1px solid var(--border); }
+.message-stream::before,.message-stream::after { content:""; position:absolute; top:50%; height:1px; background:linear-gradient(90deg, transparent, var(--electric), transparent); animation: message-flight 2.2s linear infinite; }
+.message-stream::before { width:65%; }
+.message-stream::after { width:40%; top:72%; animation-delay:.7s; }
+@keyframes message-flight { from { transform:translateX(-110%); opacity:0; } 15% { opacity:.9; } 85% { opacity:.5; } to { transform:translateX(170%); opacity:0; } }
+.app-visual { position:relative; height:42px; border:1px solid var(--border); overflow:hidden; }
+.app-visual__screen { position:absolute; inset:8px 12px; border:1px solid color-mix(in oklab,var(--electric) 35%,var(--border)); background:linear-gradient(90deg, transparent 35%, color-mix(in oklab,var(--electric) 10%,transparent) 50%, transparent 65%); animation: app-scan 2.8s ease-in-out infinite; }
+.app-visual__cursor { position:absolute; width:5px; height:5px; background:var(--electric); left:18%; top:50%; animation: cursor-run 3.5s ease-in-out infinite; }
+@keyframes app-scan { 0%,100% { transform:translateX(-8%); opacity:.4; } 50% { transform:translateX(8%); opacity:1; } }
+@keyframes cursor-run { 0%,100% { left:18%; top:55%; } 35% { left:72%; top:30%; } 68% { left:48%; top:70%; } }
+.network-visual { position:relative; height:42px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.network-visual::before { content:""; position:absolute; left:8%; right:8%; top:50%; height:1px; background:linear-gradient(90deg,transparent,var(--electric),transparent); }
+.network-visual span { position:absolute; top:calc(50% - 4px); width:8px; height:8px; border:1px solid var(--electric); background:var(--background); animation: node-pulse 1.8s ease-in-out infinite; }
+.network-visual span:nth-child(1){left:8%}.network-visual span:nth-child(2){left:35%;animation-delay:.3s}.network-visual span:nth-child(3){left:62%;animation-delay:.6s}.network-visual span:nth-child(4){right:8%;animation-delay:.9s}
+.growth-visual { display:flex; align-items:flex-end; gap:5px; height:42px; border-bottom:1px solid var(--border); }
+.growth-visual span { width:22%; background:linear-gradient(to top,color-mix(in oklab,var(--electric) 20%,transparent),var(--electric)); transform-origin:bottom; animation:growth-rise 2.4s ease-in-out infinite alternate; }
+.growth-visual span:nth-child(1){height:30%;animation-delay:0s}.growth-visual span:nth-child(2){height:55%;animation-delay:.25s}.growth-visual span:nth-child(3){height:82%;animation-delay:.5s}
+@keyframes growth-rise { from { transform:scaleY(.65);opacity:.4; } to { transform:scaleY(1);opacity:.9; } }
+@media (prefers-reduced-motion: reduce) {
+ .voice-bars i,.message-stream::before,.message-stream::after,.app-visual__screen,.app-visual__cursor,.network-visual span,.growth-visual span { animation:none; }
+}
