@@ -627,6 +627,46 @@ function SelectedSystems() {
   );
 }
 
+function Engagement() {
+  const items = [
+    "Business problem and workflow mapping",
+    "System architecture and technical plan",
+    "AI, automation, software and integrations",
+    "Testing, deployment and handoff",
+    "Ongoing optimisation where the system creates value",
+  ];
+
+  return (
+    <section id="engagement" className="border-y border-border bg-surface/20">
+      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <SectionHeading
+            eyebrow="Engagement"
+            title="Start with the system. Expand what works."
+            intro="Every build is scoped around the business problem, workflow complexity, integrations and level of support required."
+          />
+          <div className="border-t border-border">
+            {items.map((item, index) => (
+              <div key={item} className="flex items-start gap-4 border-b border-border py-5">
+                <span className="font-mono text-[10px] text-primary">{String(index + 1).padStart(2, "0")}</span>
+                <p className="text-sm leading-6 text-muted-foreground">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-10 flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-xl text-sm leading-6 text-muted-foreground">
+            We discuss scope and pricing after understanding the system — not by forcing the business into a preset tier.
+          </p>
+          <a href="#contact" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-primary hover:text-accent">
+            Discuss a project <ArrowUpRight className="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const TEAM = [
   {
     name: "Omar Bin Aziz",
