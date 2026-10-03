@@ -134,26 +134,70 @@ export function LeadJourney() {
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
       <SectionHeading
         eyebrow="System pattern"
-        title="Signal → Understand → Decide → Act → Handoff"
+        title={
+          <>
+            Signal <span className="text-muted-foreground">→</span> Understand <span className="text-muted-foreground">→</span> Decide <span className="text-muted-foreground">→</span> Act <span className="text-muted-foreground">→</span> Handoff
+          </>
+        }
         intro="This is the operating pattern behind the systems we build. The tools can change; the architecture stays focused on moving useful information to the right action."
       />
-      <div className="journey-map mt-12 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-5">
-        {JOURNEY.map((step, index) => (
-          <article key={step.stage} className="journey-step bg-background p-6 sm:p-7" style={{ "--journey-delay": `${index * 120}ms` } as React.CSSProperties}>
-            <div className="flex items-center justify-between">
-              <span className="journey-step__index font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
-              {index < JOURNEY.length - 1 && <span className="journey-step__arrow hidden font-mono text-xs text-muted-foreground md:block">→</span>}
-            </div>
-            <span className="journey-step__dot" aria-hidden="true" />
-            <h3 className="mt-8 font-display text-xl font-semibold tracking-[0.04em]">{step.stage}</h3>
-            <p className="mt-3 text-sm leading-6 text-muted-foreground">{step.body}</p>
-          </article>
-        ))}
+
+      <div className="journey-map relative mt-12 overflow-hidden border-y border-border bg-background">
+        <div className="pointer-events-none absolute left-0 right-0 top-[72px] hidden h-px bg-border md:block" aria-hidden="true">
+          <span className="journey-signal" />
+        </div>
+
+        <div className="relative grid md:grid-cols-5">
+          {JOURNEY.map((step, index) => (
+            <article
+              key={step.stage}
+              className="journey-step group relative border-b border-border p-6 last:border-b-0 sm:p-7 md:min-h-[300px] md:border-b-0 md:border-r md:last:border-r-0"
+              style={{ "--journey-delay": `${index * 120}ms` } as React.CSSProperties}
+            >
+              <div className="flex items-center justify-between">
+                <span className="journey-step__index font-mono text-[10px] tracking-[0.18em] text-primary">
+                  0{index + 1}
+                </span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">
+                  {index === 0 ? "Input" : index === 4 ? "Outcome" : "Layer"}
+                </span>
+              </div>
+
+              <span className="journey-step__dot" aria-hidden="true" />
+
+              <div className="mt-12">
+                <h3 className="font-display text-xl font-semibold tracking-[0.04em] transition-transform duration-300 group-hover:translate-x-1">
+                  {step.stage}
+                </h3>
+                <p className="mt-3 max-w-[18rem] text-sm leading-6 text-muted-foreground">
+                  {step.body}
+                </p>
+              </div>
+
+              {index < JOURNEY.length - 1 ? (
+                <span className="journey-step__arrow absolute bottom-6 right-6 hidden font-mono text-sm text-muted-foreground md:block" aria-hidden="true">
+                  →
+                </span>
+              ) : null}
+            </article>
+          ))}
+        </div>
       </div>
-      <div className="mt-8 flex flex-wrap gap-2 border-t border-border pt-6">
-        {["LLMs", "APIs", "CRM", "Database", "Calendar", "Email", "Messaging", "Human"].map((item) => (
-          <span key={item} className="border border-border px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground">{item}</span>
-        ))}
+
+      <div className="mt-8 flex flex-col gap-5 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <p className="max-w-xl text-sm leading-6 text-muted-foreground">
+          The infrastructure underneath the pattern changes with the business. The flow stays focused on one thing: getting useful information to the right action.
+        </p>
+        <div className="flex flex-wrap gap-2 sm:max-w-xl sm:justify-end">
+          {["LLMs", "APIs", "CRM", "Database", "Calendar", "Email", "Messaging", "Human"].map((item) => (
+            <span
+              key={item}
+              className="border border-border bg-surface/20 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground transition-colors duration-300 hover:border-primary/50 hover:text-foreground"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );
