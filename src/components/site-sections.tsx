@@ -246,7 +246,7 @@ export function Insights() {
               <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-3">
                 <Bell className="h-4 w-4 text-accent" />
                 <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                  Sample daily business brief
+                  Illustrative daily business brief
                 </p>
               </div>
               <dl className="mt-8 grid gap-px border-y border-border bg-border sm:grid-cols-2">
@@ -527,8 +527,8 @@ export function Packages() {
                 );
               })}
             </dl>
-            <p className="mt-4 border-t border-border pt-4 text-sm font-semibold">Scoped to the system</p>
-            <p className="mt-1 text-xs text-muted-foreground">Quote follows discovery and architecture.</p>
+            <p className="mt-5 border-t border-border pt-4 font-display text-xl font-semibold text-foreground">{detail.price}</p>
+            <p className="mt-1 text-xs text-muted-foreground">Final scope follows discovery and architecture.</p>
           </article>
         ))}
       </div>
@@ -566,7 +566,7 @@ export function Packages() {
               <td className="px-6 py-5 text-left font-semibold">Pricing</td>
                {PACKAGE_DETAILS.map((detail) => (
                  <td key={`price-${detail.tier}`} className="px-6 py-5 text-center text-xs text-muted-foreground">
-                   <span className="block font-semibold text-foreground">Custom scope</span>
+                   <span className="block font-semibold text-foreground">{detail.price}</span>
                    Discovery · Build · Ongoing
                 </td>
               ))}
