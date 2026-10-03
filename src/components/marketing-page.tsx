@@ -93,7 +93,11 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
       <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
         <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
           {data.items.map((item, index) => (
-            <article key={item.title} className="bg-background p-7 sm:p-10 lg:min-h-[260px]">
+            <article
+              key={item.title}
+              className={`marketing-card ${page === "work" ? "marketing-card--work" : page === "solutions" ? "marketing-card--solution" : "marketing-card--standard"} animate-rise bg-background p-7 sm:p-10 lg:min-h-[260px]`}
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
               <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
               <h2 className="mt-8 font-display text-2xl font-semibold">{item.title}</h2>
               <p className="mt-4 max-w-lg text-sm leading-7 text-muted-foreground">{item.body}</p>
