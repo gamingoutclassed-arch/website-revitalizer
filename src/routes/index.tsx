@@ -228,7 +228,6 @@ function Index() {
           <Hero />
           <TrustStrip />
           <Positioning />
-          <Marquee />
         </Page>
 
         {/* Page 2 — Problem + solution */}
@@ -411,43 +410,12 @@ function Hero() {
   );
 }
 
-const CHANNELS = [
-  "WhatsApp",
-  "Website chat",
-  "Email",
-  "Phone",
-  "CRM",
-  "Google Workspace",
-  "Slack",
-  "Sheets & databases",
-  "Invoicing",
-  "Calendars",
-];
-
 function TrustStrip() {
-  const areas = [
-    "Reduce manual operations",
-    "Connect fragmented workflows",
-    "Turn business knowledge into action",
-    "Build AI products around real use cases",
-  ];
-
   return (
     <section className="border-y border-border bg-surface/20">
-      <div className="mx-auto max-w-7xl px-5 py-7 sm:px-6 md:py-9">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <p className="shrink-0 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-            Typical transformation areas
-          </p>
-          <div className="grid flex-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-            {areas.map((area, index) => (
-              <div key={area} className="bg-background px-4 py-4 text-sm leading-5 text-foreground">
-                <span className="mr-2 font-mono text-[9px] text-primary">0{index + 1}</span>
-                {area}
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-7 sm:px-6 md:flex-row md:items-center md:justify-between md:py-9">
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">From strategy to production</p>
+        <p className="max-w-2xl text-sm leading-6 text-foreground">Business-first planning, careful engineering, and systems designed for real operating conditions.</p>
       </div>
     </section>
   );
@@ -469,28 +437,7 @@ function Positioning() {
     </section>
   );
 }
-function Marquee() {
-  return (
-    <section
-      className="border-y border-border bg-surface/40 py-5"
-      aria-label="Systems we connect"
-    >
-      <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="animate-marquee flex shrink-0 items-center gap-10 pr-10">
-          {[...CHANNELS, ...CHANNELS].map((channel, index) => (
-            <span
-              key={`${channel}-${index}`}
-              className="flex shrink-0 items-center gap-3 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground"
-            >
-              <Zap className="h-3.5 w-3.5 text-primary" />
-              {channel}
-            </span>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+
 
 function SectionHeading({
   eyebrow,
@@ -523,22 +470,22 @@ function SectionHeading({
 }
 
 const PROBLEMS = [
-  { icon: Globe, label: "Website" },
-  { icon: MessageSquare, label: "WhatsApp" },
-  { icon: Mail, label: "Email" },
-  { icon: Phone, label: "Phone" },
-  { icon: Instagram, label: "Social" },
-  { icon: Users, label: "CRM" },
-  { icon: Database, label: "Spreadsheets" },
-  { icon: Gauge, label: "Calendars" },
-  { icon: Settings2, label: "Internal tools" },
+  { icon: Zap, label: "Signal 01" },
+  { icon: Network, label: "Signal 02" },
+  { icon: Layers, label: "Signal 03" },
+  { icon: ArrowUpRight, label: "Signal 04" },
+  { icon: Workflow, label: "Signal 05" },
+  { icon: Database, label: "Signal 06" },
+  { icon: Sparkles, label: "Signal 07" },
+  { icon: Gauge, label: "Signal 08" },
+  { icon: Settings2, label: "Signal 09" },
 ];
 
 function Problem() {
   const [connected, setConnected] = useState(false);
   return (
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
-      <SectionHeading eyebrow="The bottleneck" title="Software isn’t the problem. Fragmentation is." intro="Website, messaging, email, phone, CRM, spreadsheets, calendars, and internal tools each hold part of the picture. When context stops at the boundary, people become the integration layer." />
+      <SectionHeading eyebrow="The bottleneck" title="Software isn’t the problem. Fragmentation is." intro="Separate events move through disconnected paths. Context gets dropped between steps, leaving teams to reconcile what the system cannot carry forward." />
       <div className={"problem-network mt-12 " + (connected ? "is-connected" : "is-fragmented")}>
         <div className="problem-network__line" aria-hidden="true" />
         <div className="problem-network__nodes">
@@ -561,11 +508,11 @@ function Problem() {
 }
 
 const SERVICES = [
-  { number: "01", icon: Bot, title: "AI Agents", body: "Systems that understand context, communicate naturally, and take action across real business workflows.", wide: true },
-  { number: "02", icon: Workflow, title: "Intelligent Automation", body: "Multi-step workflows connecting tools, data, and people without unnecessary manual handoffs." },
-  { number: "03", icon: Cpu, title: "AI Applications", body: "Purpose-built software around the processes, decisions, and information unique to your business." },
-  { number: "04", icon: Globe, title: "Digital Systems", body: "High-performance customer-facing experiences connected to the operation behind them." },
-  { number: "05", icon: TrendingUp, title: "Growth Systems", body: "Infrastructure for capturing, qualifying, following up with, and converting demand.", wide: true },
+  { number: "01", icon: Bot, title: "AI Agents", body: "Task-oriented digital agents with a defined role, tool access, and clear boundaries.", wide: true },
+  { number: "02", icon: Workflow, title: "Intelligent Automation", body: "Event-driven automations that apply rules, move records, and manage exceptions." },
+  { number: "03", icon: Cpu, title: "AI Applications", body: "Purpose-built software that puts a focused AI capability inside a usable product." },
+  { number: "04", icon: Globe, title: "Digital Systems", body: "Customer and internal platforms that give a business a coherent digital front door." },
+  { number: "05", icon: TrendingUp, title: "Growth Systems", body: "Reusable acquisition and retention products for teams managing ongoing demand.", wide: true },
 ];
 
 function Services() {
@@ -631,22 +578,22 @@ function Services() {
 
 const SELECTED_SYSTEMS = [
   {
-    number: "01", title: "Outbound lead handling",
-    description: "A short preview of how a new prospect can move from first signal to a clear next action.",
-    outcome: "From new lead to next action without losing context.",
-    architecture: ["Lead signal", "Enrichment", "Personalisation", "Reply triage", "Follow-up", "Scheduling"],
-    businessLabels: ["New prospect", "Relevant context", "Personal message", "Reply intent", "Next touch", "Meeting / owner"],
-    details: ["Capture the prospect and source.", "Add useful business context.", "Prepare relevant, individual outreach.", "Classify replies and confidence.", "Route the next message or task.", "Offer a meeting or alert a person."],
-    tools: ["Python", "LLM", "Mailgun", "Make", "Calendly"],
+    number: "01", title: "Lead response",
+    description: "A compact preview of how an incoming signal becomes a visible next step.",
+    outcome: "Less uncertainty about what should happen next.",
+    architecture: ["Input", "Context", "Decision", "Outcome"],
+    businessLabels: ["New signal", "Useful context", "Chosen route", "Next step"],
+    details: ["An event enters the system.", "Relevant context is brought together.", "A suitable route is selected.", "The next step becomes visible."],
+    tools: ["Illustrative pattern"],
   },
   {
-    number: "02", title: "Social publishing pipeline",
-    description: "A short preview of how one content idea can become reviewed assets and a scheduled post.",
-    outcome: "From strategy to a repeatable publishing operation.",
-    architecture: ["Content seed", "Format variants", "Asset creation", "Review", "Schedule", "Publish"],
-    businessLabels: ["Content idea", "Channel formats", "Creative assets", "Approval", "Publishing queue", "Live post"],
-    details: ["Start from a content theme.", "Adapt the idea for each format.", "Generate copy and visual assets.", "Pause for human approval.", "Queue approved content.", "Publish through the connected platform."],
-    tools: ["Python / n8n", "Gemini", "Zernio", "Instagram"],
+    number: "02", title: "Content operations",
+    description: "A high-level view of an idea moving toward a publish-ready state.",
+    outcome: "A clearer path from idea to approved output.",
+    architecture: ["Source", "Shape", "Review", "Ready"],
+    businessLabels: ["Starting point", "Useful form", "Review state", "Ready to use"],
+    details: ["A source idea enters.", "It takes a useful form.", "The result is checked.", "A ready state is recorded."],
+    tools: ["Illustrative pattern"],
   },
 ] as const;
 
@@ -766,35 +713,34 @@ function WhyUs() {
 
 function Engagement() {
   const items = [
-    "Business problem and workflow mapping",
-    "System architecture and technical plan",
-    "AI, automation, software and integrations",
-    "Testing, deployment and handoff",
-    "Ongoing optimisation where the system creates value",
+    { title: "Scope", body: "Agree the business priority, deliverables, boundaries, and what is out of scope." },
+    { title: "Ownership", body: "Name the day-to-day decision-maker and the person who approves business-critical behavior." },
+    { title: "Client inputs", body: "Provide relevant process knowledge, sample data, access approvals, and timely feedback." },
+    { title: "Commercials", body: "Confirm a project-specific estimate, milestones, and any ongoing support before work begins." },
   ];
 
   return (
     <section id="engagement" className="border-y border-border bg-surface/20">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-28">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionHeading
             eyebrow="Engagement"
-            title="Start with the system. Expand what works."
-            intro="Every build is scoped around the business problem, workflow complexity, integrations and level of support required."
+            title="Clear scope. Shared ownership."
+            intro="A productive engagement starts with agreed expectations on both sides—not a preset package or an open-ended build."
           />
           <div className="border-t border-border">
             {items.map((item, index) => (
-              <div key={item} className="flex items-start gap-4 border-b border-border py-5">
-                <span className="font-mono text-[10px] text-primary">{String(index + 1).padStart(2, "0")}</span>
-                <p className="text-sm leading-6 text-muted-foreground">{item}</p>
+              <div key={item.title} className="border-b border-border py-5">
+                <div className="flex items-start gap-4">
+                  <span className="font-mono text-[10px] text-primary">{String(index + 1).padStart(2, "0")}</span>
+                  <div><h3 className="text-sm font-semibold">{item.title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{item.body}</p></div>
+                </div>
               </div>
             ))}
           </div>
         </div>
         <div className="mt-10 flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-xl text-sm leading-6 text-muted-foreground">
-            We discuss scope and pricing after understanding the system — not by forcing the business into a preset tier.
-          </p>
+          <p className="max-w-xl text-sm leading-6 text-muted-foreground">Before kickoff, both sides know the deliverables, required access, decision owners, timeline assumptions, and commercial terms.</p>
           <a href="#contact" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-primary hover:text-accent">
             Discuss a project <ArrowUpRight className="h-4 w-4" />
           </a>
