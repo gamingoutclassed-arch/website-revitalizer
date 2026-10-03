@@ -49,40 +49,40 @@
 :root {
   --radius: 0.5rem;
 
-  --background: oklch(0.17 0.035 250);
-  --foreground: oklch(0.96 0.008 220);
-  --surface: oklch(0.22 0.038 248);
-  --surface-foreground: oklch(0.96 0.008 220);
-  --card: oklch(0.21 0.036 248);
-  --card-foreground: oklch(0.96 0.008 220);
-  --popover: oklch(0.21 0.036 248);
-  --popover-foreground: oklch(0.96 0.008 220);
+  --background: oklch(0.16 0.012 260);
+  --foreground: oklch(0.96 0.012 90);
+  --surface: oklch(0.21 0.014 260);
+  --surface-foreground: oklch(0.96 0.012 90);
+  --card: oklch(0.20 0.014 260);
+  --card-foreground: oklch(0.96 0.012 90);
+  --popover: oklch(0.20 0.014 260);
+  --popover-foreground: oklch(0.96 0.012 90);
 
   /* brand navy from the logo */
-  --brand: oklch(0.38 0.085 250);
+  --brand: oklch(0.40 0.14 285);
   --brand-foreground: oklch(0.97 0.008 220);
 
   /* electric blue — premium hero accent derived from the logo blue */
-  --electric: oklch(0.66 0.17 255);
+  --electric: oklch(0.60 0.24 285);
   --electric-foreground: oklch(0.99 0.005 250);
   --shadow-electric: 0 14px 40px -16px oklch(0.66 0.17 255 / 0.7);
 
   /* secondary accents stay close to the electric-blue brand system */
-  --primary: oklch(0.68 0.17 255);
+  --primary: oklch(0.64 0.23 285);
   --primary-foreground: oklch(0.99 0.005 250);
-  --accent: oklch(0.76 0.14 275);
+  --accent: oklch(0.88 0.09 150);
   --accent-foreground: oklch(0.99 0.005 250);
 
-  --secondary: oklch(0.26 0.04 248);
-  --secondary-foreground: oklch(0.96 0.008 220);
-  --muted: oklch(0.26 0.04 248);
-  --muted-foreground: oklch(0.96 0.008 220 / 0.62);
+  --secondary: oklch(0.25 0.015 260);
+  --secondary-foreground: oklch(0.96 0.012 90);
+  --muted: oklch(0.25 0.015 260);
+  --muted-foreground: oklch(0.92 0.01 90 / 0.62);
 
   --destructive: oklch(0.63 0.2 25);
-  --destructive-foreground: oklch(0.97 0.008 220);
+  --destructive-foreground: oklch(0.97 0.012 90);
   --border: oklch(0.86 0.05 200 / 0.14);
   --input: oklch(0.86 0.05 200 / 0.2);
-  --ring: oklch(0.68 0.17 255);
+  --ring: oklch(0.64 0.23 285);
 
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
