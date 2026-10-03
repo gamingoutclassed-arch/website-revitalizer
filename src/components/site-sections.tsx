@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -199,12 +200,12 @@ export function LeadJourney() {
 }
 
 const BRIEF = [
-  { label: "New leads", value: "42" },
-  { label: "Qualified leads", value: "18" },
-  { label: "Quotations sent", value: "11" },
-  { label: "Appointments booked", value: "7" },
-  { label: "Follow-ups required", value: "13" },
-  { label: "Unanswered inquiries", value: "3" },
+  { label: "Review new inquiries", detail: "Identify intent and route each request" },
+  { label: "Follow up with qualified leads", detail: "Prepare the next message for review" },
+  { label: "Check pending quotations", detail: "Flag proposals waiting for a response" },
+  { label: "Confirm upcoming appointments", detail: "Send reminders and surface conflicts" },
+  { label: "Escalate unanswered requests", detail: "Bring unresolved conversations to a person" },
+  { label: "Summarise activity", detail: "Deliver a concise brief to the team" },
 ];
 
 const RECOVERY = [
@@ -246,18 +247,106 @@ export function Insights() {
                   Illustrative daily business brief
                 </p>
               </div>
-              <dl className="mt-8 grid gap-px border-y border-border bg-border sm:grid-cols-2">
-                {BRIEF.map((row) => (
-                   <div key={row.label} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4 bg-background p-5 sm:p-6">
-                    <dt className="text-sm text-muted-foreground">{row.label}</dt>
-                    <dd className="font-display text-2xl font-semibold text-foreground">{row.value}</dd>
-                  </div>
+              <ul className="mt-8 divide-y divide-border border-y border-border">
+                {BRIEF.map((row, index) => (
+                  <li key={row.label} className="flex items-start gap-4 bg-background px-4 py-4 sm:px-5">
+                    <span className="mt-0.5 font-mono text-[10px] text-primary">0{index + 1}</span>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">{row.label}</p>
+                      <p className="mt-1 text-xs leading-5 text-muted-foreground">{row.detail}</p>
+                    </div>
+                  </li>
                 ))}
-              </dl>
+              </ul>
               <p className="mt-8 text-sm leading-relaxed text-muted-foreground">
                 Delivered through WhatsApp, email or Slack, based on how your team works.
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+const WORKFLOW_EXAMPLES = [
+  {
+    name: "New website inquiry",
+    signal: "A prospect submits a website form.",
+    understand: "Extract the request, company context, and urgency.",
+    decide: "Check fit and route the inquiry using agreed qualification rules.",
+    act: "Create a CRM record and prepare a relevant follow-up.",
+    handoff: "Send the qualified opportunity to the right person with context.",
+  },
+  {
+    name: "Missed business call",
+    signal: "A call is missed outside the team's availability.",
+    understand: "Identify the caller and capture what they need.",
+    decide: "Apply contact and escalation rules; flag urgent requests.",
+    act: "Send an approved response and record the conversation.",
+    handoff: "Notify a teammate when a human response is needed.",
+  },
+  {
+    name: "Customer support request",
+    signal: "A customer asks a question by email or WhatsApp.",
+    understand: "Match the question to approved business knowledge.",
+    decide: "Check confidence, permissions, and whether escalation is required.",
+    act: "Answer a routine question or create a support task.",
+    handoff: "Pass uncertain or sensitive cases to a person with the conversation history.",
+  },
+];
+
+export function WorkflowDemo() {
+  const [activeExample, setActiveExample] = useState(0);
+  const example = WORKFLOW_EXAMPLES[activeExample];
+  const steps = [
+    { label: "Signal", detail: example.signal },
+    { label: "Understand", detail: example.understand },
+    { label: "Decide", detail: example.decide },
+    { label: "Act", detail: example.act },
+    { label: "Human handoff", detail: example.handoff },
+  ];
+
+  return (
+    <section className="border-y border-border bg-surface/20">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 md:py-24">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">Interactive system walkthrough</p>
+            <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">One pattern. Different business workflows.</h2>
+            <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
+              Choose an example to see how a signal moves through AI reasoning, business rules, connected tools, and human oversight. This is an illustrative walkthrough, not a live integration.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-2" role="group" aria-label="Choose a workflow example">
+              {WORKFLOW_EXAMPLES.map((item, index) => (
+                <button
+                  key={item.name}
+                  type="button"
+                  onClick={() => setActiveExample(index)}
+                  aria-pressed={activeExample === index}
+                  className={activeExample === index
+                    ? "border border-primary bg-primary/10 px-3 py-2.5 text-left text-xs font-medium text-foreground"
+                    : "border border-border px-3 py-2.5 text-left text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="border-y border-border">
+            {steps.map((step, index) => (
+              <article key={step.label} className="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-4 border-b border-border py-5 last:border-b-0 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-5">
+                <div className="flex flex-col items-center">
+                  <span className="flex h-8 w-8 items-center justify-center border border-primary/50 font-mono text-[10px] text-primary">{String(index + 1).padStart(2, "0")}</span>
+                  {index < steps.length - 1 ? <span className="mt-2 min-h-6 w-px flex-1 bg-border" aria-hidden="true" /> : null}
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold">{step.label}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.detail}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>
