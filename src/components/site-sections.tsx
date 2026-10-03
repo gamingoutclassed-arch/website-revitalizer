@@ -93,12 +93,12 @@ export function Capabilities() {
           title="The intelligence underneath the system"
           intro="We work across agents, applications, workflows, integrations, data, and customer-facing systems — selecting the technology that fits the problem."
         />
-        <div className="mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
+        <div className="capability-matrix mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
           {CAPABILITIES.map((cap, index) => (
             <article
               key={cap.title}
-              className="group bg-background p-7 sm:p-9 md:min-h-[280px]"
-              style={{ animationDelay: `${index * 0.07}s` }}
+              className="capability-node group bg-background p-7 sm:p-9 md:min-h-[280px]"
+              style={{ "--cap-delay": `${index * 80}ms` } as React.CSSProperties}
             >
               <div className="flex items-start justify-between gap-4">
                 <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
@@ -137,13 +137,14 @@ export function LeadJourney() {
         title="Signal → Understand → Decide → Act → Handoff"
         intro="This is the operating pattern behind the systems we build. The tools can change; the architecture stays focused on moving useful information to the right action."
       />
-      <div className="mt-12 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-5">
+      <div className="journey-map mt-12 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-5">
         {JOURNEY.map((step, index) => (
-          <article key={step.stage} className="bg-background p-6 sm:p-7">
+          <article key={step.stage} className="journey-step bg-background p-6 sm:p-7" style={{ "--journey-delay": `${index * 120}ms` } as React.CSSProperties}>
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
-              {index < JOURNEY.length - 1 && <span className="hidden font-mono text-xs text-muted-foreground md:block">→</span>}
+              <span className="journey-step__index font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
+              {index < JOURNEY.length - 1 && <span className="journey-step__arrow hidden font-mono text-xs text-muted-foreground md:block">→</span>}
             </div>
+            <span className="journey-step__dot" aria-hidden="true" />
             <h3 className="mt-8 font-display text-xl font-semibold tracking-[0.04em]">{step.stage}</h3>
             <p className="mt-3 text-sm leading-6 text-muted-foreground">{step.body}</p>
           </article>
@@ -347,9 +348,9 @@ export function Process() {
           eyebrow="How we work"
           title="Think. Build. Compound."
         />
-        <div className="mt-12 grid gap-10 lg:grid-cols-3">
-          {(["THINK", "BUILD", "COMPOUND"] as const).map((phase) => (
-            <div key={phase} className="border-t border-border">
+        <div className="process-track mt-12 grid gap-10 lg:grid-cols-3">
+          {(["THINK", "BUILD", "COMPOUND"] as const).map((phase, phaseIndex) => (
+            <div key={phase} className="process-phase border-t border-border" style={{ "--phase-delay": `${phaseIndex * 180}ms` } as React.CSSProperties}>
               <div className="flex items-center justify-between py-5">
                 <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">{phase}</h3>
                 <span className="font-mono text-[10px] text-muted-foreground">
