@@ -37,6 +37,7 @@ import {
 
 import heroNetwork from "../assets/hero-network.jpg";
 import { Button } from "../components/ui/button";
+import { HeroSystem } from "../components/hero-system";
 import {
   Capabilities,
   HumanLoop,
@@ -301,83 +302,69 @@ function Header({
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <img
-        src={heroNetwork}
-        alt="Glowing network of connected nodes representing intelligent automation"
-        width={1920}
-        height={1088}
-        className="absolute inset-0 h-full w-full object-cover opacity-55"
-      />
-
+    <section className="hero-stage relative overflow-hidden">
+      <div className="grid-veil absolute inset-0 opacity-40" aria-hidden="true" />
       <div
-        className="absolute inset-0"
-        style={{ background: "var(--gradient-veil)" }}
+        className="pointer-events-none absolute right-[-10%] top-[10%] h-[520px] w-[520px] rounded-full opacity-60 blur-3xl"
+        style={{ background: "radial-gradient(circle, color-mix(in oklab, var(--electric) 22%, transparent), transparent 70%)" }}
         aria-hidden="true"
       />
 
-      <div
-        className="grid-veil absolute inset-0 opacity-60"
-        aria-hidden="true"
-      />
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 pb-20 pt-14 sm:px-6 md:pb-28 md:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:pt-16">
+        <div>
+          <span className="animate-rise inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-electric sm:text-[11px]">
+            <span className="h-px w-8 bg-electric" />
+            AI systems, engineered for real business
+          </span>
 
-      <div
-        className="glow-orb animate-float-slow absolute -left-24 top-24 h-72 w-72"
-        aria-hidden="true"
-      />
+          <h1 className="animate-rise mt-7 font-display text-[2.6rem] font-semibold leading-[1.02] tracking-tight text-balance sm:text-[clamp(3rem,6vw,5.25rem)] [animation-delay:0.08s]">
+            We engineer intelligence{" "}
+            <span className="text-electric">into business.</span>
+          </h1>
 
-      <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-16 sm:px-6 md:pb-32 md:pt-28">
-        <span className="animate-rise inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-surface/60 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-primary backdrop-blur sm:px-4 sm:text-[11px] sm:tracking-[0.18em]">
-          <Sparkles className="h-3.5 w-3.5" />
-          Your business apps, working together automatically
-        </span>
+          <p className="animate-rise mt-7 max-w-[50ch] text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 [animation-delay:0.16s]">
+            Alligentics designs and deploys AI systems, automation and digital
+            products around how your business actually operates, from the first
+            customer message to the systems your team relies on.
+          </p>
 
-        <h1 className="animate-rise mt-7 max-w-[24ch] break-words font-display text-[2.35rem] font-bold leading-[1.1] tracking-normal sm:text-[clamp(2.5rem,6.4vw,5rem)] sm:leading-[1.05] sm:tracking-tight [animation-delay:0.08s]">
-          Automate the work.{" "}
-          <span className="text-gradient">Accelerate the business.</span>
-        </h1>
+          <div className="animate-rise mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 [animation-delay:0.24s]">
+            <a
+              href="#contact"
+              className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-electric px-7 py-3.5 text-sm font-semibold text-electric-foreground shadow-[var(--shadow-electric)] transition-all duration-300 hover:brightness-110"
+            >
+              Start a project
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+            <a
+              href="#services"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-electric/60 hover:bg-electric/5"
+            >
+              Explore our work
+            </a>
+          </div>
 
-        <p className="animate-rise mt-6 max-w-[56ch] text-base leading-7 text-muted-foreground sm:mt-7 sm:text-lg sm:leading-relaxed [animation-delay:0.16s]">
-          We connect the apps your business already uses and add AI to handle
-          repetitive, predictable work while your team stays in control.
-        </p>
-
-        <div className="animate-rise mt-8 grid gap-3 sm:mt-10 sm:flex sm:flex-wrap sm:items-center sm:gap-4 [animation-delay:0.24s]">
-          <a
-            href="#contact"
-            className="animate-pulse-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-center text-sm font-semibold text-primary-foreground sm:px-7 sm:py-3.5"
-            style={{ background: "var(--gradient-brand)" }}
-          >
-            Book a discovery session
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-
-          <a
-            href="#services"
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-center text-sm font-medium text-foreground transition-colors hover:bg-surface sm:px-7 sm:py-3.5"
-          >
-            See what we automate
-          </a>
+          <dl className="animate-rise mt-14 grid max-w-xl grid-cols-3 gap-6 border-t border-border pt-6 [animation-delay:0.32s]">
+            {[
+              { value: "Strategy", label: "Business-first" },
+              { value: "Engineering", label: "Built to run" },
+              { value: "Growth", label: "Measured outcomes" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <dt className="font-display text-base font-semibold text-foreground sm:text-lg">
+                  {stat.value}
+                </dt>
+                <dd className="mt-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                  {stat.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
-        <dl className="animate-rise mt-12 grid max-w-3xl grid-cols-2 gap-x-5 gap-y-7 border-t border-border pt-7 sm:mt-16 sm:gap-8 sm:pt-8 md:grid-cols-4 [animation-delay:0.32s]">
-          {[
-            { value: "5-stage", label: "From discovery to launch" },
-            { value: "End-to-end", label: "Workflow coverage" },
-            { value: "Human + AI", label: "You stay in control" },
-            { value: "Custom", label: "Never off-the-shelf" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <dt className="font-display text-2xl font-semibold text-foreground">
-                {stat.value}
-              </dt>
-
-              <dd className="mt-1 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-                {stat.label}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <div className="animate-rise [animation-delay:0.2s]">
+          <HeroSystem />
+        </div>
       </div>
     </section>
   );
