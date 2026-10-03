@@ -43,79 +43,50 @@ function SectionHeading({
 }
 
 const CAPABILITIES = [
-  {
-    icon: Bot,
-    title: "AI Agents",
-    points: [
-      "Context-aware assistants for customer and internal workflows",
-      "Multi-step actions across connected business systems",
-      "Human handoff when a decision or exception needs a person",
-      "Conversation, classification, and task execution",
-    ],
-  },
-  {
-    icon: Workflow,
-    title: "Workflow Automation",
-    points: [
-      "Event-driven workflows across business tools",
-      "Lead, follow-up, notification, and approval flows",
-      "API integrations that move data between systems",
-      "Automation designed around the existing operation",
-    ],
-  },
-  {
-    icon: FileStack,
-    title: "Data & AI Applications",
-    points: [
-      "Purpose-built applications around business data",
-      "Document and information processing",
-      "LLM-powered interfaces and decision support",
-      "Structured data flowing into the next action",
-    ],
-  },
-  {
-    icon: Globe,
-    title: "Digital & Growth Systems",
-    points: [
-      "Customer-facing web experiences connected to operations",
-      "Lead capture and qualification infrastructure",
-      "Follow-up and conversion workflows",
-      "Measurement and reporting for continuous improvement",
-    ],
-  },
-];
+  { icon: Bot, title: "Intelligence & models", summary: "Choose and shape the intelligence for the task.", detail: "Model selection, prompt and context design, structured outputs, confidence thresholds, and evaluation against representative scenarios.", components: ["Model selection", "Context design", "Structured output", "Evaluation"] },
+  { icon: Workflow, title: "Orchestration & workflows", summary: "Coordinate steps, conditions, retries, and exceptions.", detail: "Event-driven orchestration, state management, conditional routing, retries, observability, and controlled escalation when a step fails.", components: ["Events", "State", "Routing", "Retries"] },
+  { icon: FileStack, title: "Data & knowledge", summary: "Make business information usable and traceable.", detail: "Data modelling, document extraction, retrieval, source context, validation, and permissions appropriate to the information being used.", components: ["Data models", "Retrieval", "Validation", "Permissions"] },
+  { icon: Globe, title: "Integrations & APIs", summary: "Connect the tools the business already relies on.", detail: "API contracts, webhooks, authentication, rate-limit handling, synchronisation, and clear failure paths between services.", components: ["APIs", "Webhooks", "Auth", "Sync"] },
+  { icon: MessageCircle, title: "Interfaces & operations", summary: "Give people a useful place to review and act.", detail: "Customer-facing experiences, internal workspaces, operational queues, status visibility, and practical handover into existing team routines.", components: ["Interfaces", "Queues", "Status", "Handover"] },
+  { icon: UserCheck, title: "Evaluation & oversight", summary: "Keep the system measurable and people accountable.", detail: "Test cases, quality checks, audit trails, access boundaries, human approvals, and monitoring for changes in real-world performance.", components: ["Test cases", "Audit trail", "Approvals", "Monitoring"] },
+] as const;
 
 export function Capabilities() {
+  const [selectedLayer, setSelectedLayer] = useState(0);
+  const layer = CAPABILITIES[selectedLayer];
   return (
     <section id="automation" className="scroll-mt-20 border-y border-border bg-surface/10 technical-grid">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
-        <SectionHeading
-          eyebrow="Engineering capabilities"
-          title="The intelligence underneath the system"
-          intro="We work across agents, applications, workflows, integrations, data, and customer-facing systems — selecting the technology that fits the problem."
-        />
-        <div className="capability-matrix mt-14 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
-          {CAPABILITIES.map((cap, index) => (
-            <article
-              key={cap.title}
-              className="capability-node group bg-background p-7 sm:p-9 md:min-h-[280px]"
-              style={{ "--cap-delay": `${index * 80}ms` } as React.CSSProperties}
-            >
-              <div className="flex items-start justify-between gap-4">
-                <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
-                <cap.icon className="h-5 w-5 text-primary transition-colors group-hover:text-electric" />
-              </div>
-              <h3 className="mt-10 font-display text-2xl font-semibold tracking-tight">{cap.title}</h3>
-              <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
-                {cap.points.map((point) => (
-                  <li key={point} className="flex items-start gap-3">
-                    <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-accent" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+        <SectionHeading eyebrow="Engineering capabilities" title="Explore the layers behind reliable delivery." intro="Select a layer to inspect the engineering responsibilities underneath a dependable AI product or automation." />
+        <div className="mt-12 grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+          <div className="border-y border-border">
+            {CAPABILITIES.map((item, index) => {
+              const active = selectedLayer === index;
+              const Icon = item.icon;
+              return (
+                <button key={item.title} type="button" onClick={() => setSelectedLayer(index)} aria-pressed={active}
+                  className={"flex min-h-[72px] w-full items-center gap-4 border-b border-border px-4 py-4 text-left last:border-b-0 " + (active ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:text-foreground")}>
+                  <span className="font-mono text-[10px] text-primary">0{index + 1}</span>
+                  <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                  <span className="flex-1 text-sm font-medium">{item.title}</span>
+                  <ArrowUpRight className={"h-4 w-4 shrink-0 " + (active ? "text-primary" : "opacity-40")} />
+                </button>
+              );
+            })}
+          </div>
+          <article className="border border-border bg-background p-6 sm:p-9" aria-live="polite">
+            <div className="flex items-start justify-between gap-4">
+              <div><p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Technical layer / {String(selectedLayer + 1).padStart(2, "0")}</p><h3 className="mt-4 font-display text-2xl font-semibold sm:text-3xl">{layer.title}</h3></div>
+              <layer.icon className="h-6 w-6 shrink-0 text-primary" aria-hidden="true" />
+            </div>
+            <p className="mt-5 text-base leading-7 text-foreground">{layer.summary}</p>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">{layer.detail}</p>
+            <div className="mt-8 border-t border-border pt-6">
+              <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Layer components</p>
+              <div className="mt-4 flex flex-wrap gap-2">{layer.components.map((item) => <span key={item} className="border border-border px-3 py-2 font-mono text-[10px] text-muted-foreground">{item}</span>)}</div>
+            </div>
+            <a href="#contact" className="mt-8 inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-primary hover:text-accent">View the technical layer <ArrowUpRight className="h-4 w-4" /></a>
+          </article>
         </div>
       </div>
     </section>
