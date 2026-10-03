@@ -653,3 +653,12 @@ main[data-motion-ready] section.is-visible {
   .archetype-node:hover,
   .problem-network.is-fragmented .problem-node:nth-child(n) { transform: none; }
 }
+
+@keyframes snapshot-signal {
+  from { box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--electric) 18%, transparent), 0 0 0 color-mix(in oklab, var(--electric) 0%, transparent); }
+  to { box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--electric) 40%, transparent), 0 0 22px color-mix(in oklab, var(--electric) 16%, transparent); }
+}
+.system-snapshot-node.is-signal-active { animation: snapshot-signal 650ms ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) {
+  .system-snapshot-node.is-signal-active { animation: none; }
+}
