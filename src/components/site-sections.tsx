@@ -123,76 +123,51 @@ export function Capabilities() {
 }
 
 const JOURNEY = [
-  { stage: "SIGNAL", body: "A customer, lead, document, message, or event enters the system." },
-  { stage: "UNDERSTAND", body: "AI reads the context, extracts the useful information, and identifies intent." },
-  { stage: "DECIDE", body: "Rules, models, business logic, and confidence checks determine the next action." },
-  { stage: "ACT", body: "The system updates records, sends messages, creates tasks, calls APIs, or schedules work." },
-  { stage: "HANDOFF", body: "When judgment matters, the right person receives the context and takes over." },
-];
+  { stage: "SIGNAL", body: "A meaningful event enters the operation.", purpose: "Notice what changed." },
+  { stage: "UNDERSTAND", body: "Context is gathered and the intent is interpreted.", purpose: "Make the signal useful." },
+  { stage: "DECIDE", body: "Business rules, model output, and confidence checks determine the next route.", purpose: "Choose a safe next step." },
+  { stage: "ACT", body: "The appropriate task, update, message, or transaction is initiated.", purpose: "Move work forward." },
+  { stage: "HANDOFF", body: "Exceptions and sensitive decisions reach the right person with context.", purpose: "Keep people in control." },
+  { stage: "LEARN", body: "Results and exceptions inform evaluation and future improvements.", purpose: "Improve the next decision." },
+] as const;
 
 export function LeadJourney() {
+  const [activeStep, setActiveStep] = useState(0);
+  const step = JOURNEY[activeStep];
   return (
     <section className="mx-auto max-w-7xl px-5 py-14 sm:px-6 md:py-20">
-      <SectionHeading
-        eyebrow="System pattern"
-        title={
-          <>
-            <span className="text-electric">01</span> Signal <span className="text-muted-foreground">/</span> <span className="text-electric">02</span> Understand <span className="text-muted-foreground">/</span> <span className="text-electric">03</span> Decide <span className="text-muted-foreground">/</span> <span className="text-electric">04</span> Act <span className="text-muted-foreground">/</span> <span className="text-electric">05</span> Handoff
-          </>
-        }
-        intro="This is the operating pattern behind the systems we build. The tools can change; the architecture stays focused on moving useful information to the right action."
-      />
-
-      <div className="journey-map relative mt-8 overflow-hidden border-y border-border bg-background">
-        <div className="pointer-events-none absolute left-0 right-0 top-[72px] hidden h-px bg-border md:block" aria-hidden="true">
-          <span className="journey-signal" />
+      <SectionHeading eyebrow="Operating pattern" title="A loop that learns from the work." intro="The operating model is reusable across use cases. Step through the loop to see the responsibility at each stage; the Learn stage feeds improvements back into understanding and decisions." />
+      <div className="mt-10 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="relative border-y border-border">
+          {JOURNEY.map((item, index) => {
+            const active = activeStep === index;
+            return (
+              <button key={item.stage} type="button" onClick={() => setActiveStep(index)} aria-pressed={active}
+                className={"relative flex min-h-14 w-full items-center gap-4 border-b border-border px-3 py-3 text-left last:border-b-0 " + (active ? "bg-primary/5 text-foreground" : "text-muted-foreground hover:text-foreground")}>
+                <span className="font-mono text-[10px] text-primary">0{index + 1}</span>
+                <span className="flex-1 font-display text-base font-semibold tracking-wide">{item.stage}</span>
+                {active ? <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" /> : null}
+              </button>
+            );
+          })}
         </div>
-
-        <div className="relative grid md:grid-cols-5">
-          {JOURNEY.map((step, index) => (
-            <article
-              key={step.stage}
-              className="journey-step group relative border-b border-border p-5 last:border-b-0 sm:p-6 md:min-h-[220px] md:border-b-0 md:border-r md:last:border-r-0"
-              style={{ "--journey-delay": `${index * 120}ms` } as React.CSSProperties}
-            >
-              <div className="flex items-center justify-between">
-                <span className="journey-step__index font-mono text-[10px] tracking-[0.18em] text-primary">
-                  0{index + 1}
-                </span>
-                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">
-                  {index === 0 ? "Input" : index === 4 ? "Outcome" : "Layer"}
-                </span>
-              </div>
-
-              <span className="journey-step__dot" aria-hidden="true" />
-
-              <div className="mt-8">
-                <h3 className="font-display text-xl font-semibold tracking-[0.04em] transition-transform duration-300 group-hover:translate-x-1">
-                  {step.stage}
-                </h3>
-                <p className="mt-3 max-w-[18rem] text-sm leading-6 text-muted-foreground">
-                  {step.body}
-                </p>
-              </div>
-
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-8 flex flex-col gap-5 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-xl text-sm leading-6 text-muted-foreground">
-          The infrastructure underneath the pattern changes with the business. The flow stays focused on one thing: getting useful information to the right action.
-        </p>
-        <div className="flex flex-wrap gap-2 sm:max-w-xl sm:justify-end">
-          {["LLMs", "APIs", "CRM", "Database", "Calendar", "Email", "Messaging", "Human"].map((item) => (
-            <span
-              key={item}
-              className="border border-border bg-surface/20 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground transition-colors duration-300 hover:border-primary/50 hover:text-foreground"
-            >
-              {item}
-            </span>
-          ))}
+        <div className="relative overflow-hidden border border-border bg-background p-6 sm:p-9" aria-live="polite">
+          <div className="flex items-center justify-between gap-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Operating loop / {String(activeStep + 1).padStart(2, "0")}</p>
+            <Workflow className="h-5 w-5 text-primary" aria-hidden="true" />
+          </div>
+          <div className="mt-8 flex flex-wrap items-center gap-2" aria-label="Operating loop overview">
+            {JOURNEY.map((item, index) => <span key={item.stage} className={"border px-2.5 py-2 font-mono text-[9px] uppercase tracking-[0.1em] " + (index === activeStep ? "border-primary/60 bg-primary/5 text-primary" : "border-border text-muted-foreground")}>{item.stage}</span>)}
+          </div>
+          <h3 className="mt-9 font-display text-3xl font-semibold">{step.stage}</h3>
+          <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">{step.body}</p>
+          <p className="mt-6 border-l-2 border-accent pl-4 text-sm leading-6">{step.purpose}</p>
+          {activeStep === 4 ? <p className="mt-5 text-xs leading-5 text-muted-foreground">Human judgment can change the route, approve an action, or return new context to the process.</p> : null}
+          {activeStep === 5 ? <p className="mt-5 text-xs leading-5 text-muted-foreground">Learning loops back into Understand and Decide through evaluation, monitoring, and approved updates.</p> : null}
+          <div className="mt-8 flex items-center justify-between border-t border-border pt-5">
+            <button type="button" onClick={() => setActiveStep((value) => (value + JOURNEY.length - 1) % JOURNEY.length)} className="min-h-10 px-3 text-sm text-muted-foreground hover:text-foreground">Previous</button>
+            <button type="button" onClick={() => setActiveStep((value) => (value + 1) % JOURNEY.length)} className="inline-flex min-h-10 items-center gap-2 bg-primary px-4 text-sm font-semibold text-primary-foreground hover:opacity-90">Step through the operating loop <ArrowUpRight className="h-4 w-4" /></button>
+          </div>
         </div>
       </div>
     </section>
