@@ -104,6 +104,26 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
                 <div className="p-6 sm:p-8">
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">After / intended transformation</p>
                   <p className="mt-5 max-w-2xl text-base leading-7">{item.body}</p>
+                  <div className={`solution-transform solution-transform--${index + 1} mt-6`}>
+                    <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">Illustrative shift</p>
+                    <div className="solution-transform__before" aria-label="Current constraint">
+                      {[
+                        ["Inquiry queue", "Manual check", "Follow-up"],
+                        ["Documents", "Keyword search", "Open tabs"],
+                        ["Unsorted request", "Manual triage", "Waiting"],
+                        ["Generic interface", "Context switch", "Drop-off"],
+                      ][index].map((node) => <span key={node}>{node}</span>)}
+                    </div>
+                    <div className="solution-transform__signal" aria-hidden="true"><span /></div>
+                    <div className="solution-transform__after" aria-label="Intended transformation">
+                      {[
+                        ["Prioritised", "Next action", "Owner"],
+                        ["Grounded answer", "Recommended step", "Source link"],
+                        ["Classify", "Route", "Human review"],
+                        ["Focused task", "Guided action", "Completion"],
+                      ][index].map((node) => <span key={node}>{node}</span>)}
+                    </div>
+                  </div>
                   <div className="mt-7 border-t border-border pt-5">
                     <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Measure what changes</p>
                     <p className="mt-2 text-sm leading-6 text-muted-foreground">{["Time from inquiry to next action; follow-up completion; work requiring manual coordination.", "Time to find a trusted answer; source coverage; successful task completion.", "Decision turnaround; routing accuracy; exception and approval rates.", "Task completion; adoption; quality and reliability in the target use case."][index]}</p>
@@ -129,7 +149,7 @@ export function MarketingPage({ page }: { page: MarketingPageKey }) {
                 { context: "Business documents that need structured handling.", constraint: "Manual extraction and inconsistent validation slow the next decision.", oversight: "Exceptions are reviewed before the record proceeds.", outcome: "Traceable information processing", integration: "File intake · OCR/parser · extraction model · validation rules · exception queue · database · audit log", cta: "Inspect the document trail", signal: ["Intake", "Extract", "Validate", "Review", "Record"] },
               ][index];
               return (
-                <article key={item.title} className="overflow-hidden border border-border">
+                <article key={item.title} className={`work-case work-case--${index + 1} overflow-hidden border border-border`}>
                   <div className="grid lg:grid-cols-[0.72fr_1.28fr]">
                     <div className="border-b border-border bg-surface/30 p-6 sm:p-8 lg:border-b-0 lg:border-r">
                       <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Implementation pattern / 0{index + 1}</p>
