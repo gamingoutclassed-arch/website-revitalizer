@@ -530,14 +530,14 @@ function Services() {
           {SERVICES.map((service, index) => (
             <article
               key={service.number}
-              className={`surface-panel animate-rise group relative overflow-hidden rounded-2xl p-8 transition-transform duration-300 hover:-translate-y-1 ${
+              className={`group relative overflow-hidden border border-border bg-background/40 p-7 transition-colors duration-300 hover:border-primary/40 sm:p-8 ${
                 service.wide ? "lg:col-span-2" : ""
               }`}
               style={{ animationDelay: `${index * 0.06}s` }}
             >
               <div className="flex items-start justify-between gap-4">
                 <span
-                  className="inline-flex h-12 w-12 items-center justify-center rounded-xl text-primary-foreground"
+                  className="inline-flex h-11 w-11 items-center justify-center border border-primary/30 text-primary-foreground"
                   style={{ background: "var(--gradient-brand)" }}
                 >
                   <service.icon className="h-5 w-5" />
@@ -872,9 +872,9 @@ function WhyUs() {
         }
         intro="The value is not an isolated chatbot or workflow. It is a system that fits the way the business runs and gets better as it operates."
       />
-      <div className="mt-12 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3">
+      <div className="mt-12 grid border-y border-border md:grid-cols-3">
         {REASONS.map((reason, index) => (
-          <article key={reason.title} className="bg-background p-7 sm:p-9">
+          <article key={reason.title} className="border-b border-border py-7 md:border-b-0 md:border-r md:px-8 md:last:border-r-0 sm:py-9">
             <span className="font-mono text-[10px] tracking-[0.18em] text-primary">0{index + 1}</span>
             <reason.icon className="mt-8 h-5 w-5 text-accent" />
             <h3 className="mt-5 font-display text-xl font-semibold">{reason.title}</h3>
@@ -1104,7 +1104,7 @@ function Contact() {
       />
 
       <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
-        <div className="surface-panel grid gap-10 rounded-2xl p-6 sm:p-8 md:p-14 lg:grid-cols-12">
+        <div className="relative grid gap-10 border-y border-border bg-surface/10 p-6 sm:p-8 md:p-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary">
               Start with the system
@@ -1120,7 +1120,7 @@ function Contact() {
 
             <a
               href="mailto:alligenticsai@gmail.com?subject=Discovery%20session%20with%20Alligentics"
-              className="animate-pulse-ring mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-primary-foreground"
+              className="mt-9 inline-flex items-center gap-2 border border-primary/50 bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-electric"
               style={{ background: "var(--gradient-brand)" }}
             >
               Start the conversation
