@@ -97,9 +97,12 @@ export function HeroSystem() {
         <text x="0" y="14" className="fill-muted-foreground font-mono" fontSize="9" letterSpacing="2">
           01 / SIGNALS
         </text>
+        <line x1="0" y1="25" x2="92" y2="25" stroke="var(--electric)" strokeOpacity="0.45" />
+        <circle cx="98" cy="25" r="2" fill="var(--electric)" className="hs-step" />
         <text x="0" y={H - 4} className="fill-muted-foreground font-mono" fontSize="9" letterSpacing="2">
           03 / BUSINESS SYSTEMS
         </text>
+        <line x1="0" y1={H - 18} x2="120" y2={H - 18} stroke="var(--electric)" strokeOpacity="0.45" />
 
         {COL.map((x, i) => (
           <g key={`in-${x}`}>
