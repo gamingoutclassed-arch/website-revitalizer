@@ -454,33 +454,16 @@ function TrustStrip() {
 }
 
 function Positioning() {
-  const stages = [
-    { number: "01", title: "THINK", body: "Understand the business, find the real constraint, and map the system around it.", label: "Business" },
-    { number: "02", title: "BUILD", body: "Engineer the intelligence, connect the tools, and deploy it into the workflow.", label: "Engineering" },
-    { number: "03", title: "COMPOUND", body: "Measure what happens, learn from the system, improve it, and expand what works.", label: "Growth" },
-  ];
-
   return (
     <section id="philosophy" className="border-y border-border bg-background">
-      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-6 md:py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">How we think</p>
-            <h2 className="mt-4 max-w-xl font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">Intelligence is not a feature. It is an operating layer.</h2>
-          </div>
-          <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">We start with the business, not the tool. Then we engineer the systems that make the operation faster, clearer, and easier to improve.</p>
+      <div className="mx-auto grid max-w-7xl gap-8 px-5 py-14 sm:px-6 md:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">Our point of view</p>
+          <h2 className="mt-4 max-w-xl font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">Intelligence should change how work gets done.</h2>
         </div>
-        <div className="mt-10 grid border-y border-border md:grid-cols-3">
-          {stages.map((stage) => (
-            <article key={stage.title} className="group border-b border-border py-7 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] tracking-[0.18em] text-primary">{stage.number}</span>
-                <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">{stage.label}</span>
-              </div>
-              <h3 className="mt-8 font-display text-2xl font-semibold tracking-[0.04em] transition-colors group-hover:text-electric">{stage.title}</h3>
-              <p className="mt-3 max-w-sm text-sm leading-6 text-muted-foreground">{stage.body}</p>
-            </article>
-          ))}
+        <div>
+          <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">The opportunity is not adding AI to every tool. It is understanding where work gets stuck, then designing a practical way for people, information, and decisions to move with less friction.</p>
+          <a href="#systems" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-accent">See representative systems <ArrowUpRight className="h-4 w-4" /></a>
         </div>
       </div>
     </section>
