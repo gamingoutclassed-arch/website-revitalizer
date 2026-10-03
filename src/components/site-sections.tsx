@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   ArrowUpRight,
-  BadgeCheck,
   Bell,
   Bot,
   CalendarCheck,
@@ -57,7 +56,7 @@ export function Capabilities() {
   return (
     <section id="automation" className="scroll-mt-20 border-y border-border bg-surface/10 technical-grid">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 md:py-32">
-        <SectionHeading eyebrow="Engineering capabilities" title="Explore the layers behind reliable delivery." intro="Select a layer to inspect the engineering responsibilities underneath a dependable AI product or automation." />
+        <SectionHeading eyebrow="Engineering capabilities" title="Explore the layers behind reliable delivery." intro="These layers describe the engineering disciplines behind delivery—not the kinds of products themselves. Select one to inspect the technical decisions and controls involved." />
         <div className="mt-12 grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
           <div className="border-y border-border">
             {CAPABILITIES.map((item, index) => {
