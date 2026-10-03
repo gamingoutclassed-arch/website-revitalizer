@@ -107,7 +107,7 @@ export function HeroSystem() {
         {COL.map((x, i) => (
           <g key={`in-${x}`}>
             <path id={`hs-in-${i}`} d={inPath(x)} fill="none" stroke="url(#hs-line)" strokeWidth="1" />
-            <circle r="2.6" fill="var(--electric)" className="hs-dot">
+            <circle r="2.8" fill="var(--electric)" className="hs-dot hs-dot--in">
               <animateMotion dur={`${2.8 + i * 0.35}s`} begin={i === 0 ? "0s" : `-${i * 0.45}s`} repeatCount="indefinite">
                 <mpath href={`#hs-in-${i}`} />
               </animateMotion>
@@ -118,7 +118,7 @@ export function HeroSystem() {
         {COL.map((x, i) => (
           <g key={`out-${x}`}>
             <path id={`hs-out-${i}`} d={outPath(x)} fill="none" stroke="url(#hs-line-out)" strokeWidth="1" />
-            <circle r="2.6" fill="var(--electric)" className="hs-dot">
+            <circle r="2.8" fill="var(--electric)" className="hs-dot hs-dot--out">
               <animateMotion dur={`${2.6 + i * 0.3}s`} begin={`-${1.2 + i * 0.4}s`} repeatCount="indefinite">
                 <mpath href={`#hs-out-${i}`} />
               </animateMotion>
@@ -127,6 +127,8 @@ export function HeroSystem() {
         ))}
 
         {/* Intelligence core */}
+        <circle cx={260} cy={270} r="78" fill="none" stroke="var(--electric)" strokeOpacity="0.08" strokeDasharray="2 9" className="hs-orbit" />
+        <circle cx={260} cy={270} r="55" fill="none" stroke="var(--electric)" strokeOpacity="0.06" strokeDasharray="1 8" className="hs-orbit hs-orbit--inner" />
         <rect
           x={CORE.x - 6}
           y={CORE.y - 6}
