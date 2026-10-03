@@ -421,9 +421,9 @@ export function Packages() {
   return (
     <section id="packages" className="mx-auto max-w-7xl scroll-mt-20 px-5 py-20 sm:px-6 md:py-32">
       <SectionHeading
-        eyebrow="Packages"
-        title="Start with one workflow or connect the whole operation"
-        intro="Every project receives a clear, specific quote before work begins. Monthly plans are quoted separately."
+        eyebrow="Engagement"
+        title="Start with the system. Expand what works."
+        intro="We scope each build around the business problem, workflow complexity, integrations, and ongoing support required. Pricing is discussed after the system is understood."
       />
 
       <div className="mt-10 grid gap-4 md:hidden">
@@ -443,8 +443,8 @@ export function Packages() {
                 );
               })}
             </dl>
-            <p className="mt-4 border-t border-border pt-4 text-sm font-semibold">{detail.price} one-time</p>
-            <p className="mt-1 text-xs text-muted-foreground">Monthly plan: custom quote</p>
+            <p className="mt-4 border-t border-border pt-4 text-sm font-semibold">Scoped to the system</p>
+            <p className="mt-1 text-xs text-muted-foreground">Quote follows discovery and architecture.</p>
           </article>
         ))}
       </div>
@@ -482,8 +482,8 @@ export function Packages() {
               <td className="px-6 py-5 text-left font-semibold">Pricing</td>
                {PACKAGE_DETAILS.map((detail) => (
                  <td key={`price-${detail.tier}`} className="px-6 py-5 text-center text-xs text-muted-foreground">
-                   <span className="block font-semibold text-foreground">{detail.price}</span>
-                   One-time · Monthly custom
+                   <span className="block font-semibold text-foreground">Custom scope</span>
+                   Discovery · Build · Ongoing
                 </td>
               ))}
             </tr>
@@ -495,8 +495,7 @@ export function Packages() {
         <div className="lg:col-span-5">
           <h3 className="font-display text-2xl font-semibold tracking-tight">Pricing philosophy</h3>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            The starting price covers the initial build. Your exact quote depends on the workflow,
-            integrations, and support required.
+            We do not force a complex business into an arbitrary tier. Scope follows the workflow, integrations, intelligence requirements, and level of support.
           </p>
           <a
             href="#contact"
